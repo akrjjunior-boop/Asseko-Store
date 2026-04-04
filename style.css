@@ -1,27 +1,47 @@
-/* Style général */
-body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background-color: #f4f7f6;
-margin: 0;
-padding: 20px;
+/* Couleurs et Police */
+:root {
+--primary: #2c3e50;
+--accent: #e74c3c;
+--bg: #f8f9fa;
+--text: #333;
 }
 
-/* Grille des jeux */
+body {
+font-family: 'Arial', sans-serif;
+background-color: var(--bg);
+margin: 0;
+color: var(--text);
+}
+
+header {
+background-color: var(--primary);
+color: white;
+text-align: center;
+padding: 2rem 1rem;
+}
+
+h2 {
+text-align: center;
+margin-top: 2rem;
+}
+
+/* Grille de jeux */
 .game-grid {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 gap: 20px;
 padding: 20px;
+max-width: 1200px;
+margin: 0 auto;
 }
 
-/* Carte de jeu */
+/* Cartes de jeux */
 .game-card {
 background: white;
-border-radius: 10px;
+border-radius: 12px;
 overflow: hidden;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-transition: transform 0.3s;
-text-align: center;
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+transition: 0.3s;
 }
 
 .game-card:hover {
@@ -30,28 +50,46 @@ transform: translateY(-5px);
 
 .game-card img {
 width: 100%;
-height: 250px;
+height: 240px;
 object-fit: cover;
 }
 
 .game-info {
 padding: 15px;
+text-align: center;
 }
 
 .game-info h3 {
-font-size: 1.1rem;
-margin: 10px 0;
-color: #2d3436;
+font-size: 1rem;
+margin: 5px 0;
 }
 
-.game-link {
-display: inline-block;
-background-color: #eb4d4b;
-color: white;
-padding: 10px 20px;
-text-decoration: none;
-border-radius: 5px;
+.price {
+color: var(--accent);
 font-weight: bold;
-margin-top: 10px;
+font-size: 1.1rem;
+margin: 10px 0;
+}
+
+.btn-buy {
+display: block;
+background-color: var(--primary);
+color: white;
+text-decoration: none;
+padding: 10px;
+border-radius: 6px;
+font-size: 0.9rem;
+font-weight: bold;
+}
+
+.btn-buy:hover {
+background-color: var(--accent);
+}
+
+footer {
+text-align: center;
+padding: 20px;
+background: #eee;
+margin-top: 40px;
 }
 
