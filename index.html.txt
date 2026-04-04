@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assekostore | Catalogue de Jeux</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<nav>
+<div class="logo">ASSEKO<span>STORE</span></div>
+<ul>
+<li><a href="#catalogue">Jeux</a></li>
+<li><a href="#inscription">S'enregistrer</a></li>
+</ul>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Vos jeux PC & Mobile au meilleur prix</h1>
+<p>Achetez vos liens de téléchargement sécurisés instantanément.</p>
+</section>
+
+<section id="catalogue" class="content">
+<h2>Catalogue des Jeux</h2>
+<div class="game-grid">
+
+<div class="game-card">
+<img src="https://via.placeholder.com/300x400?text=GTA+V" alt="GTA V">
+<div class="game-info">
+<h3>GTA V - PC</h3>
+<p>Lien de téléchargement direct après achat.</p>
+<a href="LIEN_DE_TELECHARGEMENT_ICI" class="game-link">Accéder au lien</a>
+</div>
+</div>
+
+<div class="game-card">
+<img src="https://via.placeholder.com/300x400?text=FIFA" alt="FIFA">
+<div class="game-info">
+<h3>FIFA 24 - PC</h3>
+<p>Optimisé pour les configurations moyennes.</p>
+<a href="LIEN_DE_TELECHARGEMENT_ICI" class="game-link">Accéder au lien</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="inscription" class="registration-section">
+<div class="form-container">
+<h2>S'enregistrer pour recevoir les liens</h2>
+<p>Laissez votre email pour recevoir nos offres et vos liens d'achat.</p>
+
+<form action="https://formspree.io/f/votre_id" method="POST">
+<input type="text" name="name" placeholder="Votre nom" required>
+<input type="email" name="email" placeholder="Votre adresse email" required>
+<button type="submit" class="btn-submit">S'enregistrer</button>
+</form>
+</div>
+</section>
+
+<footer>
+<p>&copy; 2026 Assekostore - Tous droits réservés</p>
+</footer>
+
+</body>
+</html>
+
