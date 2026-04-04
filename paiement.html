@@ -21,6 +21,7 @@ input:focus { border-color: #e74c3c; }
 .btn-disabled { background-color: #ccc; pointer-events: none; opacity: 0.6; }
 
 .instruction { font-size: 0.85rem; color: #e74c3c; font-weight: bold; margin-bottom: 15px; }
+.qr-text { font-weight: bold; color: #333; margin-top: 15px; margin-bottom: 5px; font-size: 0.95rem; }
 </style>
 </head>
 <body>
@@ -31,7 +32,7 @@ input:focus { border-color: #e74c3c; }
 
 <div class="pay-section">
 <div class="pay-card">
-<p class="instruction">Étape 1 : Remplissez vos informations</p>
+<p class="instruction">Étape 1 : Vos coordonnées</p>
 
 <div class="form-group">
 <label>Nom complet :</label>
@@ -39,37 +40,42 @@ input:focus { border-color: #e74c3c; }
 </div>
 
 <div class="form-group">
-<label>Adresse Gmail (pour recevoir le lien) :</label>
+<label>Votre Gmail (pour le lien du jeu) :</label>
 <input type="email" id="email" placeholder="Ex: monadresse@gmail.com" oninput="checkForm()">
 </div>
 
 <hr style="margin: 20px 0; border: 0.5px solid #eee;">
 
-<p>Étape 2 : Payez par <strong>Airtel Money</strong></p>
+<p>Étape 2 : Règlement Airtel Money</p>
 <div class="airtel-box">+241 77 82 64 58</div>
 
-<img src="mon-qr.png" alt="QR Code Airtel" class="qr-img">
+<p class="qr-text">Scanner ce code QR avec votre appli MyAirtel :</p>
+<img src="mon-qr.jpeg" alt="QR Code Airtel" class="qr-img">
 
 <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">
-Une fois le dépôt fait, cliquez sur le bouton ci-dessous pour confirmer.
+Cliquez sur le bouton ci-dessous APRÈS le dépôt.
 </p>
 
-<a id="wa-btn" href="#" class="btn-wa btn-disabled">J'AI PAYÉ (Confirmer par WhatsApp)</a>
+<a id="wa-btn" href="#" class="btn-wa btn-disabled">J'AI PAYÉ (Confirmer sur WhatsApp)</a>
 
 <a href="index.html" style="display:block; margin-top:20px; color:#999; text-decoration:none; font-size: 0.9rem;">← Retour à la boutique</a>
 </div>
 </div>
 
 <script>
+// Détecter le nom du jeu dans l'URL
+const urlParams = new URLSearchParams(window.location.search);
+const jeuChoisi = urlParams.get('jeu') || "un jeu";
+
 function checkForm() {
 let name = document.getElementById('name').value;
 let email = document.getElementById('email').value;
 let btn = document.getElementById('wa-btn');
 
-// On vérifie que le nom a plus de 2 lettres et que le mail contient un @
 if(name.length > 2 && email.includes('@')) {
 btn.classList.remove('btn-disabled');
-let message = "Bonjour Asseko Store !\n\nJe suis : " + name + "\nMon Gmail : " + email + "\nJ'ai effectué le paiement Airtel Money. Merci de m'envoyer le lien du jeu !";
+// Message WhatsApp complet avec le nom du jeu !
+let message = "Bonjour Asseko Store !\n\nJe suis : " + name + "\nMon Gmail : " + email + "\nJ'ai payé pour le jeu : " + jeuChoisi + "\nMerci de m'envoyer le lien !";
 btn.href = "https://wa.me/24177826458?text=" + encodeURIComponent(message);
 } else {
 btn.classList.add('btn-disabled');
