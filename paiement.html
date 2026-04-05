@@ -7,39 +7,42 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
 body { background-color: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-.card { max-width: 400px; margin: auto; background: #1e1e1e; padding: 30px; border-radius: 20px; border: 1px solid #27ae60; }
-input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; background: #2a2a2a; color: white; }
-.btn { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-.info-airtel { background: #252525; padding: 15px; border-radius: 10px; margin: 20px 0; border: 1px dashed #27ae60; }
+.card { max-width: 400px; margin: auto; background: #1e1e1e; padding: 25px; border-radius: 20px; border: 1px solid #27ae60; }
+.qr-box { background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; display: inline-block; }
+.qr-box img { width: 180px; display: block; }
+input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; background: #2a2a2a; color: white; }
+.btn { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 1rem; }
+.price-tag { color: #27ae60; font-size: 1.5rem; font-weight: bold; margin: 10px 0; }
 </style>
 </head>
 <body>
 
 <div class="card" id="form-box">
-<h2 id="nom-jeu-affiche" style="color: #27ae60;">Chargement...</h2>
+<h2 id="nom-jeu-affiche" style="margin-bottom: 5px;">Chargement...</h2>
+<div id="prix-jeu" class="price-tag">-- FCFA</div>
+
+<div class="qr-box">
+<p style="color: black; margin: 0 0 5px 0; font-size: 0.8rem; font-weight: bold;">SCANNEZ POUR PAYER</p>
+<img src="qrcode.png" alt="QR Code Airtel Money">
+</div>
+
+<p style="font-size: 0.85rem; color: #aaa;">Après le dépôt au <b>077 82 64 58</b>,<br>remplissez vos infos pour recevoir le lien.</p>
 
 <input type="text" id="client_name" placeholder="Votre Nom complet">
 <input type="email" id="client_email" placeholder="Votre Gmail">
 
-<div class="info-airtel">
-<p style="margin: 0; font-size: 0.8rem;">Dépôt Airtel Money au :</p>
-<strong style="font-size: 1.2rem; color: #27ae60;">+241 77 82 64 58</strong>
-</div>
-
 <button onclick="envoyerCommande()" class="btn" id="btn-valider">J'AI PAYÉ (Recevoir le jeu)</button>
 </div>
 
-<div id="success-box" style="display:none;">
-<h2 style="color: #27ae60;">✅ Commande envoyée !</h2>
-<p>Vérifiez votre boîte **Gmail** (et vos spams).</p>
-<p>Redirection vers WhatsApp...</p>
+<div id="success-box" style="display:none; padding: 50px;">
+<h2 style="color: #27ae60;">✅ C'est envoyé !</h2>
+<p>Vérifiez vos emails (et les spams).</p>
+<p>Ouverture de WhatsApp pour confirmation...</p>
 </div>
 
 <script>
-// Initialisation EmailJS
 emailjs.init("K3cFw1gtpb9bpjNyN");
 
-// --- TA BASE DE DONNÉES DE 22 LIENS ---
 const baseDeLiens = {
 "FIFA 22": "https://buzzheavier.com/ad0cnxe25dqn",
 "FIFA 21": "https://buzzheavier.com/8zvg4s982qpd",
@@ -72,35 +75,31 @@ document.getElementById('nom-jeu-affiche').innerText = jeuNom || "Votre jeu";
 function envoyerCommande() {
 const nom = document.getElementById('client_name').value;
 const email = document.getElementById('client_email').value;
-
-// On cherche le lien correspondant au nom exact reçu de l'URL
 const lienTelechargement = baseDeLiens[jeuNom];
 
 if (!nom || !email) {
-alert("Remplissez votre nom et email SVP.");
+alert("Remplissez votre nom et email.");
 return;
 }
 
 if (!lienTelechargement) {
-alert("Erreur : Le lien pour ce jeu n'a pas été trouvé. Contactez le vendeur.");
+alert("Erreur : Jeu non reconnu.");
 return;
 }
 
-document.getElementById('btn-valider').innerText = "Envoi...";
+document.getElementById('btn-valider').innerText = "Envoi en cours...";
 
 emailjs.send("service_nps1sar", "template_o3koshs", {
 to_name: nom,
 to_email: email,
 game_name: jeuNom,
-download_link: lienTelechargement
+download_link: lienTelechargement // C'est ici que le lien part vers EmailJS
 }).then(() => {
 document.getElementById('form-box').style.display = 'none';
 document.getElementById('success-box').style.display = 'block';
 setTimeout(() => {
 window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, je suis " + nom + ". J'ai payé pour " + jeuNom + ". Vérifiez mon dépôt !");
 }, 2000);
-}, (err) => {
-alert("Erreur d'envoi. Vérifiez votre connexion.");
 });
 }
 </script>
