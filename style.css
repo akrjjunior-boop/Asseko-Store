@@ -1,122 +1,101 @@
-/* --- Styles Généraux et Thème Sombre --- */
+/* --- Styles Généraux --- */
 body {
 font-family: 'Roboto', sans-serif;
 margin: 0;
-padding: 0;
-background-color: #f2f2f2; /* Gris très clair pour le fond de page */
-color: #333;
+background-color: #121212; /* Fond noir profond */
+color: white;
 }
 
-/* --- Header (Le haut bleu/noir mat) --- */
+/* --- Header Noir Mat --- */
 header {
-background-color: #2c3e50; /* Bleu marine mat très pro, comme sur l'image */
-color: white;
+background-color: #000000;
 padding: 30px 20px;
-text-align: center;
+border-bottom: 3px solid #27ae60; /* Ligne verte signature */
 }
 
 .logo-container {
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 20px; /* Espace entre logo et texte */
+gap: 20px;
 }
 
 .main-logo {
-max-height: 80px; /* Taille du logo (ajuste si nécessaire) */
+max-height: 70px;
 width: auto;
-border-radius: 50%; /* Arrondit le logo, comme sur l'exemple */
+border-radius: 50%; /* Logo rond */
 }
 
-.store-text {
-text-align: left; /* Aligne le nom et le slogan à gauche */
-}
+.store-text { text-align: left; }
+.store-text h1 { margin: 0; font-size: 2.2rem; color: #27ae60; }
+.store-text p { margin: 0; font-size: 0.9rem; color: #aaaaaa; }
 
-header h1 {
-margin: 0;
-font-size: 2.5rem;
-font-weight: 700;
-}
-
-header p {
-margin: 5px 0 0;
-font-size: 1rem;
-opacity: 0.9;
-}
-
-/* --- Grille de Jeux (Le catalogue) --- */
-main {
-max-width: 1200px;
-margin: 40px auto;
-padding: 0 20px;
-}
-
+/* --- Grille de Jeux --- */
 .game-grid {
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-gap: 30px; /* Espace entre les cartes */
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 25px;
+padding: 40px 20px;
+max-width: 1200px;
+margin: 0 auto;
 }
 
-/* --- Cartes de Jeux (Coins arrondis, ombre) --- */
 .game-card {
-background-color: white;
-border-radius: 15px; /* Coins arrondis */
-box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Petite ombre portée */
-overflow: hidden; /* Empêche l'image de déborder des coins arrondis */
-transition: transform 0.3s ease; /* Effet au survol */
+background-color: #1e1e1e;
+border-radius: 15px;
+overflow: hidden;
+border: 1px solid #333;
+transition: 0.3s;
 }
 
-.game-card:hover {
-transform: translateY(-5px); /* Monte légèrement au survol */
-}
+.game-card:hover { transform: translateY(-5px); border-color: #27ae60; }
+.game-card img { width: 100%; height: 200px; object-fit: cover; }
 
-.game-card img {
-width: 100%;
-height: 200px;
-object-fit: cover; /* Recadre l'image proprement */
-}
+.game-info { padding: 20px; text-align: center; }
+.game-info h3 { margin: 0 0 10px; font-size: 1.2rem; }
+.price { color: #27ae60; font-weight: bold; font-size: 1.3rem; margin-bottom: 15px; }
 
-.game-info {
-padding: 20px;
-text-align: center;
-}
-
-.game-info h3 {
-margin: 0 0 10px;
-font-size: 1.2rem;
-color: #2c3e50;
-}
-
-.price {
-margin: 0 0 15px;
-font-size: 1.1rem;
-font-weight: 700;
-color: #333;
-}
-
-/* --- Boutons "Commander" (Vert vif) --- */
-.btn-commander {
+/* --- Boutons --- */
+.btn-buy {
 display: block;
-background-color: #27ae60; /* Un vert vif, comme sur l'image */
+background-color: #27ae60;
 color: white;
-padding: 12px;
 text-decoration: none;
+padding: 12px;
 border-radius: 8px;
-font-weight: 500;
-transition: background-color 0.3s ease;
+font-weight: bold;
 }
 
-.btn-commander:hover {
-background-color: #2ecc71; /* Vert plus clair au survol */
-}
-
-/* --- Footer --- */
-footer {
-background-color: #2c3e50; /* Même couleur que le header */
-color: white;
-padding: 20px;
+/* --- Page Paiement --- */
+.pay-card {
+background-color: #1e1e1e;
+padding: 30px;
+border-radius: 20px;
+max-width: 400px;
+margin: 50px auto;
 text-align: center;
-margin-top: 40px;
-font-size: 0.9rem;
+border: 1px solid #333;
 }
+
+input {
+width: 100%;
+padding: 12px;
+margin: 10px 0;
+border-radius: 8px;
+border: 1px solid #333;
+background: #252525;
+color: white;
+}
+
+.airtel-box {
+font-size: 1.5rem;
+color: #e74c3c;
+font-weight: bold;
+padding: 15px;
+background: #252525;
+border-radius: 10px;
+margin: 15px 0;
+}
+
+.qr-img { width: 200px; border-radius: 10px; margin: 15px 0; }
 
