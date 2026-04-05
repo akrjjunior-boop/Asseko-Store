@@ -7,83 +7,135 @@
 <link rel="stylesheet" href="style.css">
 <style>
 body { background-color: #121212; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; text-align: center; }
-header { padding: 40px 20px; background: #1a1a1a; border-bottom: 2px solid #27ae60; }
+header { padding: 30px 20px; background: #1a1a1a; border-bottom: 2px solid #27ae60; }
+
+.logo-img { width: 120px; margin-bottom: 10px; border-radius: 50%; } /* Ajuste la taille de ton logo ici */
+
 .grid-jeux { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; padding: 40px; max-width: 1200px; margin: auto; }
-.jeu-card { background: #1e1e1e; padding: 15px; border-radius: 15px; border: 1px solid #333; transition: 0.3s; }
+.jeu-card { background: #1e1e1e; padding: 15px; border-radius: 15px; border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
 .jeu-card:hover { transform: translateY(-5px); border-color: #27ae60; }
-.jeu-card img { width: 100%; border-radius: 10px; margin-bottom: 10px; height: 220px; object-fit: cover; background: #000; }
-.prix { color: #27ae60; font-weight: bold; font-size: 1.2rem; }
-.btn-buy { background: #27ae60; color: white; text-decoration: none; padding: 10px; display: block; border-radius: 8px; font-weight: bold; margin-top: 10px; }
+.jeu-card img { width: 100%; border-radius: 10px; height: 220px; object-fit: cover; margin-bottom: 10px; }
+
+.prix { color: #27ae60; font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
+.btn-buy { background: #27ae60; color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; }
+
+.qr-section { background: #1e1e1e; padding: 30px; margin: 40px auto; max-width: 300px; border-radius: 15px; border: 2px solid #27ae60; }
+.qr-img { width: 200px; border-radius: 10px; margin-top: 10px; }
+
+footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 </style>
 </head>
 <body>
 
 <header>
+<img src="logo.png" alt="Asseko Store Logo" class="logo-img">
 <h1 style="margin:0;">ASSEKO<span style="color: #27ae60;">STORE</span></h1>
-<p style="color: #aaa;">Boutique de jeux PC à Libreville - Paiement Airtel Money</p>
+<p style="color: #aaa;">Les meilleurs jeux PC à Libreville</p>
 </header>
 
 <div class="grid-jeux">
 <div class="jeu-card">
-<img src="fifa22.jpg" alt="FIFA 22">
-<h3>FIFA 22</h3>
-<p class="prix">3 500 FCFA</p>
+<img src="fifa22.jpg" alt="FIFA 22"><p>FIFA 22</p><p class="prix">3 500 F</p>
 <a href="paiement.html?jeu=FIFA 22" class="btn-buy">Commander</a>
 </div>
 <div class="jeu-card">
-<img src="fifa21.jpg" alt="FIFA 21">
-<h3>FIFA 21</h3>
-<p class="prix">3 000 FCFA</p>
+<img src="fifa21.jpg" alt="FIFA 21"><p>FIFA 21</p><p class="prix">3 000 F</p>
 <a href="paiement.html?jeu=FIFA 21" class="btn-buy">Commander</a>
 </div>
 <div class="jeu-card">
-<img src="efootball21.jpg" alt="Efootball 21">
-<h3>Efootball 21</h3>
-<p class="prix">3 000 FCFA</p>
+<img src="fifa20.jpg" alt="FIFA 20"><p>FIFA 20</p><p class="prix">2 500 F</p>
+<a href="paiement.html?jeu=FIFA 20" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="fifa17.jpg" alt="FIFA 17"><p>FIFA 17</p><p class="prix">2 000 F</p>
+<a href="paiement.html?jeu=FIFA 17" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="efootball21.jpg" alt="Efootball 21"><p>Efootball 21</p><p class="prix">3 000 F</p>
 <a href="paiement.html?jeu=Efootball 21" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="pes2018.jpg" alt="PES 2018"><p>PES 2018</p><p class="prix">2 500 F</p>
+<a href="paiement.html?jeu=Pro évolution soccer 2018" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="pes17.jpg" alt="PES 17"><p>PES 17</p><p class="prix">2 000 F</p>
+<a href="paiement.html?jeu=Pro évolution soccer 17" class="btn-buy">Commander</a>
 </div>
 
 <div class="jeu-card">
-<img src="gtav.jpg" alt="GTA V">
-<h3>GTA V</h3>
-<p class="prix">3 500 FCFA</p>
+<img src="gtav.jpg" alt="GTA V"><p>GTA V</p><p class="prix">3 500 F</p>
 <a href="paiement.html?jeu=GTA V" class="btn-buy">Commander</a>
 </div>
 <div class="jeu-card">
-<img src="bo6.jpg" alt="Black Ops 6">
-<h3>Call of duty black ops 6</h3>
-<p class="prix">5 000 FCFA</p>
+<img src="bo6.jpg" alt="Black Ops 6"><p>CoD Black Ops 6</p><p class="prix">5 000 F</p>
 <a href="paiement.html?jeu=Call of duty black ops 6" class="btn-buy">Commander</a>
 </div>
 <div class="jeu-card">
-<img src="gow-ragnarok.jpg" alt="God of War">
-<h3>God of war ragnarok</h3>
-<p class="prix">4 500 FCFA</p>
+<img src="mw3.jpg" alt="MW3"><p>CoD Modern Warfare 3</p><p class="prix">4 500 F</p>
+<a href="paiement.html?jeu=Call of duty modern warfare 3" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="gow.jpg" alt="God of War"><p>God of War</p><p class="prix">3 500 F</p>
+<a href="paiement.html?jeu=God of war" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="gow-ragnarok.jpg" alt="God of War Ragnarok"><p>GoW Ragnarok</p><p class="prix">4 500 F</p>
 <a href="paiement.html?jeu=God of war ragnarok" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="cyberpunk.jpg" alt="Cyberpunk"><p>Cyberpunk 2077</p><p class="prix">4 000 F</p>
+<a href="paiement.html?jeu=Cyberpunk" class="btn-buy">Commander</a>
 </div>
 
 <div class="jeu-card">
-<img src="sparking.jpg" alt="DBZ Sparking">
-<h3>Dragon Ball Z sparking zéro</h3>
-<p class="prix">5 000 FCFA</p>
+<img src="sparking.jpg" alt="DBZ Sparking"><p>DBZ Sparking Zero</p><p class="prix">5 000 F</p>
 <a href="paiement.html?jeu=Dragon Ball Z sparking zéro" class="btn-buy">Commander</a>
 </div>
 <div class="jeu-card">
-<img src="storm4.jpg" alt="Naruto Storm 4">
-<h3>Naruto storm 4</h3>
-<p class="prix">2 500 FCFA</p>
+<img src="kakarot.jpg" alt="DBZ Kakarot"><p>DBZ Kakarot</p><p class="prix">3 000 F</p>
+<a href="paiement.html?jeu=Dragon Ball z kakarot" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="storm4.jpg" alt="Naruto Storm 4"><p>Naruto Storm 4</p><p class="prix">2 500 F</p>
 <a href="paiement.html?jeu=Naruto storm 4" class="btn-buy">Commander</a>
 </div>
 <div class="jeu-card">
-<img src="jumpforce.jpg" alt="Jump Force">
-<h3>Jump force</h3>
-<p class="prix">3 000 FCFA</p>
+<img src="storm-conn.jpg" alt="Storm Connections"><p>Naruto Connections</p><p class="prix">4 000 F</p>
+<a href="paiement.html?jeu=Naruto x boruto connection storm" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="shinobi.jpg" alt="Shinobi Striker"><p>Naruto Shinobi Strike</p><p class="prix">2 500 F</p>
+<a href="paiement.html?jeu=Naruto shinobi strike" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="jumpforce.jpg" alt="Jump Force"><p>Jump Force</p><p class="prix">3 000 F</p>
 <a href="paiement.html?jeu=Jump force" class="btn-buy">Commander</a>
+</div>
+
+<div class="jeu-card">
+<img src="wwe25.jpg" alt="WWE 2K25"><p>WWE 2K25</p><p class="prix">4 500 F</p>
+<a href="paiement.html?jeu=Wwe 2k25" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="nba23.jpg" alt="NBA 2K23"><p>NBA 2K23</p><p class="prix">3 500 F</p>
+<a href="paiement.html?jeu=NBA 2k23" class="btn-buy">Commander</a>
+</div>
+<div class="jeu-card">
+<img src="f1-22.jpg" alt="F1 2022"><p>F1 2022</p><p class="prix">3 500 F</p>
+<a href="paiement.html?jeu=F1 2022" class="btn-buy">Commander</a>
 </div>
 </div>
 
-<footer style="padding: 20px; color: #666; font-size: 0.8rem;">
-&copy; 2026 Asseko Store - Contact WhatsApp: +241 77 82 64 58
+<div class="qr-section">
+<h3>Paiement Rapide</h3>
+<p style="font-size: 0.8rem;">Scannez pour payer via Airtel Money</p>
+<img src="qrcode.png" alt="QR Code Airtel Money" class="qr-img">
+</div>
+
+<footer>
+<p>&copy; 2026 ASSEKO STORE - Libreville, Gabon</p>
+<p>WhatsApp : +241 77 82 64 58</p>
 </footer>
 
 </body>
