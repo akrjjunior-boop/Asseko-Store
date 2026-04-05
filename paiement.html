@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paiement sécurisé - Asseko Store</title>
+<title>Paiement - Asseko Store</title>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
 body { background-color: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
 .card { max-width: 400px; margin: auto; background: #1e1e1e; padding: 30px; border-radius: 20px; border: 1px solid #27ae60; }
-input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; }
-.btn { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; background: #2a2a2a; color: white; }
+.btn { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 .info-airtel { background: #252525; padding: 15px; border-radius: 10px; margin: 20px 0; border: 1px dashed #27ae60; }
 </style>
 </head>
 <body>
 
 <div class="card" id="form-box">
-<h2 id="nom-jeu" style="color: #27ae60;">Chargement...</h2>
-<p style="font-size: 0.9rem; color: #aaa;">Remplissez vos infos pour recevoir le lien après paiement.</p>
+<h2 id="nom-jeu-affiche" style="color: #27ae60;">Chargement...</h2>
 
 <input type="text" id="client_name" placeholder="Votre Nom complet">
 <input type="email" id="client_email" placeholder="Votre Gmail">
@@ -33,15 +32,15 @@ input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 5px; border: n
 <div id="success-box" style="display:none;">
 <h2 style="color: #27ae60;">✅ Commande envoyée !</h2>
 <p>Vérifiez votre boîte **Gmail** (et vos spams).</p>
-<p>L'alerte WhatsApp va s'ouvrir pour confirmer votre dépôt.</p>
+<p>Redirection vers WhatsApp...</p>
 </div>
 
 <script>
-// Initialisation EmailJS avec TA clé
+// Initialisation EmailJS
 emailjs.init("K3cFw1gtpb9bpjNyN");
 
-// Base de données des 22 liens Buzzheavier
-const liens = {
+// --- TA BASE DE DONNÉES DE 22 LIENS ---
+const baseDeLiens = {
 "FIFA 22": "https://buzzheavier.com/ad0cnxe25dqn",
 "FIFA 21": "https://buzzheavier.com/8zvg4s982qpd",
 "FIFA 20": "https://buzzheavier.com/kp5qnjzxeu5k",
@@ -66,38 +65,42 @@ const liens = {
 "Naruto shinobi strike": "https://nova.dlproxy.uk/download/Zs9VXtSlVeQeffwfiJa2x8l948qmTRsTLASY8jJ1Ve6cdihSmts3U4UDoXca6nmM1VzxAcpn0Tyu7KwQakwmpgeBG21u1WW7ArHOMVUJ1RIXtMnlYftkfdO1Y4tD9fZOwR2AowCke867JEUJ83O_dkCWdXcMxsPLSFLJXkIKPiLirt3s5dV7oN7X2ga-aL8x-ZWWunMe5lKB7G9A83-XAr0TMF_nGMtJWks2CoR98JeQmduXWtOXo9NZs1DmC-YaGqHQ3mgY8I-QZvQmJKlN8HIaG170TbtGEVvSAi70K1E1F9N8y74iXbGbDmkOVZWmP8e9aj9Vfk-3qZgM_ADUmi-7OChj_DfqEujoEggMKcIqpbPkpUpR8Dwo870rS6ADIAVK3E0rBJOAJJv9ju-dlUM33fKDRYuDx-UmfpiJoN-rpL_k7ofzsrciL8VVaBox-eO4rClYWa_mh3wYn7b2h05bBcdGuiJyTm9RRtauMnDX47ACT3U4i9NDPSzAGq7eIph-rusvahTK7FVbquFP9OSlFHaIiBY4TtDDhQnDUq6mlkijqXYsNojFWZJus_wGc9FJJ8tdTWRhevDCYzqHdnwmF8ov0kYtKOqcIqLjxAawcDC-pGJpCfigLAJVbxsuEqXn-IiKeZsOuLHWEeO04g?sig=GUmvBjsbX5th53VwAwP5J3bIyNAit7iq167bSYYY7wI"
 };
 
-const params = new URLSearchParams(window.location.search);
-const jeuNom = params.get('jeu');
-document.getElementById('nom-jeu').innerText = jeuNom || "Votre commande";
+const urlParams = new URLSearchParams(window.location.search);
+const jeuNom = urlParams.get('jeu');
+document.getElementById('nom-jeu-affiche').innerText = jeuNom || "Votre jeu";
 
 function envoyerCommande() {
 const nom = document.getElementById('client_name').value;
 const email = document.getElementById('client_email').value;
-const lienJeu = liens[jeuNom] || "Lien en cours de mise à jour...";
 
-if (nom === "" || email === "") {
-alert("S'il vous plaît, remplissez votre nom et email.");
+// On cherche le lien correspondant au nom exact reçu de l'URL
+const lienTelechargement = baseDeLiens[jeuNom];
+
+if (!nom || !email) {
+alert("Remplissez votre nom et email SVP.");
 return;
 }
 
-document.getElementById('btn-valider').innerText = "Envoi en cours...";
+if (!lienTelechargement) {
+alert("Erreur : Le lien pour ce jeu n'a pas été trouvé. Contactez le vendeur.");
+return;
+}
+
+document.getElementById('btn-valider').innerText = "Envoi...";
 
 emailjs.send("service_nps1sar", "template_o3koshs", {
 to_name: nom,
 to_email: email,
 game_name: jeuNom,
-download_link: lienJeu
+download_link: lienTelechargement
 }).then(() => {
 document.getElementById('form-box').style.display = 'none';
 document.getElementById('success-box').style.display = 'block';
-
-// Redirection WhatsApp après 2 secondes
 setTimeout(() => {
-window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, je suis " + nom + ". Je viens de payer pour " + jeuNom + ". Vérifiez mon dépôt !");
+window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, je suis " + nom + ". J'ai payé pour " + jeuNom + ". Vérifiez mon dépôt !");
 }, 2000);
-}, (error) => {
-alert("Erreur technique. Contactez-nous sur WhatsApp.");
-console.log(error);
+}, (err) => {
+alert("Erreur d'envoi. Vérifiez votre connexion.");
 });
 }
 </script>
