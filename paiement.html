@@ -5,76 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paiement - Asseko Store</title>
 <link rel="stylesheet" href="style.css">
-<style>
-header .logo-container { display: flex; align-items: center; justify-content: center; gap: 10px; }
-header img.logo { max-height: 40px; width: auto; }
-header h1 { margin: 0; font-size: 1.5rem; }
-
-.pay-section { display: flex; justify-content: center; padding: 20px; }
-.pay-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
-
-.form-group { text-align: left; margin-bottom: 15px; }
-label { font-weight: bold; font-size: 0.9rem; color: #555; }
-input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-
-.airtel-box { font-size: 1.6rem; color: #e74c3c; font-weight: bold; margin: 15px 0; border: 2px solid #fce4e4; padding: 12px; border-radius: 12px; background: #fff5f5; }
-.qr-img { width: 220px; margin: 15px 0; border-radius: 10px; border: 1px solid #eee; }
-
-.btn-wa { background-color: #25D366; color: white; padding: 16px; text-decoration: none; border-radius: 10px; display: block; font-weight: bold; margin-top: 15px; }
-.btn-disabled { background-color: #ccc; pointer-events: none; opacity: 0.6; }
-
-.qr-text { font-weight: bold; color: #333; margin-top: 10px; font-size: 0.95rem; }
-</style>
 </head>
 <body>
 
 <header>
 <div class="logo-container">
-<img src="logo.png" alt="Logo" class="logo">
-<h1>FINALISER MA COMMANDE</h1>
+<img src="logo.png" alt="Logo" class="main-logo">
+<h1>PAIEMENT</h1>
 </div>
 </header>
 
-<div class="pay-section">
 <div class="pay-card">
-<div class="form-group">
-<label>Nom complet :</label>
-<input type="text" id="name" placeholder="Votre nom" oninput="checkForm()">
-</div>
+<label>Votre Nom :</label>
+<input type="text" id="name" placeholder="Ex: Jean Asseko" oninput="checkForm()">
 
-<div class="form-group">
 <label>Votre Gmail :</label>
 <input type="email" id="email" placeholder="votre@gmail.com" oninput="checkForm()">
-</div>
 
-<hr style="margin: 20px 0; border: 0.1px solid #eee;">
-
-<p>Règlement Airtel Money :</p>
+<p style="margin-top: 20px;">Dépôt Airtel Money au :</p>
 <div class="airtel-box">+241 77 82 64 58</div>
 
-<p class="qr-text">Scanner ce code QR avec votre appli MyAirtel :</p>
+<p>Ou scannez avec MyAirtel :</p>
 <img src="mon-qr.png" alt="QR Code" class="qr-img">
 
-<a id="wa-btn" href="#" class="btn-wa btn-disabled">J'AI PAYÉ (WhatsApp)</a>
-<a href="index.html" style="display:block; margin-top:15px; color:#999; text-decoration:none;">← Retour</a>
-</div>
+<a id="wa-btn" href="#" class="btn-buy" style="background-color: #ccc; pointer-events: none;">J'AI PAYÉ</a>
+<a href="index.html" style="display:block; margin-top:20px; color:#aaa; text-decoration:none;">← Annuler</a>
 </div>
 
 <script>
-const urlParams = new URLSearchParams(window.location.search);
-const jeuChoisi = urlParams.get('jeu') || "un produit";
+const params = new URLSearchParams(window.location.search);
+const jeu = params.get('jeu') || "Produit";
 
 function checkForm() {
-let name = document.getElementById('name').value;
-let email = document.getElementById('email').value;
-let btn = document.getElementById('wa-btn');
+let n = document.getElementById('name').value;
+let e = document.getElementById('email').value;
+let b = document.getElementById('wa-btn');
 
-if(name.length > 2 && email.includes('@')) {
-btn.classList.remove('btn-disabled');
-let message = "Bonjour Asseko Store !\n\nClient : " + name + "\nEmail : " + email + "\nJeu : " + jeuChoisi + "\nJ'ai effectué le paiement. Merci !";
-btn.href = "https://wa.me/24177826458?text=" + encodeURIComponent(message);
+if(n.length > 2 && e.includes('@')) {
+b.style.backgroundColor = "#27ae60";
+b.style.pointerEvents = "auto";
+let txt = "Bonjour !\nJe suis : " + n + "\nEmail : " + e + "\nJeu payé : " + jeu + "\nEnvoyez-moi le lien !";
+b.href = "https://wa.me/24177826458?text=" + encodeURIComponent(txt);
 } else {
-btn.classList.add('btn-disabled');
+b.style.backgroundColor = "#ccc";
+b.style.pointerEvents = "none";
 }
 }
 </script>
