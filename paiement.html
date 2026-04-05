@@ -12,7 +12,7 @@ body { background-color: #121212; color: white; font-family: sans-serif; text-al
 .qr-box img { width: 100%; max-width: 180px; display: block; }
 input { width: 90%; padding: 10px; margin: 8px 0; border-radius: 5px; border: none; background: #2a2a2a; color: white; outline: none; }
 .btn { background: #27ae60; color: white; border: none; width: 100%; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 1rem; }
-.price-tag { color: #27ae60; font-size: 1.3rem; font-weight: bold; margin: 5px 0; }
+.price-tag { color: #27ae60; font-size: 1.5rem; font-weight: bold; margin: 5px 0; }
 p { font-size: 0.85rem; margin: 5px 0; line-height: 1.2; color: #ccc; }
 </style>
 </head>
@@ -20,7 +20,7 @@ p { font-size: 0.85rem; margin: 5px 0; line-height: 1.2; color: #ccc; }
 
 <div class="card" id="form-box">
 <h2 id="nom-jeu-affiche" style="margin: 0; font-size: 1.4rem;">Chargement...</h2>
-<div id="prix-jeu" class="price-tag">-- FCFA</div>
+<div id="prix-jeu" class="price-tag">Chargement...</div>
 
 <div class="qr-box">
 <p style="color: black; margin-bottom: 5px; font-weight: bold;">SCANNES POUR PAYER</p>
@@ -38,6 +38,32 @@ p { font-size: 0.85rem; margin: 5px 0; line-height: 1.2; color: #ccc; }
 
 <script>
 emailjs.init("K3cFw1gtpb9bpjNyN");
+
+// --- LISTE DES PRIX ---
+const listePrix = {
+"FIFA 22": "3 500 FCFA",
+"FIFA 21": "3 000 FCFA",
+"FIFA 20": "2 500 FCFA",
+"FIFA 17": "2 000 FCFA",
+"GTA V": "3 500 FCFA",
+"Dragon Ball Z sparking zéro": "5 000 FCFA",
+"Cyberpunk": "4 000 FCFA",
+"Call of duty black ops 6": "5 000 FCFA",
+"Call of duty modern warfare 3": "4 500 FCFA",
+"God of war": "3 500 FCFA",
+"God of war ragnarok": "4 500 FCFA",
+"Efootball 21": "3 000 FCFA",
+"Pro évolution soccer 2018": "2 500 FCFA",
+"Pro évolution soccer 17": "2 000 FCFA",
+"F1 2022": "3 500 FCFA",
+"Wwe 2k25": "4 500 FCFA",
+"NBA 2k23": "3 500 FCFA",
+"Dragon Ball z kakarot": "3 000 FCFA",
+"Jump force": "3 000 FCFA",
+"Naruto storm 4": "2 500 FCFA",
+"Naruto x boruto connection storm": "4 000 FCFA",
+"Naruto shinobi strike": "2 500 FCFA"
+};
 
 const baseDeLiens = {
 "FIFA 22": "https://buzzheavier.com/ad0cnxe25dqn",
@@ -66,7 +92,10 @@ const baseDeLiens = {
 
 const params = new URLSearchParams(window.location.search);
 const jeuNom = params.get('jeu');
+
+// Affichage du nom et du prix
 document.getElementById('nom-jeu-affiche').innerText = jeuNom || "Ta commande";
+document.getElementById('prix-jeu').innerText = listePrix[jeuNom] || "Prix non défini";
 
 function envoyerCommande() {
 const nom = document.getElementById('client_name').value;
@@ -89,7 +118,7 @@ download_link: lien
 alert("✅ Email envoyé ! Regardes tes mails.");
 window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, c'est " + nom + ". J'ai fini le paiement pour " + jeuNom + ".");
 }, (error) => {
-alert("Petit souci technique. Écris-moi sur WhatsApp.");
+alert("Petit souci technique.");
 });
 }
 </script>
