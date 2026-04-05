@@ -5,51 +5,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paiement - Asseko Store</title>
 <link rel="stylesheet" href="style.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
-<body>
+<body style="background-color: #121212; color: white; font-family: sans-serif; text-align: center;">
 
-<header>
-<div class="logo-container">
-<img src="logo.png" alt="Logo" class="main-logo">
-<h1>PAIEMENT</h1>
-</div>
+<header style="padding: 20px;">
+<h1 style="color: #27ae60;">ASSEKO STORE</h1>
+<p>Finalisez votre commande</p>
 </header>
 
-<div class="pay-card">
-<label>Votre Nom :</label>
-<input type="text" id="name" placeholder="Ex: Jean Asseko" oninput="checkForm()">
+<div class="pay-card" style="max-width: 400px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 15px; border: 1px solid #333;">
 
-<label>Votre Gmail :</label>
-<input type="email" id="email" placeholder="votre@gmail.com" oninput="checkForm()">
+<div id="form-paiement">
+<h3 id="nom-jeu-affiche" style="color: #27ae60;">Chargement du jeu...</h3>
 
-<p style="margin-top: 20px;">Dépôt Airtel Money au :</p>
-<div class="airtel-box">+241 77 82 64 58</div>
+<label style="display:block; margin: 10px 0 5px;">Votre Nom complet :</label>
+<input type="text" id="user_name" placeholder="Ex: Kevan Asseko" oninput="verifierFormulaire()" style="width:90%; padding:10px; border-radius:5px; border:none;">
 
-<p>Ou scannez avec MyAirtel :</p>
-<img src="mon-qr.png" alt="QR Code" class="qr-img">
+<label style="display:block; margin: 15px 0 5px;">Votre Gmail :</label>
+<input type="email" id="user_email" placeholder="exemple@gmail.com" oninput="verifierFormulaire()" style="width:90%; padding:10px; border-radius:5px; border:none;">
 
-<a id="wa-btn" href="#" class="btn-buy" style="background-color: #ccc; pointer-events: none;">J'AI PAYÉ</a>
-<a href="index.html" style="display:block; margin-top:20px; color:#aaa; text-decoration:none;">← Annuler</a>
+<div style="background: #252525; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px dashed #27ae60;">
+<p style="margin:0; font-size: 0.9rem;">Dépôt Airtel Money au :</p>
+<strong style="font-size: 1.2rem; color: #27ae60;">+241 77 82 64 58</strong>
 </div>
 
-<script>
-const params = new URLSearchParams(window.location.search);
-const jeu = params.get('jeu') || "Produit";
+<p style="font-size: 0.8rem; color: #aaa; margin-top: 15px;">Le lien vous sera envoyé par mail immédiatement après avoir cliqué.</p>
 
-function checkForm() {
-let n = document.getElementById('name').value;
-let e = document.getElementById('email').value;
-let b = document.getElementById('wa-btn');
+<button id="btn-valider" class="btn-buy" onclick="envoyerEmailAutomatique()"
+style="background-color: #555; pointer-events: none; color: white; border:none; width:100%; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 10px; cursor: pointer;">
+J'AI PAYÉ (Recevoir mon lien)
+</button>
+</div>
 
-if(n.length > 2 && e.includes('@')) {
-b.style.backgroundColor = "#27ae60";
-b.style.pointerEvents = "auto";
-let txt = "Bonjour !\nJe suis : " + n + "\nEmail : " + e + "\nJeu payé : " + jeu + "\nEnvoyez-moi le lien !";
-b.href = "https://wa.me/24177826458?text=" + encodeURIComponent(txt);
+<div id="message-succes" style="display:none; padding: 20px;">
+<h2 style="color: #27ae60;">✅ C'est envoyé !</h2>
+<p>Vérifiez votre boîte **Gmail** (regardez aussi dans "Spams").</p>
+<p>Une alerte WhatsApp va s'ouvrir pour confirmer votre paiement.</p>
+<a href="index.html" style="color: #aaa; display:block; margin-top: 20px;">Retour à l'accueil</a>
+</div>
+</div>
+
+<script type="text/javascript">
+// --- INITIALISATION EMAILJS ---
+(function(){
+emailjs.init("TON_PUBLIC_KEY"); // REMPLACE PAR TA CLÉ EMAILJS
+})();
+
+// --- TA BASE DE DONNÉES DE LIENS ---
+const liensJeux = {
+"FIFA 22": "https://buzzheavier.com/ad0cnxe25dqn",
+"FIFA 21": "https://buzzheavier.com/8zvg4s982qpd",
+"FIFA 20": "https://buzzheavier.com/kp5qnjzxeu5k",
+"FIFA 17": "https://buzzheavier.com/96o1s7lgp9r8",
+"GTA V": "https://buzzheavier.com/y3urdxf9h7qs",
+"Dragon Ball Z sparking zéro": "https://buzzheavier.com/sjbsnuv6ayt5",
+"Cyberpunk": "https://buzzheavier.com/u33dxmmaozb6",
+"Call of duty black ops 6": "https://buzzheavier.com/9ybd43gq688x",
+"Call of duty modern warfare 3": "https://buzzheavier.com/p2vnu0rfbb1d",
+"God of war": "https://buzzheavier.com/lrtuuu7e0e73",
+"God of war ragnarok": "https://buzzheavier.com/i3t0797hahst",
+"Efootball 21": "https://buzzheavier.com/jevj472kmk4p",
+"Pro évolution soccer 2018": "https://buzzheavier.com/blp63v9ysdxn",
+"Pro évolution soccer 17": "https://buzzheavier.com/m9uh9k9vehv0",
+"F1 2022": "https://buzzheavier.com/bhdq7sosv5qr",
+"Wwe 2k25": "https://buzzheavier.com/kz6x7dl7dk4i",
+"NBA 2k23": "https://buzzheavier.com/u87xysolly06",
+"Dragon Ball z kakarot": "https://gofile.io/d/4bZQLX",
+"Jump force": "https://buzzheavier.com/1rv0xeou6ix2",
+"Naruto storm 4": "https://buzzheavier.com/gb4xhh25zw7q",
+"Naruto x boruto connection storm": "https://buzzheavier.com/pxv3wzml2uor",
+"Naruto shinobi strike": "https://nova.dlproxy.uk/download/Zs9VXtSlVeQeffwfiJa2x8l948qmTRsTLASY8jJ1Ve6cdihSmts3U4UDoXca6nmM1VzxAcpn0Tyu7KwQakwmpgeBG21u1WW7ArHOMVUJ1RIXtMnlYftkfdO1Y4tD9fZOwR2AowCke867JEUJ83O_dkCWdXcMxsPLSFLJXkIKPiLirt3s5dV7oN7X2ga-aL8x-ZWWunMe5lKB7G9A83-XAr0TMF_nGMtJWks2CoR98JeQmduXWtOXo9NZs1DmC-YaGqHQ3mgY8I-QZvQmJKlN8HIaG170TbtGEVvSAi70K1E1F9N8y74iXbGbDmkOVZWmP8e9aj9Vfk-3qZgM_ADUmi-7OChj_DfqEujoEggMKcIqpbPkpUpR8Dwo870rS6ADIAVK3E0rBJOAJJv9ju-dlUM33fKDRYuDx-UmfpiJoN-rpL_k7ofzsrciL8VVaBox-eO4rClYWa_mh3wYn7b2h05bBcdGuiJyTm9RRtauMnDX47ACT3U4i9NDPSzAGq7eIph-rusvahTK7FVbquFP9OSlFHaIiBY4TtDDhQnDUq6mlkijqXYsNojFWZJus_wGc9FJJ8tdTWRhevDCYzqHdnwmF8ov0kYtKOqcIqLjxAawcDC-pGJpCfigLAJVbxsuEqXn-IiKeZsOuLHWEeO04g?sig=GUmvBjsbX5th53VwAwP5J3bIyNAit7iq167bSYYY7wI"
+};
+
+const urlParams = new URLSearchParams(window.location.search);
+const nomDuJeu = urlParams.get('jeu');
+document.getElementById('nom-jeu-affiche').innerText = nomDuJeu || "Produit";
+
+function verifierFormulaire() {
+const nom = document.getElementById('user_name').value;
+const email = document.getElementById('user_email').value;
+const btn = document.getElementById('btn-valider');
+if(nom.length > 3 && email.includes('@')) {
+btn.style.backgroundColor = "#27ae60";
+btn.style.pointerEvents = "auto";
 } else {
-b.style.backgroundColor = "#ccc";
-b.style.pointerEvents = "none";
+btn.style.backgroundColor = "#555";
+btn.style.pointerEvents = "none";
 }
+}
+
+function envoyerEmailAutomatique() {
+const btn = document.getElementById('btn-valider');
+const nomClient = document.getElementById('user_name').value;
+const mailClient = document.getElementById('user_email').value;
+const lienChoisi = liensJeux[nomDuJeu] || "Contactez-nous sur WhatsApp";
+
+btn.innerText = "Envoi en cours...";
+btn.style.pointerEvents = "none";
+
+const params = {
+to_name: nomClient,
+to_email: mailClient,
+game_name: nomDuJeu,
+download_link: lienChoisi
+};
+
+emailjs.send('SERVICE_ID', 'TEMPLATE_ID', params) // REMPLACE PAR TES ID
+.then(function() {
+document.getElementById('form-paiement').style.display = 'none';
+document.getElementById('message-succes').style.display = 'block';
+
+// Alerte WhatsApp pour Kevan
+setTimeout(() => {
+window.open("https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, je suis " + nomClient + ". Je viens de payer pour " + nomDuJeu + ". Vérifiez mon dépôt !"), '_blank');
+}, 2000);
+}, function(error) {
+alert("Erreur. Contactez-nous sur WhatsApp.");
+});
 }
 </script>
 </body>
