@@ -6,38 +6,34 @@
 <title>Paiement - Asseko Store</title>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
-body { background-color: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-.card { max-width: 400px; margin: auto; background: #1e1e1e; padding: 25px; border-radius: 20px; border: 1px solid #27ae60; }
-.qr-box { background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; display: inline-block; }
-.qr-box img { width: 180px; display: block; }
-input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; background: #2a2a2a; color: white; }
-.btn { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 1rem; }
-.price-tag { color: #27ae60; font-size: 1.5rem; font-weight: bold; margin: 10px 0; }
+body { background-color: #121212; color: white; font-family: sans-serif; text-align: center; padding: 15px; margin: 0; }
+.card { max-width: 380px; margin: 20px auto; background: #1e1e1e; padding: 20px; border-radius: 15px; border: 1px solid #27ae60; }
+.qr-box { background: white; padding: 8px; border-radius: 10px; margin: 10px 0; display: inline-block; }
+.qr-box img { width: 100%; max-width: 180px; display: block; }
+input { width: 90%; padding: 10px; margin: 8px 0; border-radius: 5px; border: none; background: #2a2a2a; color: white; outline: none; }
+.btn { background: #27ae60; color: white; border: none; width: 100%; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 1rem; }
+.price-tag { color: #27ae60; font-size: 1.3rem; font-weight: bold; margin: 5px 0; }
+p { font-size: 0.85rem; margin: 5px 0; line-height: 1.2; color: #ccc; }
 </style>
 </head>
 <body>
 
 <div class="card" id="form-box">
-<h2 id="nom-jeu-affiche" style="margin-bottom: 5px;">Chargement...</h2>
+<h2 id="nom-jeu-affiche" style="margin: 0; font-size: 1.4rem;">Chargement...</h2>
 <div id="prix-jeu" class="price-tag">-- FCFA</div>
 
 <div class="qr-box">
-<p style="color: black; margin: 0 0 5px 0; font-size: 0.8rem; font-weight: bold;">SCANNEZ POUR PAYER</p>
-<img src="qrcode.png" alt="QR Code Airtel Money">
+<p style="color: black; margin-bottom: 5px; font-weight: bold;">SCANNES POUR PAYER</p>
+<img src="image.png" alt="QR Code Airtel Money">
 </div>
 
-<p style="font-size: 0.85rem; color: #aaa;">Après le dépôt au <b>077 82 64 58</b>,<br>remplissez vos infos pour recevoir le lien.</p>
+<p>Effectues ton dépôt au <b>077 82 64 58</b>.</p>
+<p>Remplis ensuite tes infos pour recevoir le lien :</p>
 
-<input type="text" id="client_name" placeholder="Votre Nom complet">
-<input type="email" id="client_email" placeholder="Votre Gmail">
+<input type="text" id="client_name" placeholder="Ton Nom complet">
+<input type="email" id="client_email" placeholder="Ton Gmail">
 
 <button onclick="envoyerCommande()" class="btn" id="btn-valider">J'AI PAYÉ (Recevoir le jeu)</button>
-</div>
-
-<div id="success-box" style="display:none; padding: 50px;">
-<h2 style="color: #27ae60;">✅ C'est envoyé !</h2>
-<p>Vérifiez vos emails (et les spams).</p>
-<p>Ouverture de WhatsApp pour confirmation...</p>
 </div>
 
 <script>
@@ -68,38 +64,32 @@ const baseDeLiens = {
 "Naruto shinobi strike": "https://nova.dlproxy.uk/download/Zs9VXtSlVeQeffwfiJa2x8l948qmTRsTLASY8jJ1Ve6cdihSmts3U4UDoXca6nmM1VzxAcpn0Tyu7KwQakwmpgeBG21u1WW7ArHOMVUJ1RIXtMnlYftkfdO1Y4tD9fZOwR2AowCke867JEUJ83O_dkCWdXcMxsPLSFLJXkIKPiLirt3s5dV7oN7X2ga-aL8x-ZWWunMe5lKB7G9A83-XAr0TMF_nGMtJWks2CoR98JeQmduXWtOXo9NZs1DmC-YaGqHQ3mgY8I-QZvQmJKlN8HIaG170TbtGEVvSAi70K1E1F9N8y74iXbGbDmkOVZWmP8e9aj9Vfk-3qZgM_ADUmi-7OChj_DfqEujoEggMKcIqpbPkpUpR8Dwo870rS6ADIAVK3E0rBJOAJJv9ju-dlUM33fKDRYuDx-UmfpiJoN-rpL_k7ofzsrciL8VVaBox-eO4rClYWa_mh3wYn7b2h05bBcdGuiJyTm9RRtauMnDX47ACT3U4i9NDPSzAGq7eIph-rusvahTK7FVbquFP9OSlFHaIiBY4TtDDhQnDUq6mlkijqXYsNojFWZJus_wGc9FJJ8tdTWRhevDCYzqHdnwmF8ov0kYtKOqcIqLjxAawcDC-pGJpCfigLAJVbxsuEqXn-IiKeZsOuLHWEeO04g?sig=GUmvBjsbX5th53VwAwP5J3bIyNAit7iq167bSYYY7wI"
 };
 
-const urlParams = new URLSearchParams(window.location.search);
-const jeuNom = urlParams.get('jeu');
-document.getElementById('nom-jeu-affiche').innerText = jeuNom || "Votre jeu";
+const params = new URLSearchParams(window.location.search);
+const jeuNom = params.get('jeu');
+document.getElementById('nom-jeu-affiche').innerText = jeuNom || "Ta commande";
 
 function envoyerCommande() {
 const nom = document.getElementById('client_name').value;
 const email = document.getElementById('client_email').value;
-const lienTelechargement = baseDeLiens[jeuNom];
+const lien = baseDeLiens[jeuNom];
 
 if (!nom || !email) {
-alert("Remplissez votre nom et email.");
+alert("Oublies pas ton nom et ton Gmail !");
 return;
 }
 
-if (!lienTelechargement) {
-alert("Erreur : Jeu non reconnu.");
-return;
-}
-
-document.getElementById('btn-valider').innerText = "Envoi en cours...";
+document.getElementById('btn-valider').innerText = "Envoi...";
 
 emailjs.send("service_nps1sar", "template_o3koshs", {
 to_name: nom,
 to_email: email,
 game_name: jeuNom,
-download_link: lienTelechargement // C'est ici que le lien part vers EmailJS
+download_link: lien
 }).then(() => {
-document.getElementById('form-box').style.display = 'none';
-document.getElementById('success-box').style.display = 'block';
-setTimeout(() => {
-window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, je suis " + nom + ". J'ai payé pour " + jeuNom + ". Vérifiez mon dépôt !");
-}, 2000);
+alert("✅ Email envoyé ! Regardes tes mails.");
+window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, c'est " + nom + ". J'ai fini le paiement pour " + jeuNom + ".");
+}, (error) => {
+alert("Petit souci technique. Écris-moi sur WhatsApp.");
 });
 }
 </script>
