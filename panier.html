@@ -10,26 +10,19 @@ body { background-color: #121212; color: white; font-family: 'Segoe UI', sans-se
 
 h1 { color: #27ae60; margin-bottom: 30px; font-size: 1.8rem; }
 
-.liste-panier { text-align: left; margin-bottom: 20px; }
-.item-panier { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #333; transition: 0.3s; }
-.item-panier:hover { background: #252525; }
+.item-panier { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #333; }
 
-.info-jeu { flex: 2; }
+.info-jeu { text-align: left; }
 .nom-jeu { font-weight: bold; display: block; font-size: 1.1rem; }
-.prix-jeu { color: #27ae60; font-size: 0.9rem; }
+.prix-jeu { color: #27ae60; font-size: 1rem; }
 
-.btn-supprimer { background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
-.btn-supprimer:hover { background: #c0392b; }
+.btn-supprimer { background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; }
 
 .total-section { margin-top: 25px; padding-top: 20px; border-top: 2px solid #27ae60; }
-.total-label { font-size: 1.2rem; color: #aaa; }
 .total-montant { display: block; font-size: 2rem; font-weight: bold; color: #27ae60; margin-top: 5px; }
 
-.btn-payer { display: block; background: #27ae60; color: white; text-decoration: none; padding: 18px; border-radius: 12px; font-weight: bold; margin-top: 25px; font-size: 1.1rem; transition: 0.3s; }
-.btn-payer:hover { background: #219150; transform: scale(1.02); }
-
-.btn-retour { display: inline-block; margin-top: 25px; color: #888; text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid transparent; }
-.btn-retour:hover { color: white; border-bottom: 1px dotted white; }
+.btn-payer { display: block; background: #27ae60; color: white; text-decoration: none; padding: 18px; border-radius: 12px; font-weight: bold; margin-top: 25px; font-size: 1.1rem; }
+.btn-retour { display: inline-block; margin-top: 25px; color: #888; text-decoration: none; font-size: 0.9rem; }
 
 .vide-msg { padding: 40px 0; color: #666; font-style: italic; }
 </style>
@@ -44,31 +37,34 @@ h1 { color: #27ae60; margin-bottom: 30px; font-size: 1.8rem; }
 
 <div id="panier-rempli" style="display: none;">
 <div class="total-section">
-<span class="total-label">Total à payer :</span>
+<span style="color: #aaa;">Total à payer :</span>
 <span id="montant-total" class="total-montant">0 FCFA</span>
 </div>
 
 <a href="paiement.html" class="btn-payer">Passer au paiement</a>
 </div>
 
-<a href="index.html" class="btn-retour">← Continuer mes achats</a>
+<a href="index.html" class="btn-retour">← Retourner à la boutique</a>
 </div>
 
 <script>
 function afficherPanier() {
-const panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+// ON RÉCUPÈRE EXACTEMENT 'asseko_panier'
+const donnees = localStorage.getItem('asseko_panier');
+const panier = donnees ? JSON.parse(donnees) : [];
+
 const zoneContenu = document.getElementById('contenu-panier');
 const zoneAction = document.getElementById('panier-rempli');
 const zonePrix = document.getElementById('montant-total');
 
 if (panier.length === 0) {
-zoneContenu.innerHTML = "<div class='vide-msg'>Votre panier est vide...</div>";
+zoneContenu.innerHTML = "<div class='vide-msg'>Ton panier est vide...</div>";
 zoneAction.style.display = "none";
 return;
 }
 
 zoneAction.style.display = "block";
-let html = "<div class='liste-panier'>";
+let html = "";
 let total = 0;
 
 panier.forEach((jeu, index) => {
@@ -80,22 +76,21 @@ html += `
 </div>
 <button class="btn-supprimer" onclick="supprimerArticle(${index})">Enlever</button>
 </div>`;
-total += jeu.prix;
+total += parseInt(jeu.prix);
 });
 
-html += "</div>";
 zoneContenu.innerHTML = html;
 zonePrix.innerText = total + " FCFA";
 }
 
 function supprimerArticle(index) {
 let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-panier.splice(index, 1); // Supprime l'élément à la position 'index'
+panier.splice(index, 1);
 localStorage.setItem('asseko_panier', JSON.stringify(panier));
-afficherPanier(); // Rafraîchit l'affichage
+afficherPanier(); // On recharge la liste
 }
 
-// Lance l'affichage au chargement de la page
+// Lancement auto
 afficherPanier();
 </script>
 
