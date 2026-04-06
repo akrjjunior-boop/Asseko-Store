@@ -1,3 +1,8 @@
+
+Asseko 2
+03:15 (il y a 0 minute)
+À moi
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +15,7 @@ header { padding: 30px 20px; background: #1a1a1a; border-bottom: 2px solid #27ae
 
 .logo-img { width: 120px; margin-bottom: 10px; border-radius: 50%; }
 
-/* Style du bouton Panier flottant */
+/* Style du bouton Panier flottant en haut à droite */
 .cart-status { position: fixed; top: 20px; right: 20px; background: #f39c12; padding: 10px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000; transition: 0.3s; }
 .cart-status:hover { transform: scale(1.1); background: #e67e22; }
 
@@ -51,7 +56,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">4 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=FIFA 22" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('FIFA 22', 4000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -61,7 +66,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">3 500 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=FIFA 21" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('FIFA 21', 3500)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -71,7 +76,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">3 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=FIFA 20" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('FIFA 20', 3000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -81,7 +86,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">2 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=FIFA 17" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('FIFA 17', 2000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -91,7 +96,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">3 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Efootball 21" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('Efootball 21', 3000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -101,7 +106,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">2 500 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Pro évolution soccer 2018" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('PES 2018', 2500)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -111,7 +116,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">2 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Pro évolution soccer 17" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('PES 17', 2000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -121,7 +126,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">4 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=GTA V" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('GTA V', 4000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -131,17 +136,17 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">7 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Call of duty black ops 6" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('CoD Black Ops 6', 7000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
 <div class="jeu-card">
 <img src="https://i.pinimg.com/736x/de/e7/a2/dee7a2209580884a5b63615206169c9b.jpg" alt="MW3">
-<p>CoD Modern Warfare 3</p>
+<p>CoD MW3</p>
 <p class="prix">5 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Call of duty modern warfare 3" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('CoD MW3', 5000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -151,7 +156,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">7 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=God of war" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('God of War', 7000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -161,7 +166,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">8 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=God of war ragnarok" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('GoW Ragnarok', 8000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -171,7 +176,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">5 500 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Cyberpunk" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('Cyberpunk 2077', 5500)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -181,7 +186,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">5 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Dragon Ball Z sparking zéro" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('DBZ Sparking Zero', 5000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -191,7 +196,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">5 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Dragon Ball z kakarot" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('DBZ Kakarot', 5000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -201,7 +206,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">4 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Naruto storm 4" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('Naruto Storm 4', 4000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -211,7 +216,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">5 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Naruto x boruto connection storm" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('Naruto Connections', 5000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -221,7 +226,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">5 500 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Naruto shinobi strike" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('Naruto Shinobi Strike', 5500)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -231,7 +236,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">4 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Jump force" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('Jump Force', 4000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -241,7 +246,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">8 000 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=Wwe 2k25" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('WWE 2K25', 8000)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -251,7 +256,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">3 500 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=NBA 2k23" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('NBA 2K23', 3500)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -261,7 +266,7 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p class="prix">4 500 F</p>
 <div class="buttons-group">
 <a href="paiement.html?jeu=F1 2022" class="btn-buy">Commander</a>
-<button onclick="alert('Ajouté au panier !')" class="btn-cart">🛒</button>
+<button onclick="ajouterAuPanier('F1 2022', 4500)" class="btn-cart">🛒</button>
 </div>
 </div>
 
@@ -277,24 +282,31 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p>&copy; 2026 ASSEKO STORE - Libreville, Gabon</p>
 <p>WhatsApp : +241 77 82 64 58</p>
 </footer>
+
 <script>
 function ajouterAuPanier(nom, prix) {
 let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
 panier.push({ nom: nom, prix: prix });
 localStorage.setItem('asseko_panier', JSON.stringify(panier));
 
-// Mise à jour du compteur en haut à droite
-document.getElementById('cart-counter').innerText = "🛒 Panier (" + panier.length + ")";
-alert(nom + " a été ajouté au panier !");
+// Mise à jour visuelle du compteur
+let compteur = document.getElementById('cart-counter');
+if(compteur) {
+compteur.innerText = "🛒 Panier (" + panier.length + ")";
 }
 
-// Pour afficher le bon nombre au chargement de la page
+alert(nom + " ajouté au panier !");
+}
+
+// Pour mettre à jour le compteur quand on recharge la page
 window.onload = function() {
 let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-document.getElementById('cart-counter').innerText = "🛒 Panier (" + panier.length + ")";
+let compteur = document.getElementById('cart-counter');
+if(compteur) {
+compteur.innerText = "🛒 Panier (" + panier.length + ")";
+}
 };
 </script>
-
 
 </body>
 </html>
