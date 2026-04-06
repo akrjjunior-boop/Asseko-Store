@@ -10,117 +10,115 @@ body { background-color: #121212; color: white; font-family: sans-serif; text-al
 .card { max-width: 380px; margin: 20px auto; background: #1e1e1e; padding: 20px; border-radius: 15px; border: 1px solid #27ae60; }
 .qr-box { background: white; padding: 8px; border-radius: 10px; margin: 10px 0; display: inline-block; }
 .qr-box img { width: 100%; max-width: 180px; display: block; }
-input { width: 90%; padding: 10px; margin: 8px 0; border-radius: 5px; border: none; background: #2a2a2a; color: white; outline: none; }
+input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 5px; border: none; background: #2a2a2a; color: white; outline: none; }
 .btn { background: #27ae60; color: white; border: none; width: 100%; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 1rem; }
 .price-tag { color: #27ae60; font-size: 1.5rem; font-weight: bold; margin: 5px 0; }
+.liste-jeux { text-align: left; font-size: 0.9rem; background: #252525; padding: 10px; border-radius: 8px; margin-bottom: 10px; color: #eee; min-height: 40px; }
+ul { margin: 5px 0; padding-left: 20px; }
 p { font-size: 0.85rem; margin: 5px 0; line-height: 1.2; color: #ccc; }
 </style>
 </head>
 <body>
 
-<div class="card" id="form-box">
-<h2 id="nom-jeu-affiche" style="margin: 0; font-size: 1.4rem;">Chargement...</h2>
-<div id="prix-jeu" class="price-tag">Chargement...</div>
+<div class="card">
+<h2 style="margin: 0; font-size: 1.3rem;">Résumé de la commande</h2>
+
+<div id="affichage-commande" class="liste-jeux">Chargement des détails...</div>
+
+<div id="prix-total" class="price-tag">-- FCFA</div>
 
 <div class="qr-box">
-<p style="color: black; margin-bottom: 5px; font-weight: bold;">SCANNES POUR PAYER</p>
+<p style="color: black; margin-bottom: 5px; font-weight: bold; font-size: 0.7rem;">SCANNEZ POUR PAYER</p>
 <img src="image.png" alt="QR Code Airtel Money">
 </div>
 
-<p>Effectues ton dépôt au <b>077 82 64 58</b>.</p>
-<p>Remplis ensuite tes infos pour recevoir le lien :</p>
+<p>Effectuez le dépôt au <b>077 82 64 58</b>.</p>
 
-<input type="text" id="client_name" placeholder="Ton Nom complet">
-<input type="email" id="client_email" placeholder="Ton Gmail">
+<input type="text" id="client_name" placeholder="Votre Nom complet">
+<input type="email" id="client_email" placeholder="Votre Gmail">
 
-<button onclick="envoyerCommande()" class="btn" id="btn-valider">J'AI PAYÉ (Recevoir le jeu)</button>
+<button onclick="envoyerCommande()" class="btn" id="btn-valider">J'AI PAYÉ (Recevoir mes jeux)</button>
 </div>
 
 <script>
 emailjs.init("K3cFw1gtpb9bpjNyN");
 
-// --- LISTE DES PRIX ---
-const listePrix = {
-"FIFA 22": "3 500 FCFA",
-"FIFA 21": "3 000 FCFA",
-"FIFA 20": "2 500 FCFA",
-"FIFA 17": "2 000 FCFA",
-"GTA V": "3 500 FCFA",
-"Dragon Ball Z sparking zéro": "5 000 FCFA",
-"Cyberpunk": "4 000 FCFA",
-"Call of duty black ops 6": "5 000 FCFA",
-"Call of duty modern warfare 3": "4 500 FCFA",
-"God of war": "3 500 FCFA",
-"God of war ragnarok": "4 500 FCFA",
-"Efootball 21": "3 000 FCFA",
-"Pro évolution soccer 2018": "2 500 FCFA",
-"Pro évolution soccer 17": "2 000 FCFA",
-"F1 2022": "3 500 FCFA",
-"Wwe 2k25": "4 500 FCFA",
-"NBA 2k23": "3 500 FCFA",
-"Dragon Ball z kakarot": "3 000 FCFA",
-"Jump force": "3 000 FCFA",
-"Naruto storm 4": "2 500 FCFA",
-"Naruto x boruto connection storm": "4 000 FCFA",
-"Naruto shinobi strike": "2 500 FCFA"
-};
-
-const baseDeLiens = {
-"FIFA 22": "https://buzzheavier.com/ad0cnxe25dqn",
-"FIFA 21": "https://buzzheavier.com/8zvg4s982qpd",
-"FIFA 20": "https://buzzheavier.com/kp5qnjzxeu5k",
-"FIFA 17": "https://buzzheavier.com/96o1s7lgp9r8",
-"GTA V": "https://buzzheavier.com/y3urdxf9h7qs",
-"Dragon Ball Z sparking zéro": "https://buzzheavier.com/sjbsnuv6ayt5",
-"Cyberpunk": "https://buzzheavier.com/u33dxmmaozb6",
-"Call of duty black ops 6": "https://buzzheavier.com/9ybd43gq688x",
-"Call of duty modern warfare 3": "https://buzzheavier.com/p2vnu0rfbb1d",
-"God of war": "https://buzzheavier.com/lrtuuu7e0e73",
-"God of war ragnarok": "https://buzzheavier.com/i3t0797hahst",
-"Efootball 21": "https://buzzheavier.com/jevj472kmk4p",
-"Pro évolution soccer 2018": "https://buzzheavier.com/blp63v9ysdxn",
-"Pro évolution soccer 17": "https://buzzheavier.com/m9uh9k9vehv0",
-"F1 2022": "https://buzzheavier.com/bhdq7sosv5qr",
-"Wwe 2k25": "https://buzzheavier.com/kz6x7dl7dk4i",
-"NBA 2k23": "https://buzzheavier.com/u87xysolly06",
-"Dragon Ball z kakarot": "https://gofile.io/d/4bZQLX",
-"Jump force": "https://buzzheavier.com/1rv0xeou6ix2",
-"Naruto storm 4": "https://buzzheavier.com/gb4xhh25zw7q",
-"Naruto x boruto connection storm": "https://buzzheavier.com/pxv3wzml2uor",
-"Naruto shinobi strike": "https://nova.dlproxy.uk/download/Zs9VXtSlVeQeffwfiJa2x8l948qmTRsTLASY8jJ1Ve6cdihSmts3U4UDoXca6nmM1VzxAcpn0Tyu7KwQakwmpgeBG21u1WW7ArHOMVUJ1RIXtMnlYftkfdO1Y4tD9fZOwR2AowCke867JEUJ83O_dkCWdXcMxsPLSFLJXkIKPiLirt3s5dV7oN7X2ga-aL8x-ZWWunMe5lKB7G9A83-XAr0TMF_nGMtJWks2CoR98JeQmduXWtOXo9NZs1DmC-YaGqHQ3mgY8I-QZvQmJKlN8HIaG170TbtGEVvSAi70K1E1F9N8y74iXbGbDmkOVZWmP8e9aj9Vfk-3qZgM_ADUmi-7OChj_DfqEujoEggMKcIqpbPkpUpR8Dwo870rS6ADIAVK3E0rBJOAJJv9ju-dlUM33fKDRYuDx-UmfpiJoN-rpL_k7ofzsrciL8VVaBox-eO4rClYWa_mh3wYn7b2h05bBcdGuiJyTm9RRtauMnDX47ACT3U4i9NDPSzAGq7eIph-rusvahTK7FVbquFP9OSlFHaIiBY4TtDDhQnDUq6mlkijqXYsNojFWZJus_wGc9FJJ8tdTWRhevDCYzqHdnwmF8ov0kYtKOqcIqLjxAawcDC-pGJpCfigLAJVbxsuEqXn-IiKeZsOuLHWEeO04g?sig=GUmvBjsbX5th53VwAwP5J3bIyNAit7iq167bSYYY7wI"
+// --- TA LISTE DE PRIX POUR L'ACHAT DIRECT ---
+const prixCatalogue = {
+"FIFA 22": 4000, "FIFA 21": 3500, "FIFA 20": 3000, "FIFA 17": 2000,
+"Efootball 21": 3000, "Pro évolution soccer 2018": 2500, "Pro évolution soccer 17": 2000,
+"GTA V": 4000, "Call of duty black ops 6": 7000, "Call of duty modern warfare 3": 5000,
+"God of war": 7000, "God of war ragnarok": 8000, "Cyberpunk": 5500,
+"Dragon Ball Z sparking zéro": 5000, "Dragon Ball z kakarot": 5000,
+"Naruto storm 4": 4000, "Naruto x boruto connection storm": 5000,
+"Naruto shinobi strike": 5500, "Jump force": 4000,
+"Wwe 2k25": 8000, "NBA 2k23": 3500, "F1 2022": 4500
 };
 
 const params = new URLSearchParams(window.location.search);
-const jeuNom = params.get('jeu');
+const jeuDirect = params.get('jeu');
+let jeuxTextePourEmail = "";
+let montantTotal = 0;
 
-// Affichage du nom et du prix
-document.getElementById('nom-jeu-affiche').innerText = jeuNom || "Ta commande";
-document.getElementById('prix-jeu').innerText = listePrix[jeuNom] || "Prix non défini";
+function initialiserPage() {
+const zoneAffichage = document.getElementById('affichage-commande');
+const zonePrix = document.getElementById('prix-total');
+
+if (jeuDirect) {
+// OPTION A : ACHAT DIRECT (Bouton vert)
+montantTotal = prixCatalogue[jeuDirect] || 0;
+jeuxTextePourEmail = jeuDirect;
+zoneAffichage.innerHTML = "<b>Jeu :</b> " + jeuDirect;
+zonePrix.innerText = montantTotal + " F";
+} else {
+// OPTION B : PANIER (Bouton orange)
+const panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+
+if (panier.length > 0) {
+jeuxTextePourEmail = panier.map(j => j.nom).join(", ");
+montantTotal = panier.reduce((sum, j) => sum + j.prix, 0);
+
+let listeHtml = "<ul>";
+panier.forEach(j => { listeHtml += `<li>${j.nom} (${j.prix} F)</li>`; });
+listeHtml += "</ul>";
+
+zoneAffichage.innerHTML = listeHtml;
+zonePrix.innerText = montantTotal + " FCFA";
+} else {
+zoneAffichage.innerHTML = "Aucun jeu sélectionné.";
+zonePrix.innerText = "0 F";
+}
+}
+}
 
 function envoyerCommande() {
 const nom = document.getElementById('client_name').value;
 const email = document.getElementById('client_email').value;
-const lien = baseDeLiens[jeuNom];
 
 if (!nom || !email) {
-alert("Oublies pas ton nom et ton Gmail !");
+alert("Veuillez remplir votre nom et votre adresse Gmail.");
 return;
 }
 
-document.getElementById('btn-valider').innerText = "Envoi...";
+document.getElementById('btn-valider').innerText = "Envoi en cours...";
 
 emailjs.send("service_nps1sar", "template_o3koshs", {
 to_name: nom,
 to_email: email,
-game_name: jeuNom,
-download_link: lien
+game_name: jeuxTextePourEmail,
+total_price: montantTotal + " F", // Nouveau champ utile
+download_link: "Vérification du paiement en cours..."
 }).then(() => {
-alert("✅ Email envoyé ! Regardes tes mails.");
-window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, c'est " + nom + ". J'ai fini le paiement pour " + jeuNom + ".");
+alert("✅ Commande envoyée !");
+// On vide le panier après le paiement
+localStorage.removeItem('asseko_panier');
+window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent("Salut Asseko Store, c'est " + nom + ". J'ai payé " + montantTotal + " F pour : " + jeuxTextePourEmail);
 }, (error) => {
-alert("Petit souci technique.");
+alert("Erreur lors de l'envoi. Contactez-moi sur WhatsApp.");
 });
 }
+
+initialiserPage();
 </script>
 </body>
 </html>
