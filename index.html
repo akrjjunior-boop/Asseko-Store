@@ -277,6 +277,24 @@ footer { padding: 40px; color: #666; background: #0a0a0a; margin-top: 50px; }
 <p>&copy; 2026 ASSEKO STORE - Libreville, Gabon</p>
 <p>WhatsApp : +241 77 82 64 58</p>
 </footer>
+<script>
+function ajouterAuPanier(nom, prix) {
+let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+panier.push({ nom: nom, prix: prix });
+localStorage.setItem('asseko_panier', JSON.stringify(panier));
+
+// Mise à jour du compteur en haut à droite
+document.getElementById('cart-counter').innerText = "🛒 Panier (" + panier.length + ")";
+alert(nom + " a été ajouté au panier !");
+}
+
+// Pour afficher le bon nombre au chargement de la page
+window.onload = function() {
+let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+document.getElementById('cart-counter').innerText = "🛒 Panier (" + panier.length + ")";
+};
+</script>
+
 
 </body>
 </html>
