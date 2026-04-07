@@ -5,36 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paiement - Asseko Store</title>
 <style>
-body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-.card { max-width: 400px; margin: auto; background: #1e1e1e; padding: 25px; border-radius: 20px; border: 2px solid #27ae60; }
-.logo-top { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #27ae60; margin-bottom: 10px; }
-.qr img { width: 180px; background: white; padding: 10px; border-radius: 10px; margin: 15px 0; }
-input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #333; background: #252525; color: white; }
-.btn-pay { background: #27ae60; color: white; border: none; width: 100%; padding: 18px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
-#recap { background: #252525; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: left; font-size: 0.9rem; border-left: 4px solid #f39c12; }
+:root { --primary: #27ae60; --bg: #121212; --card: #1e1e1e; }
+body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; }
+.card { max-width: 400px; margin: auto; background: var(--card); padding: 30px; border-radius: 25px; border: 1px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.logo-top { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 15px; object-fit: cover; }
+.qr img { width: 190px; background: white; padding: 10px; border-radius: 12px; margin: 20px 0; }
+input { width: 90%; padding: 14px; margin: 10px 0; border-radius: 10px; border: 1px solid #333; background: #252525; color: white; font-size: 1rem; }
+.btn-pay { background: var(--primary); color: white; border: none; width: 100%; padding: 20px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 15px; }
+#recap { background: #252525; padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: left; font-size: 0.95rem; border-left: 5px solid #f39c12; }
+
+/* Styles du Compte à Rebours */
+.timer-box { background: #252525; padding: 25px; border-radius: 20px; margin: 20px 0; border: 1px solid #333; }
+#timer { font-size: 3rem; font-weight: 800; color: #f39c12; margin: 10px 0; font-variant-numeric: tabular-nums; }
+.progress-bg { width: 100%; background: #444; height: 12px; border-radius: 10px; overflow: hidden; margin-top: 15px; }
+#progress-bar { width: 100%; background: var(--primary); height: 100%; transition: 1s linear; }
+.success-msg { color: var(--primary); font-weight: bold; font-size: 1.2rem; margin-top: 15px; display: none; }
+
+footer { margin-top: 40px; color: #666; font-size: 0.85rem; line-height: 1.5; }
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="card" id="main-content">
 <img src="logo.png" class="logo-top" alt="Logo">
-<h2>Paiement Airtel Money</h2>
-<div id="recap">Chargement...</div>
-<h3 id="montant" style="color: #27ae60; font-size: 1.8rem;">0 F</h3>
+<h2 style="margin-bottom: 5px;">Paiement Airtel</h2>
+<p style="color: #aaa; font-size: 0.9rem; margin-bottom: 20px;">Meilleur vendeur de jeux PC</p>
 
-<div class="qr"><img src="image.png" alt="QR Code"></div>
-<p>Dépôt au : <b>077 82 64 58</b></p>
+<div id="recap">Chargement de la commande...</div>
+<h3 id="montant-display" style="color: var(--primary); font-size: 2rem; margin: 10px 0;">0 F</h3>
 
-<input type="text" id="nom_client" placeholder="Ton Nom Complet" required>
-<input type="email" id="email_client" placeholder="Ton adresse Gmail" required>
-
-<button type="button" onclick="finaliser()" class="btn-pay" id="btn">J'AI PAYÉ ✅</button>
+<div class="qr">
+<img src="image.png" alt="QR Code Airtel Money">
 </div>
 
-<script>
-const DISCORD = "https://discordapp.com/api/webhooks/1491165559281156286/56gJcFyKAXUeWI7gcDPB4ddYvD2Xw2CBR5ebudPQ4qOGKU1trBXelH_qAmrIVVIUkq63";
+<p>Envoyez au :<br><b style="font-size: 1.4rem;">077 82 64 58</b></p>
+<p style="font-size: 0.85rem; color: #888;">Nom : Kevan (Airtel Money)</p>
 
-const tarifs = {
+<input type="text" id="c_nom" placeholder="Ton Nom Complet" required>
+<input type="email" id="c_email" placeholder="Ton adresse Gmail" required>
+
+<button type="button" onclick="lancerTraitement()" class="btn-pay" id="btn-valider">J'AI PAYÉ ✅</button>
+</div>
+
+<footer>
+Asseko Store 2026 - Tous droits réservés<br>
+Créateur : <b style="color: var(--primary);">Monsieur Asseko Régis</b>
+</footer>
+
+<script>
+const DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1491165559281156286/56gJcFyKAXUeWI7gcDPB4ddYvD2Xw2CBR5ebudPQ4qOGKU1trBXelH_qAmrIVVIUkq63";
+
+const prixJeux = {
 "WWE 2K25": 8000, "GoW Ragnarok": 8000, "CoD Black Ops 6": 7000, "God of War": 7000,
 "Cyberpunk 2077": 5500, "Naruto Shinobi Strike": 5500, "DBZ Sparking Zero": 5000,
 "DBZ Kakarot": 5000, "Naruto Connections": 5000, "CoD MW3": 5000, "NFS Heat Deluxe": 4500,
@@ -46,39 +67,98 @@ const tarifs = {
 
 const params = new URLSearchParams(window.location.search);
 const jeuSeul = params.get('jeu');
-let jeuxNoms = "";
-let totalPayer = 0;
+let nomsJeux = "";
+let total = 0;
 
 if (jeuSeul) {
-totalPayer = tarifs[jeuSeul] || 0;
-jeuxNoms = jeuSeul;
-document.getElementById('recap').innerText = "Jeu : " + jeuSeul;
+total = prixJeux[jeuSeul] || 0;
+nomsJeux = jeuSeul;
+document.getElementById('recap').innerHTML = "<b>Jeu :</b> " + jeuSeul;
 } else {
-const panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-totalPayer = panier.reduce((s, j) => s + j.prix, 0);
-jeuxNoms = panier.map(j => j.nom).join(", ");
-document.getElementById('recap').innerText = "Panier : " + (jeuxNoms || "Vide");
+const p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+total = p.reduce((s, j) => s + j.prix, 0);
+nomsJeux = p.map(j => j.nom).join(", ");
+document.getElementById('recap').innerHTML = "<b>Panier :</b> " + (nomsJeux || "Vide");
 }
-document.getElementById('montant').innerText = totalPayer + " FCFA";
+document.getElementById('montant-display').innerText = total + " FCFA";
 
-function finaliser() {
-const n = document.getElementById('nom_client').value;
-const e = document.getElementById('email_client').value;
-if(!n || !e) { alert("Remplis tes infos !"); return; }
+function lancerTraitement() {
+const nom = document.getElementById('c_nom').value;
+const email = document.getElementById('c_email').value;
 
-fetch(DISCORD, {
+if(!nom || !email) { alert("Remplis tes infos pour la livraison !"); return; }
+
+// 1. Notification Discord
+fetch(DISCORD_WEBHOOK, {
 method: "POST",
 headers: {"Content-Type":"application/json"},
 body: JSON.stringify({
-embeds: [{ title: "Vente !", fields: [
-{name:"Client", value:n}, {name:"Jeux", value:jeuxNoms}, {name:"Prix", value:totalPayer+" F"}
-]}]
+embeds: [{
+title: "💰 NOUVELLE VENTE ASSEKO STORE",
+color: 3066993,
+fields: [
+{ name: "👤 Client", value: nom, inline: true },
+{ name: "💵 Total", value: total + " F", inline: true },
+{ name: "🎮 Jeux", value: nomsJeux },
+{ name: "📧 Mail client", value: email }
+]
+}]
 })
-}).then(() => {
-const wa = `Salut Asseko Store ! J'ai payé *${totalPayer} F* pour *${jeuxNoms}*. Mail: ${e}`;
-localStorage.removeItem('asseko_panier');
-window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent(wa);
 });
+
+// 2. Interface de remerciement et Compte à rebours
+document.getElementById('main-content').innerHTML = `
+<img src="logo.png" class="logo-top">
+<h2 style="color:var(--primary);">Merci ${nom} !</h2>
+<p>Ton paiement est en cours de validation par notre système.</p>
+
+<div class="timer-box">
+<p style="font-size:0.85rem; color:#aaa; margin:0;">Livraison automatique dans :</p>
+<div id="timer">10:00</div>
+<div class="progress-bg">
+<div id="progress-bar"></div>
+</div>
+</div>
+
+<p id="status-text" style="font-size:0.9rem; margin-bottom:20px;">Préparation de vos liens de téléchargement...</p>
+
+<div id="final-msg" class="success-msg">✅ Tes jeux viennent d'être envoyés sur ton mail : ${email} !</div>
+
+<a href="https://wa.me/24177826458?text=${encodeURIComponent("Salut Asseko Store ! J'ai payé " + total + "F pour " + nomsJeux + ". Mon mail : " + email)}"
+style="background:#25d366; color:white; padding:15px; display:block; border-radius:12px; text-decoration:none; font-weight:bold; margin-top:10px;">
+RETOURNER SUR WHATSAPP
+</a>
+`;
+
+startTimer(600, email); // 10 minutes (600 secondes)
+localStorage.removeItem('asseko_panier');
+}
+
+function startTimer(duration, email) {
+let timer = duration;
+const display = document.getElementById('timer');
+const bar = document.getElementById('progress-bar');
+const status = document.getElementById('status-text');
+const finalMsg = document.getElementById('final-msg');
+
+const interval = setInterval(function () {
+let minutes = parseInt(timer / 60, 10);
+let secondes = parseInt(timer % 60, 10);
+
+minutes = minutes < 10 ? "0" + minutes : minutes;
+secondes = secondes < 10 ? "0" + secondes : secondes;
+
+display.textContent = minutes + ":" + secondes;
+bar.style.width = (timer / duration * 100) + "%";
+
+if (--timer < 0) {
+clearInterval(interval);
+display.textContent = "00:00";
+status.style.display = "none";
+finalMsg.style.display = "block";
+display.style.color = "#27ae60";
+}
+}, 1000);
 }
 </script>
 </body>
