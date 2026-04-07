@@ -3,31 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asseko Store - Catalogue de jeux pc</title>
+<title>Asseko Store - Meilleur Vendeur de Jeux PC</title>
 <style>
-body { background: #121212; color: white; font-family: sans-serif; margin: 0; text-align: center; }
-header { padding: 30px; background: #1a1a1a; border-bottom: 3px solid #27ae60; }
-.logo-main { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #27ae60; object-fit: cover; }
-.cart-status { position: fixed; top: 20px; right: 20px; background: #f39c12; padding: 12px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 2px solid white; }
-.grid-jeux { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 15px; padding: 20px; max-width: 1200px; margin: auto; }
-.jeu-card { background: #1e1e1e; padding: 12px; border-radius: 15px; border: 1px solid #333; display: flex; flex-direction: column; transition: 0.3s; }
-.jeu-card img { width: 100%; height: 180px; border-radius: 10px; object-fit: cover; }
-.prix { color: #27ae60; font-weight: bold; margin: 10px 0; font-size: 1.1rem; }
-.btn-group { display: flex; gap: 5px; }
-.btn-buy { background: #27ae60; color: white; text-decoration: none; padding: 10px; border-radius: 8px; flex: 2; font-weight: bold; font-size: 0.8rem; }
-.btn-cart { background: #f39c12; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 1.1rem; }
+:root { --primary: #27ae60; --bg: #121212; --card: #1e1e1e; }
+body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding-bottom: 50px; }
+
+/* Header Chic */
+header { padding: 40px 20px; background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); border-bottom: 2px solid var(--primary); }
+.logo-main { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; box-shadow: 0 0 15px rgba(39, 174, 96, 0.3); }
+h1 { margin: 10px 0 5px; font-size: 1.8rem; letter-spacing: 1px; }
+.slogan { color: #aaa; font-style: italic; font-size: 0.9rem; margin-bottom: 10px; }
+
+/* Panier Flottant Mobile */
+.cart-status { position: fixed; bottom: 20px; right: 20px; background: #f39c12; padding: 15px 25px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.6); border: 2px solid white; display: flex; align-items: center; gap: 8px; }
+
+/* Grille Responsive (Mobile 2 colonnes / PC 4+) */
+.grid-jeux { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; max-width: 1200px; margin: auto; }
+@media (min-width: 768px) { .grid-jeux { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; } }
+
+.jeu-card { background: var(--card); border-radius: 18px; overflow: hidden; border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; }
+.jeu-card img { width: 100%; height: 160px; object-fit: cover; }
+.info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.jeu-nom { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #eee; min-height: 34px; }
+.prix { color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 12px; }
+
+/* Boutons Compacts */
+.btn-group { display: flex; gap: 6px; }
+.btn-buy { background: var(--primary); color: white; text-decoration: none; padding: 10px; border-radius: 8px; flex: 3; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; text-align: center; }
+.btn-cart { background: #444; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 1rem; }
+
+/* Footer */
+footer { margin-top: 50px; padding: 30px; border-top: 1px solid #333; color: #666; font-size: 0.85rem; line-height: 1.6; }
+footer b { color: var(--primary); }
 </style>
 </head>
 <body>
 
 <header>
 <img src="logo.png" class="logo-main" alt="Logo">
-<h1>ASSEKO<span style="color: #27ae60;">STORE</span></h1>
+<h1>ASSEKO<span style="color: var(--primary);">STORE</span></h1>
+<p class="slogan">Meilleur vendeur de jeux PC</p>
 </header>
 
-<a href="panier.html" class="cart-status" id="cart-counter">🛒 Panier (0)</a>
+<a href="panier.html" class="cart-status" id="cart-counter">🛒 <span>(0)</span></a>
 
 <div class="grid-jeux" id="catalogue"></div>
+
+<footer>
+Asseko Store 2026 - Tous droits réservés<br>
+Créateur : <b>Monsieur Asseko Régis</b>
+</footer>
 
 <script>
 const listeJeux = [
@@ -41,7 +66,7 @@ const listeJeux = [
 {n: "DBZ Kakarot", p: 5000, img: "https://i.pinimg.com/736x/03/77/39/0377395b7989c414483e580896048cf1.jpg"},
 {n: "Naruto Connections", p: 5000, img: "https://i.pinimg.com/1200x/b4/bf/d2/b4bfd24ee83c4df44bad28dc17631001.jpg"},
 {n: "CoD MW3", p: 5000, img: "https://i.pinimg.com/736x/de/e7/a2/dee7a2209580884a5b63615206169c9b.jpg"},
-{n: "NFS Heat Deluxe", p: 4500, img: "https://i.pinimg.com/736x/2e/c9/fa/2ec9fad416ac4fe639f50184aba77aee.jpg"},
+{n: "NFS Heat Deluxe", p: 4500, img: "https://i.pinimg.com/736x/1a/2c/3d/1a2c3d3b3b3b3b3b3b3b3b3b3b3b3b3b.jpg"},
 {n: "F1 2022", p: 4500, img: "https://i.pinimg.com/1200x/20/ad/a9/20ada9cd59ea21f2f8658df69ef9c218.jpg"},
 {n: "FIFA 22", p: 4000, img: "https://i.pinimg.com/736x/df/7a/71/df7a71474e3b8fb87ce816bb79b23476.jpg"},
 {n: "GTA V", p: 4000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg"},
@@ -49,47 +74,49 @@ const listeJeux = [
 {n: "Jump Force", p: 4000, img: "https://i.pinimg.com/736x/25/30/66/25306638ebe76311cfbf6bde6caae84f.jpg"},
 {n: "FIFA 21", p: 3500, img: "https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg"},
 {n: "NBA 2K23", p: 3500, img: "https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg"},
-{n: "Test Drive Unlimited 2", p: 3500, img: "https://i.pinimg.com/1200x/96/91/bf/9691bf3993f312e2ed4744c392061ca8.jpg"},
-{n: "Naruto Storm Revolution", p: 4000, img: "https://i.pinimg.com/736x/c9/26/38/c926388ae9d01a6e3bc70d439a1eb0f6.jpg"},
+{n: "Test Drive Unlimited 2", p: 3500, img: "https://i.pinimg.com/736x/2b/9b/7f/2b9b7f5b3a3b3b3b3b3b3b3b3b3b3b3b.jpg"},
+{n: "Naruto Storm Revolution", p: 3500, img: "https://i.pinimg.com/736x/8f/3e/2a/8f3e2a3b3b3b3b3b3b3b3b3b3b3b3b3b.jpg"},
 {n: "FIFA 20", p: 3000, img: "https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg"},
 {n: "Efootball 21", p: 3000, img: "https://i.pinimg.com/736x/01/39/9e/01399ef1fba685b0fee527e7478eb3d1.jpg"},
-{n: "Assassin's Creed Revelations", p: 3000, img: "https://i.pinimg.com/736x/80/32/3a/80323a05c9272608d121b93cdcf2cc39.jpg"},
+{n: "Assassin's Creed Revelations", p: 3000, img: "https://i.pinimg.com/736x/4a/1c/3e/4a1c3e3b3b3b3b3b3b3b3b3b3b3b3b3b.jpg"},
 {n: "PES 2018", p: 2500, img: "https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg"},
-{n: "Minecraft Story Mode", p: 2500, img: "https://i.pinimg.com/736x/b0/8d/06/b08d06c36f03ac7f9bd7cb12e93bb853.jpg"},
+{n: "Minecraft Story Mode", p: 2500, img: "https://i.pinimg.com/736x/6d/2b/1e/6d2b1e3b3b3b3b3b3b3b3b3b3b3b3b3b.jpg"},
 {n: "FIFA 17", p: 2000, img: "https://i.pinimg.com/1200x/80/ed/ee/80edee894a2cd179caedb4134d1a427b.jpg"},
 {n: "PES 17", p: 2000, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg"}
 ];
 
-function afficherCatalogue() {
+function render() {
 const cat = document.getElementById('catalogue');
 cat.innerHTML = listeJeux.map(j => `
 <div class="jeu-card">
 <img src="${j.img}" alt="${j.n}">
-<p><b>${j.n}</b></p>
+<div class="info">
+<div class="jeu-nom">${j.n}</div>
 <div class="prix">${j.p} F</div>
 <div class="btn-group">
 <a href="paiement.html?jeu=${encodeURIComponent(j.n)}" class="btn-buy">Acheter</a>
-<button onclick="ajouterPanier('${j.n}', ${j.p})" class="btn-cart">🛒</button>
+<button onclick="add('${j.n}', ${j.p})" class="btn-cart">🛒</button>
+</div>
 </div>
 </div>
 `).join('');
-majCompteur();
+maj();
 }
 
-function ajouterPanier(n, p) {
+function add(n, p) {
 let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-panier.push({ nom: n, prix: p });
+panier.push({nom: n, prix: p});
 localStorage.setItem('asseko_panier', JSON.stringify(panier));
-majCompteur();
-alert(n + " ajouté au panier !");
+maj();
+alert("Ajouté !");
 }
 
-function majCompteur() {
-let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-document.getElementById('cart-counter').innerText = "🛒 Panier (" + panier.length + ")";
+function maj() {
+let p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+document.querySelector('#cart-counter span').innerText = "(" + p.length + ")";
 }
 
-window.onload = afficherCatalogue;
+window.onload = render;
 </script>
 </body>
 </html>
