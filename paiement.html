@@ -7,106 +7,77 @@
 <style>
 body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
 .card { max-width: 400px; margin: auto; background: #1e1e1e; padding: 25px; border-radius: 20px; border: 2px solid #27ae60; }
-.logo-top { width: 80px; margin-bottom: 10px; border-radius: 50%; }
+.logo-top { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #27ae60; margin-bottom: 10px; }
 .qr img { width: 180px; background: white; padding: 10px; border-radius: 10px; margin: 15px 0; }
 input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #333; background: #252525; color: white; }
-.btn-pay { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
-#recap { background: #252525; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: left; font-size: 0.9rem; border-left: 3px solid #f39c12; }
+.btn-pay { background: #27ae60; color: white; border: none; width: 100%; padding: 18px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
+#recap { background: #252525; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: left; font-size: 0.9rem; border-left: 4px solid #f39c12; }
 </style>
 </head>
 <body>
 
 <div class="card">
-<img src="logo.png" class="logo-top" alt="Logo Asseko">
-<h2>Finaliser la commande</h2>
+<img src="logo.png" class="logo-top" alt="Logo">
+<h2>Paiement Airtel Money</h2>
 <div id="recap">Chargement...</div>
-<h3 id="montant-display" style="color: #27ae60; font-size: 1.6rem;">0 F</h3>
+<h3 id="montant" style="color: #27ae60; font-size: 1.8rem;">0 F</h3>
 
-<div class="qr">
-<img src="image.png" alt="QR Code Airtel Money">
-</div>
-
+<div class="qr"><img src="image.png" alt="QR Code"></div>
 <p>Dépôt au : <b>077 82 64 58</b></p>
 
-<input type="text" id="client_nom" placeholder="Ton Nom Complet" required>
-<input type="email" id="client_email" placeholder="Ton adresse Gmail" required>
+<input type="text" id="nom_client" placeholder="Ton Nom Complet" required>
+<input type="email" id="email_client" placeholder="Ton adresse Gmail" required>
 
-<button type="button" onclick="declencherPaiement()" class="btn-pay" id="main-btn">J'AI PAYÉ ✅</button>
+<button type="button" onclick="finaliser()" class="btn-pay" id="btn">J'AI PAYÉ ✅</button>
 </div>
 
 <script>
-const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1491165559281156286/56gJcFyKAXUeWI7gcDPB4ddYvD2Xw2CBR5ebudPQ4qOGKU1trBXelH_qAmrIVVIUkq63";
+const DISCORD = "https://discordapp.com/api/webhooks/1491165559281156286/56gJcFyKAXUeWI7gcDPB4ddYvD2Xw2CBR5ebudPQ4qOGKU1trBXelH_qAmrIVVIUkq63";
 
-const prixJeux = {
-"FIFA 22": 4000, "FIFA 21": 3500, "FIFA 20": 3000, "FIFA 17": 2000,
-"Efootball 21": 3000, "PES 2018": 2500, "PES 17": 2000, "GTA V": 4000,
-"CoD Black Ops 6": 7000, "CoD MW3": 5000, "God of War": 7000,
-"GoW Ragnarok": 8000, "Cyberpunk 2077": 5500, "DBZ Sparking Zero": 5000,
-"DBZ Kakarot": 5000, "Naruto Storm 4": 4000, "Naruto Connections": 5000,
-"Naruto Shinobi Strike": 5500, "Jump Force": 4000, "WWE 2K25": 8000,
-"NBA 2K23": 3500, "F1 2022": 4500, "Test Drive Unlimited 2": 3500,
-"Naruto Storm Revolution": 3500, "Assassin's Creed Revelations": 3000,
-"Minecraft Story Mode": 2500, "NFS Heat Deluxe": 4500
+const tarifs = {
+"WWE 2K25": 8000, "GoW Ragnarok": 8000, "CoD Black Ops 6": 7000, "God of War": 7000,
+"Cyberpunk 2077": 5500, "Naruto Shinobi Strike": 5500, "DBZ Sparking Zero": 5000,
+"DBZ Kakarot": 5000, "Naruto Connections": 5000, "CoD MW3": 5000, "NFS Heat Deluxe": 4500,
+"F1 2022": 4500, "FIFA 22": 4000, "GTA V": 4000, "Naruto Storm 4": 4000, "Jump Force": 4000,
+"FIFA 21": 3500, "NBA 2K23": 3500, "Test Drive Unlimited 2": 3500, "Naruto Storm Revolution": 3500,
+"FIFA 20": 3000, "Efootball 21": 3000, "Assassin's Creed Revelations": 3000,
+"PES 2018": 2500, "Minecraft Story Mode": 2500, "FIFA 17": 2000, "PES 17": 2000
 };
 
 const params = new URLSearchParams(window.location.search);
 const jeuSeul = params.get('jeu');
-let texteJeux = "";
-let totalPrix = 0;
+let jeuxNoms = "";
+let totalPayer = 0;
 
 if (jeuSeul) {
-totalPrix = prixJeux[jeuSeul] || 0;
-texteJeux = jeuSeul;
+totalPayer = tarifs[jeuSeul] || 0;
+jeuxNoms = jeuSeul;
 document.getElementById('recap').innerText = "Jeu : " + jeuSeul;
 } else {
-const p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-totalPrix = p.reduce((s, j) => s + j.prix, 0);
-texteJeux = p.map(j => j.nom).join(", ");
-document.getElementById('recap').innerText = "Panier : " + (texteJeux || "Vide");
+const panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+totalPayer = panier.reduce((s, j) => s + j.prix, 0);
+jeuxNoms = panier.map(j => j.nom).join(", ");
+document.getElementById('recap').innerText = "Panier : " + (jeuxNoms || "Vide");
 }
-document.getElementById('montant-display').innerText = totalPrix + " FCFA";
+document.getElementById('montant').innerText = totalPayer + " FCFA";
 
-function declencherPaiement() {
-const nom = document.getElementById('client_nom').value;
-const email = document.getElementById('client_email').value;
-const btn = document.getElementById('main-btn');
+function finaliser() {
+const n = document.getElementById('nom_client').value;
+const e = document.getElementById('email_client').value;
+if(!n || !e) { alert("Remplis tes infos !"); return; }
 
-if(!nom || !email) {
-alert("Remplis ton nom et ton mail !");
-return;
-}
-
-btn.innerText = "Envoi...";
-btn.disabled = true;
-
-const data = {
-username: "Asseko Store Bot",
-embeds: [{
-title: "💰 Nouvelle Vente !",
-color: 3066993,
-fields: [
-{ name: "Client", value: nom, inline: true },
-{ name: "Email", value: email, inline: true },
-{ name: "Commande", value: texteJeux },
-{ name: "Total", value: totalPrix + " F", inline: true }
-]
-}]
-};
-
-fetch(WEBHOOK_URL, {
+fetch(DISCORD, {
 method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify(data)
+headers: {"Content-Type":"application/json"},
+body: JSON.stringify({
+embeds: [{ title: "Vente !", fields: [
+{name:"Client", value:n}, {name:"Jeux", value:jeuxNoms}, {name:"Prix", value:totalPayer+" F"}
+]}]
 })
-.then(() => {
-alert("✅ Commande reçue ! Je vérifie et je t'envoie les liens.");
+}).then(() => {
+const wa = `Salut Asseko Store ! J'ai payé *${totalPayer} F* pour *${jeuxNoms}*. Mail: ${e}`;
 localStorage.removeItem('asseko_panier');
-const msg = `Salut Asseko, c'est ${nom}. Je viens de payer ${totalPrix}F pour : ${texteJeux}. Mon mail : ${email}`;
-window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent(msg);
-})
-.catch(() => {
-const msg = `Salut Asseko, c'est ${nom}. Je viens de payer ${totalPrix}F pour : ${texteJeux}. Mon mail : ${email}`;
-window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent(msg);
+window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent(wa);
 });
 }
 </script>
