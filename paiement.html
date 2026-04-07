@@ -2,40 +2,42 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paiement - Asseko Store</title>
 <style>
 body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-.card { max-width: 450px; margin: auto; background: #1e1e1e; padding: 30px; border-radius: 20px; border: 2px solid #27ae60; }
-.qr-placeholder { background: white; padding: 15px; border-radius: 10px; width: 200px; margin: 20px auto; color: black; font-weight: bold; }
-input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #333; background: #252525; color: white; }
-.btn-valider { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px; }
-#recap { background: #252525; padding: 15px; border-radius: 10px; text-align: left; margin-bottom: 20px; border-left: 4px solid #f39c12; }
+.card { max-width: 400px; margin: auto; background: #1e1e1e; padding: 25px; border-radius: 20px; border: 2px solid #27ae60; }
+.logo-top { width: 80px; margin-bottom: 10px; border-radius: 50%; }
+.qr img { width: 180px; background: white; padding: 10px; border-radius: 10px; margin: 15px 0; }
+input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #333; background: #252525; color: white; }
+.btn-pay { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
+#recap { background: #252525; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: left; font-size: 0.9rem; border-left: 3px solid #f39c12; }
 </style>
 </head>
 <body>
 
 <div class="card">
+<img src="logo.png" class="logo-top" alt="Logo Asseko">
 <h2>Finaliser la commande</h2>
-<div id="recap"></div>
-<h3 id="montant-total" style="color:#27ae60; font-size: 1.8rem;">0 F</h3>
+<div id="recap">Chargement...</div>
+<h3 id="montant-display" style="color: #27ae60; font-size: 1.6rem;">0 F</h3>
 
-<div class="qr-placeholder">
-[IMAGE QR CODE ICI]<br>
-<small>Airtel Money</small>
+<div class="qr">
+<img src="image.png" alt="QR Code Airtel Money">
 </div>
 
-<p>Faites le dépôt au : <b>077 82 64 58</b></p>
+<p>Dépôt au : <b>077 82 64 58</b></p>
 
-<input type="text" id="nom_client" placeholder="Votre Nom complet" required>
-<input type="email" id="email_client" placeholder="Votre adresse Gmail" required>
+<input type="text" id="client_nom" placeholder="Ton Nom Complet" required>
+<input type="email" id="client_email" placeholder="Ton adresse Gmail" required>
 
-<button onclick="envoyerCommande()" class="btn-valider" id="btn-submit">J'AI PAYÉ ✅</button>
+<button type="button" onclick="declencherPaiement()" class="btn-pay" id="main-btn">J'AI PAYÉ ✅</button>
 </div>
 
 <script>
-const DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1491165559281156286/56gJcFyKAXUeWI7gcDPB4ddYvD2Xw2CBR5ebudPQ4qOGKU1trBXelH_qAmrIVVIUkq63";
+const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1491165559281156286/56gJcFyKAXUeWI7gcDPB4ddYvD2Xw2CBR5ebudPQ4qOGKU1trBXelH_qAmrIVVIUkq63";
 
-const prixCatalogue = {
+const prixJeux = {
 "FIFA 22": 4000, "FIFA 21": 3500, "FIFA 20": 3000, "FIFA 17": 2000,
 "Efootball 21": 3000, "PES 2018": 2500, "PES 17": 2000, "GTA V": 4000,
 "CoD Black Ops 6": 7000, "CoD MW3": 5000, "God of War": 7000,
@@ -48,67 +50,63 @@ const prixCatalogue = {
 };
 
 const params = new URLSearchParams(window.location.search);
-const jeuDirect = params.get('jeu');
-let listeJeuxMsg = "";
-let totalA Payer = 0;
+const jeuSeul = params.get('jeu');
+let texteJeux = "";
+let totalPrix = 0;
 
-if (jeuDirect) {
-totalAPayer = prixCatalogue[jeuDirect] || 0;
-listeJeuxMsg = jeuDirect;
-document.getElementById('recap').innerHTML = "<b>Jeu sélectionné :</b><br>" + jeuDirect;
+if (jeuSeul) {
+totalPrix = prixJeux[jeuSeul] || 0;
+texteJeux = jeuSeul;
+document.getElementById('recap').innerText = "Jeu : " + jeuSeul;
 } else {
-const panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-totalAPayer = panier.reduce((sum, j) => sum + j.prix, 0);
-listeJeuxMsg = panier.map(j => j.nom).join(", ");
-document.getElementById('recap').innerHTML = "<b>Votre Panier :</b><br>" + (listeJeuxMsg || "Vide");
+const p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+totalPrix = p.reduce((s, j) => s + j.prix, 0);
+texteJeux = p.map(j => j.nom).join(", ");
+document.getElementById('recap').innerText = "Panier : " + (texteJeux || "Vide");
 }
-document.getElementById('montant-total').innerText = totalAPayer + " FCFA";
+document.getElementById('montant-display').innerText = totalPrix + " FCFA";
 
-function envoyerCommande() {
-const nom = document.getElementById('nom_client').value;
-const email = document.getElementById('email_client').value;
-const btn = document.getElementById('btn-submit');
+function declencherPaiement() {
+const nom = document.getElementById('client_nom').value;
+const email = document.getElementById('client_email').value;
+const btn = document.getElementById('main-btn');
 
 if(!nom || !email) {
-alert("Veuillez remplir votre nom et votre email !");
+alert("Remplis ton nom et ton mail !");
 return;
 }
 
+btn.innerText = "Envoi...";
 btn.disabled = true;
-btn.innerText = "Envoi en cours...";
 
-// Préparation du message pour Discord
-const discordMessage = {
+const data = {
 username: "Asseko Store Bot",
 embeds: [{
-title: "🔔 Nouvelle Commande !",
+title: "💰 Nouvelle Vente !",
 color: 3066993,
 fields: [
-{ name: "👤 Client", value: nom, inline: true },
-{ name: "📧 Email", value: email, inline: true },
-{ name: "🎮 Jeux", value: listeJeuxMsg },
-{ name: "💰 Total", value: totalAPayer + " FCFA", inline: true }
-],
-footer: { text: "Vérifie ton Airtel Money avant de livrer !" }
+{ name: "Client", value: nom, inline: true },
+{ name: "Email", value: email, inline: true },
+{ name: "Commande", value: texteJeux },
+{ name: "Total", value: totalPrix + " F", inline: true }
+]
 }]
 };
 
-fetch(DISCORD_WEBHOOK, {
+fetch(WEBHOOK_URL, {
 method: "POST",
 headers: { "Content-Type": "application/json" },
-body: JSON.stringify(discordMessage)
+body: JSON.stringify(data)
 })
 .then(() => {
-alert("✅ Demande envoyée ! Asseko vérifie ton dépôt. Tu recevras tes liens par mail et WhatsApp.");
+alert("✅ Commande reçue ! Je vérifie et je t'envoie les liens.");
 localStorage.removeItem('asseko_panier');
-// Redirection WhatsApp
-const waMsg = `Salut Asseko Store, je suis ${nom}. Je viens de payer ${totalAPayer}F pour ${listeJeuxMsg}. Mon mail : ${email}`;
-window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent(waMsg);
+const msg = `Salut Asseko, c'est ${nom}. Je viens de payer ${totalPrix}F pour : ${texteJeux}. Mon mail : ${email}`;
+window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent(msg);
 })
 .catch(() => {
-alert("Erreur lors de l'envoi. Contactez Asseko sur WhatsApp.");
-btn.disabled = false;
-btn.innerText = "J'AI PAYÉ ✅";
+const msg = `Salut Asseko, c'est ${nom}. Je viens de payer ${totalPrix}F pour : ${texteJeux}. Mon mail : ${email}`;
+window.location.href = "https://wa.me/24177826458?text=" + encodeURIComponent(msg);
 });
 }
 </script>
