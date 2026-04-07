@@ -5,48 +5,43 @@
 <title>Mon Panier - Asseko Store</title>
 <style>
 body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-.container { max-width: 500px; margin: auto; background: #1e1e1e; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #333; }
-.btn-payer { display: block; background: #27ae60; color: white; padding: 15px; margin-top: 30px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; }
-.btn-suppr { background: #ff4757; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
-.total-box { margin-top: 20px; font-size: 1.5rem; color: #27ae60; font-weight: bold; }
+.panier-box { max-width: 450px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 15px; border: 1px solid #27ae60; }
+.item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #333; }
+.btn-pay { background: #27ae60; color: white; display: block; padding: 15px; margin-top: 20px; text-decoration: none; border-radius: 10px; font-weight: bold; }
+.btn-clear { background: #e74c3c; color: white; border: none; padding: 10px; margin-top: 10px; border-radius: 5px; cursor: pointer; }
 </style>
 </head>
 <body>
-<div class="container">
-<h1>🛒 Votre Panier</h1>
-<div id="liste"></div>
-<div class="total-box" id="total">Total : 0 F</div>
-<a href="paiement.html" class="btn-payer">Procéder au paiement</a>
-<br>
-<a href="index.html" style="color: #aaa; text-decoration: none;">← Retour au catalogue</a>
+<div class="panier-box">
+<h1>🛒 Ton Panier</h1>
+<div id="liste-panier"></div>
+<h2 id="total-panier" style="color: #27ae60;">Total : 0 F</h2>
+<a href="paiement.html" class="btn-pay">Passer au paiement</a>
+<button onclick="viderPanier()" class="btn-clear">Vider le panier</button>
+<br><br><a href="index.html" style="color: gray;">Retour au catalogue</a>
 </div>
 
 <script>
 function chargerPanier() {
 const panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-const listeDiv = document.getElementById('liste');
 let total = 0;
+const liste = document.getElementById('liste-panier');
 
-if (panier.length === 0) {
-listeDiv.innerHTML = "<p>Votre panier est vide.</p>";
-} else {
-listeDiv.innerHTML = panier.map((j, i) => {
+if(panier.length === 0) {
+liste.innerHTML = "<p>Ton panier est vide.</p>";
+return;
+}
+
+liste.innerHTML = panier.map(j => {
 total += j.prix;
-return `<div class="item">
-<span><b>${j.nom}</b><br><small>${j.prix} F</small></span>
-<button class="btn-suppr" onclick="supprimer(${i})">Supprimer</button>
-</div>`;
+return `<div class="item"><span>${j.nom}</span><span>${j.prix} F</span></div>`;
 }).join('');
-}
-document.getElementById('total').innerText = "Total : " + total + " FCFA";
+document.getElementById('total-panier').innerText = "Total : " + total + " F";
 }
 
-function supprimer(i) {
-let panier = JSON.parse(localStorage.getItem('asseko_panier'));
-panier.splice(i, 1);
-localStorage.setItem('asseko_panier', JSON.stringify(panier));
-chargerPanier();
+function viderPanier() {
+localStorage.removeItem('asseko_panier');
+location.reload();
 }
 
 window.onload = chargerPanier;
