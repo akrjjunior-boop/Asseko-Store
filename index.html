@@ -3,28 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asseko Store - Catalogue Jeux PC</title>
+<title>Asseko Store - Catalogue</title>
 <style>
-body { background: #121212; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; text-align: center; }
+body { background: #121212; color: white; font-family: sans-serif; margin: 0; text-align: center; }
 header { padding: 30px; background: #1a1a1a; border-bottom: 3px solid #27ae60; }
-.logo-main { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; border: 2px solid #27ae60; object-fit: cover; }
-.cart-status { position: fixed; top: 20px; right: 20px; background: #f39c12; padding: 12px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-.grid-jeux { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; padding: 30px; max-width: 1200px; margin: auto; }
-.jeu-card { background: #1e1e1e; padding: 15px; border-radius: 15px; border: 1px solid #333; display: flex; flex-direction: column; transition: 0.3s; }
-.jeu-card:hover { border-color: #27ae60; transform: translateY(-5px); }
-.jeu-card img { width: 100%; height: 200px; border-radius: 10px; object-fit: cover; background: #252525; }
-.jeu-nom { font-weight: bold; margin: 10px 0 5px 0; height: 40px; display: flex; align-items: center; justify-content: center; }
-.prix { color: #27ae60; font-weight: bold; margin-bottom: 15px; font-size: 1.2rem; }
-.btn-buy { background: #27ae60; color: white; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; display: block; }
+.logo-main { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #27ae60; object-fit: cover; }
+.cart-status { position: fixed; top: 20px; right: 20px; background: #f39c12; padding: 12px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 2px solid white; }
+.grid-jeux { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 15px; padding: 20px; max-width: 1200px; margin: auto; }
+.jeu-card { background: #1e1e1e; padding: 12px; border-radius: 15px; border: 1px solid #333; display: flex; flex-direction: column; transition: 0.3s; }
+.jeu-card img { width: 100%; height: 180px; border-radius: 10px; object-fit: cover; }
+.prix { color: #27ae60; font-weight: bold; margin: 10px 0; font-size: 1.1rem; }
+.btn-group { display: flex; gap: 5px; }
+.btn-buy { background: #27ae60; color: white; text-decoration: none; padding: 10px; border-radius: 8px; flex: 2; font-weight: bold; font-size: 0.8rem; }
+.btn-cart { background: #f39c12; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 1.1rem; }
 </style>
 </head>
 <body>
 
 <header>
-<img src="logo.png" class="logo-main" alt="Asseko Store">
+<img src="logo.png" class="logo-main" alt="Logo">
 <h1>ASSEKO<span style="color: #27ae60;">STORE</span></h1>
-<p>Jeux PC & Gaming - Libreville</p>
 </header>
+
+<a href="panier.html" class="cart-status" id="cart-counter">🛒 Panier (0)</a>
 
 <div class="grid-jeux" id="catalogue"></div>
 
@@ -64,11 +65,28 @@ const cat = document.getElementById('catalogue');
 cat.innerHTML = listeJeux.map(j => `
 <div class="jeu-card">
 <img src="${j.img}" alt="${j.n}">
-<div class="jeu-nom">${j.n}</div>
+<p><b>${j.n}</b></p>
 <div class="prix">${j.p} F</div>
+<div class="btn-group">
 <a href="paiement.html?jeu=${encodeURIComponent(j.n)}" class="btn-buy">Acheter</a>
+<button onclick="ajouterPanier('${j.n}', ${j.p})" class="btn-cart">🛒</button>
+</div>
 </div>
 `).join('');
+majCompteur();
+}
+
+function ajouterPanier(n, p) {
+let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+panier.push({ nom: n, prix: p });
+localStorage.setItem('asseko_panier', JSON.stringify(panier));
+majCompteur();
+alert(n + " ajouté au panier !");
+}
+
+function majCompteur() {
+let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+document.getElementById('cart-counter').innerText = "🛒 Panier (" + panier.length + ")";
 }
 
 window.onload = afficherCatalogue;
