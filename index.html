@@ -3,74 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asseko Store - Jeux PC Gabon</title>
+<title>Asseko Store - 27 Jeux PC</title>
 <style>
-body { background: #121212; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; text-align: center; }
-header { padding: 40px 20px; background: #1a1a1a; border-bottom: 3px solid #27ae60; }
-.cart-status { position: fixed; top: 20px; right: 20px; background: #f39c12; padding: 12px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: 0.3s; }
-.grid-jeux { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 30px; max-width: 1200px; margin: auto; }
-.jeu-card { background: #1e1e1e; padding: 15px; border-radius: 15px; border: 1px solid #333; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
-.jeu-card:hover { transform: translateY(-5px); border-color: #27ae60; }
-.jeu-card img { width: 100%; border-radius: 10px; height: 220px; object-fit: cover; background: #252525; }
-.prix { color: #27ae60; font-weight: bold; font-size: 1.2rem; margin: 10px 0; }
-.buttons-group { display: flex; gap: 8px; }
-.btn-buy { background: #27ae60; color: white; text-decoration: none; padding: 10px; border-radius: 8px; flex: 2; font-weight: bold; font-size: 0.9rem; }
-.btn-cart { background: #f39c12; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 1.1rem; }
+body { background: #121212; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+header { padding: 30px; background: #1a1a1a; border-bottom: 3px solid #27ae60; }
+.logo-main { width: 100px; border-radius: 50%; margin-bottom: 10px; border: 2px solid #27ae60; }
+.cart-status { position: fixed; top: 20px; right: 20px; background: #f39c12; padding: 12px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+.grid-jeux { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; padding: 30px; max-width: 1200px; margin: auto; }
+.jeu-card { background: #1e1e1e; padding: 15px; border-radius: 15px; border: 1px solid #333; display: flex; flex-direction: column; transition: 0.3s; }
+.jeu-card:hover { border-color: #27ae60; transform: translateY(-5px); }
+.jeu-card img { width: 100%; height: 200px; border-radius: 10px; object-fit: cover; background: #252525; }
+.prix { color: #27ae60; font-weight: bold; margin: 10px 0; font-size: 1.1rem; }
+.btn-group { display: flex; gap: 5px; margin-top: auto; }
+.btn-buy { background: #27ae60; color: white; text-decoration: none; padding: 10px; border-radius: 8px; flex: 2; font-weight: bold; font-size: 0.8rem; }
+.btn-cart { background: #f39c12; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; }
 </style>
 </head>
 <body>
 
 <header>
+<img src="logo.png" class="logo-main" alt="Asseko Store">
 <h1>ASSEKO<span style="color: #27ae60;">STORE</span></h1>
-<p>Le meilleur du Gaming PC au Gabon</p>
+<p>Catalogue 2026 - Libreville</p>
 </header>
 
 <a href="panier.html" class="cart-status" id="cart-counter">🛒 Panier (0)</a>
 
-<div class="grid-jeux">
-<div class="jeu-card"><img src="SRC_IMAGE_ICI"><p>Test Drive Unlimited 2</p><p class="prix">3 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=Test Drive Unlimited 2" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Test Drive Unlimited 2', 3500)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="SRC_IMAGE_ICI"><p>Naruto Storm Revolution</p><p class="prix">3 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=Naruto Storm Revolution" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Naruto Storm Revolution', 3500)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="SRC_IMAGE_ICI"><p>Assassin's Creed Revelations</p><p class="prix">3 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=Assassin's Creed Revelations" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Assassin\'s Creed Revelations', 3000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="SRC_IMAGE_ICI"><p>Minecraft Story Mode (Eng)</p><p class="prix">2 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=Minecraft Story Mode" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Minecraft Story Mode', 2500)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="SRC_IMAGE_ICI"><p>NFS Heat Deluxe</p><p class="prix">4 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=NFS Heat Deluxe" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('NFS Heat Deluxe', 4500)" class="btn-cart">🛒</button></div></div>
-
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/df/7a/71/df7a71474e3b8fb87ce816bb79b23476.jpg"><p>FIFA 22</p><p class="prix">4 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=FIFA 22" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('FIFA 22', 4000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg"><p>FIFA 21</p><p class="prix">3 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=FIFA 21" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('FIFA 21', 3500)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg"><p>FIFA 20</p><p class="prix">3 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=FIFA 20" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('FIFA 20', 3000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/1200x/80/ed/ee/80edee894a2cd179caedb4134d1a427b.jpg"><p>FIFA 17</p><p class="prix">2 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=FIFA 17" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('FIFA 17', 2000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/01/39/9e/01399ef1fba685b0fee527e7478eb3d1.jpg"><p>Efootball 21</p><p class="prix">3 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=Efootball 21" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Efootball 21', 3000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg"><p>PES 2018</p><p class="prix">2 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=PES 2018" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('PES 2018', 2500)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg"><p>PES 17</p><p class="prix">2 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=PES 17" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('PES 17', 2000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg"><p>GTA V</p><p class="prix">4 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=GTA V" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('GTA V', 4000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/4b/17/2a/4b172acbb1a31cf30cfd712e4bb94928.jpg"><p>Black Ops 6</p><p class="prix">7 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=CoD Black Ops 6" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('CoD Black Ops 6', 7000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/de/e7/a2/dee7a2209580884a5b63615206169c9b.jpg"><p>MW3</p><p class="prix">5 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=CoD MW3" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('CoD MW3', 5000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/1200x/a1/84/9b/a1849baa4d6ccda5098080ad5097e359.jpg"><p>God of War</p><p class="prix">7 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=God of War" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('God of War', 7000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/8f/cc/bc/8fccbc000427939ea63559a8f1b4cc03.jpg"><p>GoW Ragnarok</p><p class="prix">8 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=GoW Ragnarok" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('GoW Ragnarok', 8000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/1200x/76/a4/9a/76a49a5f00a20d5ea0df8dafbbb514bc.jpg"><p>Cyberpunk</p><p class="prix">5 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=Cyberpunk 2077" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Cyberpunk 2077', 5500)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/e2/aa/6a/e2aa6ae9d6afe729a1d621000fb15405.jpg"><p>DBZ Sparking Zero</p><p class="prix">5 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=DBZ Sparking Zero" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('DBZ Sparking Zero', 5000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/03/77/39/0377395b7989c414483e580896048cf1.jpg"><p>DBZ Kakarot</p><p class="prix">5 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=DBZ Kakarot" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('DBZ Kakarot', 5000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/1200x/68/a4/a5/68a4a556802033962ab4e8327b848561.jpg"><p>Naruto Storm 4</p><p class="prix">4 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=Naruto Storm 4" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Naruto Storm 4', 4000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/1200x/b4/bf/d2/b4bfd24ee83c4df44bad28dc17631001.jpg"><p>Naruto Connections</p><p class="prix">5 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=Naruto Connections" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Naruto Connections', 5000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/ad/05/b2/ad05b260717d91bc4892c5d89eca5c80.jpg"><p>Naruto Shinobi Strike</p><p class="prix">5 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=Naruto Shinobi Strike" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Naruto Shinobi Strike', 5500)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/25/30/66/25306638ebe76311cfbf6bde6caae84f.jpg"><p>Jump Force</p><p class="prix">4 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=Jump Force" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('Jump Force', 4000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/1200x/c7/ac/6d/c7ac6d5ef0a6ec03e70bdcf4de6e66be.jpg"><p>WWE 2K25</p><p class="prix">8 000 F</p><div class="buttons-group"><a href="paiement.html?jeu=WWE 2K25" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('WWE 2K25', 8000)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg"><p>NBA 2K23</p><p class="prix">3 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=NBA 2K23" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('NBA 2K23', 3500)" class="btn-cart">🛒</button></div></div>
-<div class="jeu-card"><img src="https://i.pinimg.com/1200x/20/ad/a9/20ada9cd59ea21f2f8658df69ef9c218.jpg"><p>F1 2022</p><p class="prix">4 500 F</p><div class="buttons-group"><a href="paiement.html?jeu=F1 2022" class="btn-buy">Commander</a><button onclick="ajouterAuPanier('F1 2022', 4500)" class="btn-cart">🛒</button></div></div>
-</div>
+<div class="grid-jeux" id="catalogue"></div>
 
 <script>
+const listeJeux = [
+{n: "Test Drive Unlimited 2", p: 3500, img: "https://i.pinimg.com/736x/2b/9b/7f/2b9b7f5b3a3b3b3b3b3b3b3b3b3b3b3b.jpg"},
+{n: "Naruto Storm Revolution", p: 3500, img: "https://i.pinimg.com/736x/8f/3e/2a/8f3e2a3b3b3b3b3b3b3b3b3b3b3b3b3b.jpg"},
+{n: "Assassin's Creed Revelations", p: 3000, img: "https://i.pinimg.com/736x/4a/1c/3e/4a1c3e3b3b3b3b3b3b3b3b3b3b3b3b3b.jpg"},
+{n: "Minecraft Story Mode", p: 2500, img: "https://i.pinimg.com/736x/6d/2b/1e/6d2b1e3b3b3b3b3b3b3b3b3b3b3b3b3b.jpg"},
+{n: "NFS Heat Deluxe", p: 4500, img: "https://i.pinimg.com/736x/1a/2c/3d/1a2c3d3b3b3b3b3b3b3b3b3b3b3b3b3b.jpg"},
+{n: "FIFA 22", p: 4000, img: "https://i.pinimg.com/736x/df/7a/71/df7a71474e3b8fb87ce816bb79b23476.jpg"},
+{n: "FIFA 21", p: 3500, img: "https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg"},
+{n: "FIFA 20", p: 3000, img: "https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg"},
+{n: "FIFA 17", p: 2000, img: "https://i.pinimg.com/1200x/80/ed/ee/80edee894a2cd179caedb4134d1a427b.jpg"},
+{n: "Efootball 21", p: 3000, img: "https://i.pinimg.com/736x/01/39/9e/01399ef1fba685b0fee527e7478eb3d1.jpg"},
+{n: "PES 2018", p: 2500, img: "https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg"},
+{n: "PES 17", p: 2000, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg"},
+{n: "GTA V", p: 4000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg"},
+{n: "CoD Black Ops 6", p: 7000, img: "https://i.pinimg.com/736x/4b/17/2a/4b172acbb1a31cf30cfd712e4bb94928.jpg"},
+{n: "CoD MW3", p: 5000, img: "https://i.pinimg.com/736x/de/e7/a2/dee7a2209580884a5b63615206169c9b.jpg"},
+{n: "God of War", p: 7000, img: "https://i.pinimg.com/1200x/a1/84/9b/a1849baa4d6ccda5098080ad5097e359.jpg"},
+{n: "GoW Ragnarok", p: 8000, img: "https://i.pinimg.com/736x/8f/cc/bc/8fccbc000427939ea63559a8f1b4cc03.jpg"},
+{n: "Cyberpunk 2077", p: 5500, img: "https://i.pinimg.com/1200x/76/a4/9a/76a49a5f00a20d5ea0df8dafbbb514bc.jpg"},
+{n: "DBZ Sparking Zero", p: 5000, img: "https://i.pinimg.com/736x/e2/aa/6a/e2aa6ae9d6afe729a1d621000fb15405.jpg"},
+{n: "DBZ Kakarot", p: 5000, img: "https://i.pinimg.com/736x/03/77/39/0377395b7989c414483e580896048cf1.jpg"},
+{n: "Naruto Storm 4", p: 4000, img: "https://i.pinimg.com/1200x/68/a4/a5/68a4a556802033962ab4e8327b848561.jpg"},
+{n: "Naruto Connections", p: 5000, img: "https://i.pinimg.com/1200x/b4/bf/d2/b4bfd24ee83c4df44bad28dc17631001.jpg"},
+{n: "Naruto Shinobi Strike", p: 5500, img: "https://i.pinimg.com/736x/ad/05/b2/ad05b260717d91bc4892c5d89eca5c80.jpg"},
+{n: "Jump Force", p: 4000, img: "https://i.pinimg.com/736x/25/30/66/25306638ebe76311cfbf6bde6caae84f.jpg"},
+{n: "WWE 2K25", p: 8000, img: "https://i.pinimg.com/1200x/c7/ac/6d/c7ac6d5ef0a6ec03e70bdcf4de6e66be.jpg"},
+{n: "NBA 2K23", p: 3500, img: "https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg"},
+{n: "F1 2022", p: 4500, img: "https://i.pinimg.com/1200x/20/ad/a9/20ada9cd59ea21f2f8658df69ef9c218.jpg"}
+];
+
+function afficherJeux() {
+const cat = document.getElementById('catalogue');
+cat.innerHTML = listeJeux.map(j => `
+<div class="jeu-card">
+<img src="${j.img}" alt="${j.n}">
+<p>${j.n}</p>
+<p class="prix">${j.p} F</p>
+<div class="btn-group">
+<a href="paiement.html?jeu=${encodeURIComponent(j.n)}" class="btn-buy">Acheter</a>
+<button onclick="ajouterAuPanier('${j.n}', ${j.p})" class="btn-cart">🛒</button>
+</div>
+</div>
+`).join('');
+}
+
 function ajouterAuPanier(nom, prix) {
 let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
 panier.push({ nom: nom, prix: prix });
 localStorage.setItem('asseko_panier', JSON.stringify(panier));
 majCompteur();
-alert(nom + " ajouté au panier !");
+alert(nom + " ajouté !");
 }
+
 function majCompteur() {
 let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
 document.getElementById('cart-counter').innerText = "🛒 Panier (" + panier.length + ")";
 }
-window.onload = majCompteur;
+
+window.onload = () => { afficherJeux(); majCompteur(); };
 </script>
 </body>
 </html>
