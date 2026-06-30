@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asseko shop - Jeux & Accessoires</title>
+<title>Asseko Store - Jeux & Accessoires</title>
 <style>
 :root { --primary: #27ae60; --bg: #121212; --card: #1e1e1e; }
 body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding-bottom: 50px; }
@@ -83,7 +83,7 @@ const listeJeux = [
 ];
 
 const listeAccessoires = [
-{n: "Nike Mercurial Vapor 16", p: 20000,taille:"42" img: "https://i.pinimg.com/1200x/d6/bd/63/d6bd637c9795be8d2b0ad64fa1784295.jpg"}
+{n: "Nike Mercurial Vapor 16", p: 20000, img: "https://i.pinimg.com/1200x/d6/bd/63/d6bd637c9795be8d2b0ad64fa1784295.jpg"}
 ];
 
 function generer(liste, id) {
@@ -112,7 +112,8 @@ alert("Ajouté !");
 
 function maj() {
 let p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-document.querySelector('#cart-counter span').innerText = "(" + p.length + ")";
+let el = document.querySelector('#cart-counter span');
+if (el) el.innerText = "(" + p.length + ")";
 }
 
 window.onload = () => {
