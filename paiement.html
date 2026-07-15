@@ -52,9 +52,11 @@ Asseko Store 2026 - Tous droits réservés<br>
 Créateur : <b style="color: var(--primary);">Monsieur Asseko Régis</b>
 </footer>
 
-// Liste complète des prix (Jeux ET Accessoires)
+<script>
+const DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1491165559281156286/56gJcFyKAXUeWI7gcDPB4ddYvD2Xw2CBR5ebudPQ4qOGKU1trBXelH_qAmrIVVIUkq63";
+
+// Liste complète des prix (Jeux ET Accessoires) pour que tout s'affiche correctement
 const prixJeux = {
-// Jeux PC
 "WWE 2K25": 8000, "GoW Ragnarok": 8000, "CoD Black Ops 6": 7000, "God of War": 7000,
 "Cyberpunk 2077": 5500, "Naruto Shinobi Strike": 5500, "DBZ Sparking Zero": 5000,
 "DBZ Kakarot": 5000, "Naruto Connections": 5000, "CoD MW3": 5000, "NFS Heat Deluxe": 4500,
@@ -63,7 +65,7 @@ const prixJeux = {
 "FIFA 20": 3000, "Efootball 21": 3000, "Assassin's Creed Revelations": 3000,
 "PES 2018": 2500, "Minecraft Story Mode": 2500, "FIFA 17": 2000, "PES 17": 2000,
 
-// Chaussures & Accessoires (Ajoutés ici pour corriger le bug)
+// Chaussures & Accessoires
 "Nike Mercurial Vapor 16": 20000, 
 "Jordan 3 black": 15000
 };
@@ -76,7 +78,7 @@ let total = 0;
 if (jeuSeul) {
 total = prixJeux[jeuSeul] || 0;
 nomsJeux = jeuSeul;
-document.getElementById('recap').innerHTML = "<b>Jeu :</b> " + jeuSeul;
+document.getElementById('recap').innerHTML = "<b>Article :</b> " + jeuSeul;
 } else {
 const p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
 total = p.reduce((s, j) => s + j.prix, 0);
@@ -102,14 +104,14 @@ color: 3066993,
 fields: [
 { name: "👤 Client", value: nom, inline: true },
 { name: "💵 Total", value: total + " F", inline: true },
-{ name: "🎮 Jeux", value: nomsJeux },
+{ name: "🎮 Jeux / Accessoires", value: nomsJeux },
 { name: "📧 Mail client", value: email }
 ]
 }]
 })
 });
 
-// Message pré-écrit automatique pour le numéro Gabonais 062143184 (au format international 24162143184)
+// Message pré-écrit automatique envoyé sur ton WhatsApp 062143184 (au format 24162143184)
 const textWhatsApp = `Bonjour Asseko Store ! J'ai payé ${total} F pour ma commande.
 
 👤 Client : ${nom}
@@ -136,7 +138,7 @@ document.getElementById('main-content').innerHTML = `
 
 <p id="status-text" style="font-size:0.9rem; margin-bottom:20px;">Préparation de vos liens de téléchargement...</p>
 
-<div id="final-msg" class="success-msg">✅ Tes jeux viennent d'être envoyés sur ton mail : ${email} !</div>
+<div id="final-msg" class="success-msg">✅ Vos articles viennent d'être envoyés sur votre mail : ${email} !</div>
 
 <a href="${whatsappURL}" target="_blank"
 style="background:#25d366; color:white; padding:15px; display:block; border-radius:12px; text-decoration:none; font-weight:bold; margin-top:10px; font-size:1.1rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">
@@ -144,7 +146,7 @@ style="background:#25d366; color:white; padding:15px; display:block; border-radi
 </a>
 `;
 
-// Redirection automatique immédiate vers le WhatsApp configuré sur son téléphone
+// Redirection automatique immédiate vers WhatsApp
 window.open(whatsappURL, '_blank');
 
 startTimer(600, email); // 10 minutes (600 secondes)
