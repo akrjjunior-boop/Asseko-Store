@@ -2,50 +2,95 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mon Panier - Asseko Store</title>
 <style>
-body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-.panier-box { max-width: 450px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 15px; border: 1px solid #27ae60; }
-.item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #333; }
-.btn-pay { background: #27ae60; color: white; display: block; padding: 15px; margin-top: 20px; text-decoration: none; border-radius: 10px; font-weight: bold; }
-.btn-clear { background: #e74c3c; color: white; border: none; padding: 10px; margin-top: 10px; border-radius: 5px; cursor: pointer; }
+:root { --primary: #27ae60; --bg: #121212; --card: #1e1e1e; }
+body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; }
+
+.container { max-width: 600px; margin: auto; }
+.logo-style { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 10px; }
+header { text-align: center; margin-bottom: 30px; }
+h1 { margin: 5px 0; font-size: 1.6rem; }
+
+.cart-card { background: var(--card); border-radius: 18px; border: 1px solid #333; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #333; }
+.cart-item:last-child { border-bottom: none; }
+.item-info { text-align: left; }
+.item-name { font-weight: 600; font-size: 0.95rem; }
+.item-price { color: var(--primary); font-size: 0.9rem; margin-top: 3px; }
+
+.btn-remove { background: none; border: none; color: #e74c3c; font-size: 1.2rem; cursor: pointer; padding: 5px 10px; }
+.total-box { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 2px dashed #444; font-size: 1.2rem; font-weight: bold; }
+
+.btn-checkout { display: block; text-align: center; background: var(--primary); color: white; text-decoration: none; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 1rem; text-transform: uppercase; margin-top: 25px; transition: 0.3s; }
+.btn-checkout:hover { background: #219150; }
+.btn-back { display: block; text-align: center; color: #aaa; text-decoration: none; margin-top: 15px; font-size: 0.9rem; }
+.empty-msg { text-align: center; color: #888; padding: 40px 0; }
 </style>
 </head>
 <body>
-<div class="panier-box">
-<h1>🛒 Ton Panier</h1>
-<div id="liste-panier"></div>
-<h2 id="total-panier" style="color: #27ae60;">Total : 0 F</h2>
-<a href="paiement.html" class="btn-pay">Passer au paiement</a>
-<button onclick="viderPanier()" class="btn-clear">Vider le panier</button>
-<br><br><a href="index.html" style="color: gray;">Retour au catalogue</a>
+
+<div class="container">
+<header>
+<img src="logo2.png" class="logo-style" alt="Logo">
+<h1>MON <span style="color: var(--primary);">PANIER</span></h1>
+</header>
+
+<div class="cart-card">
+<div id="cart-items">
+<!-- Les articles s'afficheront ici dynamiquement -->
+</div>
+
+<div class="total-box">
+<span>Total :</span>
+<span id="total-price" style="color: var(--primary);">0 F</span>
+</div>
+</div>
+
+<a href="paiement.html" class="btn-checkout" id="btn-payer">Passer au paiement ✅</a>
+<a href="index.html" class="btn-back">← Continuer mes achats</a>
 </div>
 
 <script>
 function chargerPanier() {
 const panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+const container = document.getElementById('cart-items');
+const btnPayer = document.getElementById('btn-payer');
 let total = 0;
-const liste = document.getElementById('liste-panier');
 
-if(panier.length === 0) {
-liste.innerHTML = "<p>Ton panier est vide.</p>";
+if (panier.length === 0) {
+container.innerHTML = `<div class="empty-msg">Votre panier est vide 🛒</div>`;
+document.getElementById('total-price').innerText = "0 F";
+btnPayer.style.display = "none"; // On cache le bouton de paiement s'il n'y a rien
 return;
 }
 
-liste.innerHTML = panier.map(j => {
-total += j.prix;
-return `<div class="item"><span>${j.nom}</span><span>${j.prix} F</span></div>`;
+btnPayer.style.display = "block";
+container.innerHTML = panier.map((item, index) => {
+total += item.prix;
+return `
+<div class="cart-item">
+<div class="item-info">
+<div class="item-name">${item.nom}</div>
+<div class="item-price">${item.prix} F</div>
+</div>
+<button class="btn-remove" onclick="supprimerArticle(${index})">🗑️</button>
+</div>
+`;
 }).join('');
-document.getElementById('total-panier').innerText = "Total : " + total + " F";
+
+document.getElementById('total-price').innerText = total + " F";
 }
 
-function viderPanier() {
-localStorage.removeItem('asseko_panier');
-location.reload();
+function supprimerArticle(index) {
+let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+panier.splice(index, 1); // Supprime l'élément sélectionné
+localStorage.setItem('asseko_panier', JSON.stringify(panier));
+chargerPanier(); // Recharge l'affichage du panier
 }
 
 window.onload = chargerPanier;
 </script>
 </body>
 </html>
-
