@@ -6,39 +6,29 @@
 <title>Asseko Store - Jeux & Accessoires</title>
 <style>
 :root { --primary: #27ae60; --bg: #121212; --card: #1e1e1e; }
-body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding-bottom: 80px; }
+body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding-bottom: 50px; }
 
-/* En-tête */
-header { padding: 40px 20px; background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); border-bottom: 2px solid var(--primary); text-align: center; }
 .logo-style { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; box-shadow: 0 0 15px rgba(39, 174, 96, 0.3); margin: 5px; }
-h1 { margin: 10px 0 5px; font-size: 1.8rem; letter-spacing: 1px; font-weight: 800; }
-.section-title { text-align: center; margin: 40px 0 20px; color: var(--primary); text-transform: uppercase; font-size: 1.3rem; letter-spacing: 1px; }
+header { padding: 40px 20px; background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); border-bottom: 2px solid var(--primary); text-align: center; }
+h1 { margin: 10px 0 5px; font-size: 1.8rem; letter-spacing: 1px; }
+.section-title { text-align: center; margin: 40px 0 20px; color: var(--primary); text-transform: uppercase; }
 
-/* Flotteur Panier */
-.cart-status { position: fixed; bottom: 20px; right: 20px; background: #f39c12; padding: 15px 25px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.6); border: 2px solid white; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
-.cart-status:hover { transform: scale(1.05); }
+.cart-status { position: fixed; bottom: 20px; right: 20px; background: #f39c12; padding: 15px 25px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.6); border: 2px solid white; display: flex; align-items: center; gap: 8px; }
 
-/* Grille des Produits */
 .grid-jeux { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; max-width: 1200px; margin: auto; }
 @media (min-width: 768px) { .grid-jeux { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; } }
 
-/* Cartes Produits */
 .jeu-card { background: var(--card); border-radius: 18px; overflow: hidden; border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; }
-.jeu-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 5px 15px rgba(39, 174, 96, 0.1); }
 .jeu-card img { width: 100%; height: 160px; object-fit: cover; }
 .info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 .jeu-nom { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #eee; min-height: 34px; }
 .prix { color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 12px; }
 
-/* Boutons */
 .btn-group { display: flex; gap: 6px; }
-.btn-buy { background: var(--primary); color: white; text-decoration: none; padding: 10px; border-radius: 8px; flex: 3; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; text-align: center; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
-.btn-buy:hover { background: #219150; }
-.btn-cart { background: #444; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 1rem; transition: 0.2s; }
-.btn-cart:hover { background: #555; }
+.btn-buy { background: var(--primary); color: white; text-decoration: none; padding: 10px; border-radius: 8px; flex: 3; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; text-align: center; }
+.btn-cart { background: #444; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 1rem; }
 
-/* Footer */
-footer { margin-top: 50px; padding: 35px; border-top: 1px solid #333; color: #666; font-size: 0.85rem; text-align: center; }
+footer { margin-top: 50px; padding: 30px; border-top: 1px solid #333; color: #666; font-size: 0.85rem; text-align: center; }
 </style>
 </head>
 <body>
@@ -48,27 +38,20 @@ footer { margin-top: 50px; padding: 35px; border-top: 1px solid #333; color: #66
 <h1>ASSEKO<span style="color: var(--primary);">STORE</span></h1>
 </header>
 
-<!-- Bouton Panier Flottant -->
 <a href="panier.html" class="cart-status" id="cart-counter">🛒 <span>(0)</span></a>
 
-<main>
-<!-- Section Jeux PC -->
 <h2 class="section-title">Catalogue Jeux PC</h2>
 <div class="grid-jeux" id="catalogue"></div>
 
-<!-- Section Chaussures & Accessoires -->
 <h2 class="section-title">Chaussures & Accessoires</h2>
 <div class="grid-jeux" id="catalogue-chaussures"></div>
-</main>
 
 <footer>
 <img src="logo2.png" class="logo-style" alt="Logo Footer"><br><br>
-Asseko Store 2026 - Tous droits réservés<br>
-Créateur : <b style="color: var(--primary);">Monsieur Asseko Régis</b>
+Asseko Store 2026 - Tous droits réservés
 </footer>
 
 <script>
-// Catalogue complet des Jeux PC
 const listeJeux = [
 {n: "WWE 2K25", p: 8000, img: "https://i.pinimg.com/1200x/c7/ac/6d/c7ac6d5ef0a6ec03e70bdcf4de6e66be.jpg"},
 {n: "GoW Ragnarok", p: 8000, img: "https://i.pinimg.com/736x/8f/cc/bc/8fccbc000427939ea63559a8f1b4cc03.jpg"},
@@ -96,19 +79,19 @@ const listeJeux = [
 {n: "PES 2018", p: 3000, img: "https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg"},
 {n: "Minecraft Story Mode", p: 2500, img: "https://i.pinimg.com/1200x/91/9e/6f/919e6f51cc7bd1fc0c8b1187057b22f5.jpg"},
 {n: "FIFA 17", p: 2500, img: "https://i.pinimg.com/1200x/80/ed/ee/80edee894a2cd179caedb4134d1a427b.jpg"},
-{n: "PES 17", p: 2500, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg"},
-];
-// Catalogue des Chaussures & Accessoires
-const listeAccessoires = [
-{n: "Nike Mercurial Vapor 16", p: 20000, img: "https://i.pinimg.com/1200x/d6/bd/63/d6bd637c9795be8d2b0ad64fa1784295.jpg"},
-{n: "Jordan 3 black", p: 15000, img: "https://i.pinimg.com/736x/ed/36/75/ed36753fa4238548f79fcf8e13ebfc65.jpg"}
+{n: "PES 17", p: 2500, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg"}
 ];
 
-// Fonction d'affichage dynamique des articles
+const listeAccessoires = [
+{n: "Nike Mercurial Vapor 16", p: 20000, img: "https://i.pinimg.com/1200x/d6/bd/63/d6bd637c9795be8d2b0ad64fa1784295.jpg"}
+];
+  
+{n: "Jordan 3 black", p: 15000, img: "https://i.pinimg.com/736x/ed/36/75/ed36753fa4238548f79fcf8e13ebfc65.jpg"}
+
 function generer(liste, id) {
 document.getElementById(id).innerHTML = liste.map(j => `
 <div class="jeu-card">
-<img src="${j.img}" alt="${j.n}" loading="lazy">
+<img src="${j.img}" alt="${j.n}">
 <div class="info">
 <div class="jeu-nom">${j.n}</div>
 <div class="prix">${j.p} F</div>
@@ -121,23 +104,20 @@ document.getElementById(id).innerHTML = liste.map(j => `
 `).join('');
 }
 
-// Ajouter un produit au panier local
 function add(n, p) {
 let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
 panier.push({nom: n, prix: p});
 localStorage.setItem('asseko_panier', JSON.stringify(panier));
 maj();
-alert("Produit ajouté au panier ! 🛒");
+alert("Ajouté !");
 }
 
-// Mettre à jour l'affichage du nombre d'articles dans le panier flottant
 function maj() {
 let p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
 let el = document.querySelector('#cart-counter span');
 if (el) el.innerText = "(" + p.length + ")";
 }
 
-// Lancement au chargement de la page
 window.onload = () => {
 generer(listeJeux, 'catalogue');
 generer(listeAccessoires, 'catalogue-chaussures');
