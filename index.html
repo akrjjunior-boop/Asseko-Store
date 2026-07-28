@@ -1,114 +1,22 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asseko Store - Jeux & Accessoires</title>
-<style>
-:root { --primary: #27ae60; --bg: #121212; --card: #1e1e1e; }
-body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding-bottom: 50px; }
-
-.logo-style { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; box-shadow: 0 0 15px rgba(39, 174, 96, 0.3); margin: 5px; }
-header { padding: 40px 20px; background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); border-bottom: 2px solid var(--primary); text-align: center; }
-h1 { margin: 10px 0 5px; font-size: 1.8rem; letter-spacing: 1px; }
-.section-title { text-align: center; margin: 40px 0 20px; color: var(--primary); text-transform: uppercase; }
-
-.cart-status { position: fixed; bottom: 20px; right: 20px; background: #f39c12; padding: 15px 25px; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.6); border: 2px solid white; display: flex; align-items: center; gap: 8px; }
-
-.grid-jeux { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; max-width: 1200px; margin: auto; }
-@media (min-width: 768px) { .grid-jeux { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; } }
-
-.jeu-card { background: var(--card); border-radius: 18px; overflow: hidden; border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; }
-.jeu-card img { width: 100%; height: 160px; object-fit: cover; }
-.info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.jeu-nom { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #eee; min-height: 34px; }
-.prix { color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 12px; }
-
-.btn-group { display: flex; gap: 6px; }
-.btn-buy { background: var(--primary); color: white; text-decoration: none; padding: 10px; border-radius: 8px; flex: 3; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; text-align: center; border: none; cursor: pointer; }
-.btn-cart { background: #444; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 1rem; }
-
-/* Styles Espace Client */
-.auth-container { max-width: 400px; margin: 40px auto; padding: 0 15px; }
-.auth-card { background: var(--card); padding: 25px; border-radius: 18px; border: 1px solid #333; text-align: center; }
-.auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-.auth-tabs button { flex: 1; padding: 10px; background: #333; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-.auth-tabs button.active { background: var(--primary); }
-.auth-card input { width: 100%; padding: 12px; margin-bottom: 12px; background: #222; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
-
-footer { margin-top: 50px; padding: 30px; border-top: 1px solid #333; color: #666; font-size: 0.85rem; text-align: center; }
-</style>
-</head>
-<body>
-
-<header>
-<img src="logo2.png" class="logo-style" alt="Logo">
-<h1>ASSEKO<span style="color: var(--primary);">STORE</span></h1>
-</header>
-
-<a href="panier.html" class="cart-status" id="cart-counter">🛒 <span>(0)</span></a>
-
-<!-- ESPACE CLIENT / AUTHENTIFICATION -->
-<div class="auth-container">
-<h2 class="section-title" style="margin-top: 10px;">Espace Client</h2>
-<div class="auth-card">
-<div class="auth-tabs" id="auth-tabs">
-<button id="tab-login" class="active" onclick="switchTab('login')">Connexion</button>
-<button id="tab-signup" onclick="switchTab('signup')">Inscription</button>
-</div>
-
-<!-- Formulaire de Connexion -->
-<form id="form-login" onsubmit="connexion(event)">
-<input type="email" id="login-email" placeholder="Adresse Email" required>
-<input type="password" id="login-pass" placeholder="Mot de passe" required>
-<button type="submit" class="btn-buy" style="width:100%">Se connecter</button>
-</form>
-
-<!-- Formulaire d'Inscription -->
-<form id="form-signup" onsubmit="inscription(event)" style="display:none;">
-<input type="text" id="sign-nom" placeholder="Nom complet" required>
-<input type="email" id="sign-email" placeholder="Adresse Email" required>
-<input type="password" id="sign-pass" placeholder="Mot de passe (6+ caractères)" required>
-<button type="submit" class="btn-buy" style="width:100%">Créer mon compte</button>
-</form>
-
-<!-- Affichage Profil Connecté -->
-<div id="user-info" style="display:none;">
-<p style="font-size: 1.1rem; margin-bottom: 15px;">Bienvenue, <b id="user-name" style="color: var(--primary);"></b> !</p>
-<button onclick="deconnexion()" class="btn-cart" style="width:100%; padding: 12px;">Se déconnecter</button>
-</div>
-</div>
-</div>
-
-<h2 class="section-title">Catalogue Jeux PC</h2>
-<div class="grid-jeux" id="catalogue"></div>
-
-<h2 class="section-title">Chaussures & Accessoires</h2>
-<div class="grid-jeux" id="catalogue-chaussures"></div>
-
-<footer>
-<img src="logo2.png" class="logo-style" alt="Logo Footer"><br><br>
-Asseko Store 2026 - Tous droits réservés
-</footer>
-
-<!-- SDKs Firebase Version v8 (Compatibilité globale) -->
+<!-- SDKs Firebase version v8 (Compatibles avec ton script) -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
 <script>
-// Config Firebase
+// Ta vraie configuration Firebase synchronisée
 const firebaseConfig = {
-apiKey: "AIzaSyCaJAsQAIfeZNK9W_tT6wbYe23pQGLJSww",
-authDomain: "asseko-store.firebaseapp.com",
-projectId: "asseko-store",
-storageBucket: "asseko-store.firebasestorage.app",
-messagingSenderId: "181163873812",
-appId: "1:181163873812:web:cdbf8e26e533d1019a7901"
+  apiKey: "AIzaSyCaJAsQAIfeZNK9W_tT6wbYe23pQGLJSww",
+  authDomain: "asseko-store.firebaseapp.com",
+  projectId: "asseko-store",
+  storageBucket: "asseko-store.firebasestorage.app",
+  messagingSenderId: "181163873812",
+  appId: "1:181163873812:web:83762b02eb9535e39a7901",
+  measurementId: "G-YFSB2NKY6X"
 };
 
 // Initialisation
 if (!firebase.apps.length) {
-firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 }
 const auth = firebase.auth();
 
@@ -178,60 +86,61 @@ let el = document.querySelector('#cart-counter span');
 if (el) el.innerText = "(" + p.length + ")";
 }
 
-// Fonctions Authentification
+// Fonctions d'authentification
 function switchTab(type) {
-document.getElementById('form-login').style.display = type === 'login' ? 'block' : 'none';
-document.getElementById('form-signup').style.display = type === 'signup' ? 'block' : 'none';
-document.getElementById('tab-login').classList.toggle('active', type === 'login');
-document.getElementById('tab-signup').classList.toggle('active', type === 'signup');
+  document.getElementById('form-login').style.display = type === 'login' ? 'block' : 'none';
+  document.getElementById('form-signup').style.display = type === 'signup' ? 'block' : 'none';
+  document.getElementById('tab-login').classList.toggle('active', type === 'login');
+  document.getElementById('tab-signup').classList.toggle('active', type === 'signup');
 }
 
 function inscription(e) {
-e.preventDefault();
-const email = document.getElementById('sign-email').value;
-const pass = document.getElementById('sign-pass').value;
-const nom = document.getElementById('sign-nom').value;
+  e.preventDefault();
+  const email = document.getElementById('sign-email').value;
+  const pass = document.getElementById('sign-pass').value;
+  const nom = document.getElementById('sign-nom').value;
 
-auth.createUserWithEmailAndPassword(email, pass)
-.then((userCredential) => {
-return userCredential.user.updateProfile({ displayName: nom });
-})
-.then(() => alert("Compte créé avec succès ! Bienvenue sur Asseko Store 🔥"))
-.catch((error) => alert("Erreur d'inscription : " + error.message));
+  auth.createUserWithEmailAndPassword(email, pass)
+    .then((userCredential) => {
+      return userCredential.user.updateProfile({ displayName: nom });
+    })
+    .then(() => alert("Compte créé avec succès ! Bienvenue sur Asseko Store 🔥"))
+    .catch((error) => alert("Erreur d'inscription : " + error.message));
 }
 
 function connexion(e) {
-e.preventDefault();
-const email = document.getElementById('login-email').value;
-const pass = document.getElementById('login-pass').value;
+  e.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-pass').value;
 
-auth.signInWithEmailAndPassword(email, pass)
-.then(() => alert("Connexion réussie !"))
-.catch((error) => alert("Erreur : " + error.message));
+  auth.signInWithEmailAndPassword(email, pass)
+    .then(() => alert("Connexion réussie !"))
+    .catch((error) => alert("Erreur : " + error.message));
 }
 
 function deconnexion() {
-auth.signOut().then(() => alert("Déconnecté !"));
+  auth.signOut().then(() => alert("Déconnecté !"));
 }
 
-// Suivi de session
+// Suivi de l'état de connexion
 auth.onAuthStateChanged((user) => {
-const formLogin = document.getElementById('form-login');
-const formSignup = document.getElementById('form-signup');
-const userInfo = document.getElementById('user-info');
-const tabs = document.getElementById('auth-tabs');
+  const formLogin = document.getElementById('form-login');
+  const formSignup = document.getElementById('form-signup');
+  const userInfo = document.getElementById('user-info');
+  const tabs = document.getElementById('auth-tabs');
 
-if (user) {
-formLogin.style.display = 'none';
-formSignup.style.display = 'none';
-tabs.style.display = 'none';
-userInfo.style.display = 'block';
-document.getElementById('user-name').innerText = user.displayName || user.email;
-} else {
-tabs.style.display = 'flex';
-userInfo.style.display = 'none';
-switchTab('login');
-}
+  if (user) {
+    if(formLogin) formLogin.style.display = 'none';
+    if(formSignup) formSignup.style.display = 'none';
+    if(tabs) tabs.style.display = 'none';
+    if(userInfo) userInfo.style.display = 'block';
+    const userNameEl = document.getElementById('user-name');
+    if(userNameEl) userNameEl.innerText = user.displayName || user.email;
+  } else {
+    if(tabs) tabs.style.display = 'flex';
+    if(userInfo) userInfo.style.display = 'none';
+    switchTab('login');
+  }
 });
 
 window.onload = () => {
@@ -240,6 +149,3 @@ generer(listeAccessoires, 'catalogue-chaussures');
 maj();
 };
 </script>
-</body>
-</html>
-
