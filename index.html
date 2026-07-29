@@ -48,36 +48,36 @@ footer { margin-top: 50px; padding: 30px; border-top: 1px solid #333; color: #66
 
 <a href="panier.html" class="cart-status" id="cart-counter">🛒 <span>(0)</span></a>
 
-<!-- ESPACE CLIENT -->
+<!-- ESPACE CLIENT / AUTHENTIFICATION -->
 <div class="auth-container">
-<h2 class="section-title" style="margin-top: 10px;">Espace Client</h2>
-<div class="auth-card">
-<div class="auth-tabs" id="auth-tabs">
-<button id="tab-login" class="active" onclick="switchTab('login')">Connexion</button>
-<button id="tab-signup" onclick="switchTab('signup')">Inscription</button>
-</div>
+  <h2 class="section-title" style="margin-top: 10px;">Espace Client</h2>
+  <div class="auth-card">
+    <div class="auth-tabs" id="auth-tabs">
+      <button id="tab-login" class="active" onclick="switchTab('login')">Connexion</button>
+      <button id="tab-signup" onclick="switchTab('signup')">Inscription</button>
+    </div>
 
-<!-- Formulaire de Connexion -->
-<form id="form-login" onsubmit="connexion(event)">
-<input type="email" id="login-email" placeholder="Adresse Email" required>
-<input type="password" id="login-pass" placeholder="Mot de passe" required>
-<button type="submit" class="btn-buy" style="width:100%">Se connecter</button>
-</form>
+    <!-- Formulaire de Connexion -->
+    <form id="form-login" onsubmit="connexion(event)">
+      <input type="email" id="login-email" placeholder="Adresse Email" required>
+      <input type="password" id="login-pass" placeholder="Mot de passe" required>
+      <button type="submit" class="btn-buy" style="width:100%">Se connecter</button>
+    </form>
 
-<!-- Formulaire d'Inscription -->
-<form id="form-signup" onsubmit="inscription(event)" style="display:none;">
-<input type="text" id="sign-nom" placeholder="Nom complet" required>
-<input type="email" id="sign-email" placeholder="Adresse Email" required>
-<input type="password" id="sign-pass" placeholder="Mot de passe (6+ caractères)" required>
-<button type="submit" class="btn-buy" style="width:100%">Créer mon compte</button>
-</form>
+    <!-- Formulaire d'Inscription -->
+    <form id="form-signup" onsubmit="inscription(event)" style="display:none;">
+      <input type="text" id="sign-nom" placeholder="Nom complet" required>
+      <input type="email" id="sign-email" placeholder="Adresse Email" required>
+      <input type="password" id="sign-pass" placeholder="Mot de passe (6+ caractères)" required>
+      <button type="submit" class="btn-buy" style="width:100%">Créer mon compte</button>
+    </form>
 
-<!-- Affichage Profil Connecté -->
-<div id="user-info" style="display:none;">
-<p style="font-size: 1.1rem; margin-bottom: 15px;">Bienvenue, <b id="user-name" style="color: var(--primary);"></b> !</p>
-<button onclick="deconnexion()" class="btn-cart" style="width:100%; padding: 12px;">Se déconnecter</button>
-</div>
-</div>
+    <!-- Affichage Profil Connecté -->
+    <div id="user-info" style="display:none;">
+      <p style="font-size: 1.1rem; margin-bottom: 15px;">Bienvenue, <b id="user-name" style="color: var(--primary);"></b> !</p>
+      <button onclick="deconnexion()" class="btn-cart" style="width:100%; padding: 12px;">Se déconnecter</button>
+    </div>
+  </div>
 </div>
 
 <h2 class="section-title">Catalogue Jeux PC</h2>
@@ -91,25 +91,24 @@ footer { margin-top: 50px; padding: 30px; border-top: 1px solid #333; color: #66
 Asseko Store 2026 - Tous droits réservés
 </footer>
 
-<!-- SDKs Firebase v8 -->
+<!-- SDKs Firebase Version v8 -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
 <script>
-// Config Firebase
+// Config Firebase avec ta nouvelle clé API
 const firebaseConfig = {
-apiKey: "AIzaSyCaJAsQAIfeZNK9W_tT6wbYe23pQGLJSww",
-authDomain: "asseko-store.firebaseapp.com",
-projectId: "asseko-store",
-storageBucket: "asseko-store.firebasestorage.app",
-messagingSenderId: "181163873812",
-appId: "1:181163873812:web:83762b02eb9535e39a7901",
-measurementId: "G-YFSB2NKY6X"
+  apiKey: "AIzaSyA4iJyyLl-fjz9cP7p8DWFYDjvBj4wvcqM",
+  authDomain: "asseko-store.firebaseapp.com",
+  projectId: "asseko-store",
+  storageBucket: "asseko-store.firebasestorage.app",
+  messagingSenderId: "181163873812",
+  appId: "1:181163873812:web:cdbf8e26e533d1019a7901"
 };
 
 // Initialisation
 if (!firebase.apps.length) {
-firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 }
 const auth = firebase.auth();
 
@@ -150,101 +149,111 @@ const listeAccessoires = [
 ];
 
 function generer(liste, id) {
-const el = document.getElementById(id);
-if (el) {
-el.innerHTML = liste.map(j => `
-<div class="jeu-card">
-<img src="${j.img}" alt="${j.n}">
-<div class="info">
-<div class="jeu-nom">${j.n}</div>
-<div class="prix">${j.p} F</div>
-<div class="btn-group">
-<a href="paiement.html?jeu=${encodeURIComponent(j.n)}" class="btn-buy">Acheter</a>
-<button onclick="add('${j.n}', ${j.p})" class="btn-cart">🛒</button>
-</div>
-</div>
-</div>
-`).join('');
+  document.getElementById(id).innerHTML = liste.map(j => `
+    <div class="jeu-card">
+      <img src="${j.img}" alt="${j.n}">
+      <div class="info">
+        <div class="jeu-nom">${j.n}</div>
+        <div class="prix">${j.p} F</div>
+        <div class="btn-group">
+          <button onclick="acheterArticle('${j.n}')" class="btn-buy">Acheter</button>
+          <button onclick="add('${j.n}', ${j.p})" class="btn-cart">🛒</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
 }
+
+// Vérification de connexion avant achat
+function acheterArticle(nomJeu) {
+  const user = auth.currentUser;
+  if (user) {
+    window.location.href = "paiement.html?jeu=" + encodeURIComponent(nomJeu);
+  } else {
+    alert("🔒 Veuillez créer un compte ou vous connecter pour passer à la caisse.");
+    const authSection = document.querySelector('.auth-container');
+    if (authSection) {
+      authSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    switchTab('signup');
+  }
 }
 
 function add(n, p) {
-let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-panier.push({nom: n, prix: p});
-localStorage.setItem('asseko_panier', JSON.stringify(panier));
-maj();
-alert("Ajouté !");
+  let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+  panier.push({nom: n, prix: p});
+  localStorage.setItem('asseko_panier', JSON.stringify(panier));
+  maj();
+  alert("Ajouté au panier !");
 }
 
 function maj() {
-let p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-let el = document.querySelector('#cart-counter span');
-if (el) el.innerText = "(" + p.length + ")";
+  let p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+  let el = document.querySelector('#cart-counter span');
+  if (el) el.innerText = "(" + p.length + ")";
 }
 
 // Fonctions Authentification
 function switchTab(type) {
-document.getElementById('form-login').style.display = type === 'login' ? 'block' : 'none';
-document.getElementById('form-signup').style.display = type === 'signup' ? 'block' : 'none';
-document.getElementById('tab-login').classList.toggle('active', type === 'login');
-document.getElementById('tab-signup').classList.toggle('active', type === 'signup');
+  document.getElementById('form-login').style.display = type === 'login' ? 'block' : 'none';
+  document.getElementById('form-signup').style.display = type === 'signup' ? 'block' : 'none';
+  document.getElementById('tab-login').classList.toggle('active', type === 'login');
+  document.getElementById('tab-signup').classList.toggle('active', type === 'signup');
 }
 
 function inscription(e) {
-e.preventDefault();
-const email = document.getElementById('sign-email').value;
-const pass = document.getElementById('sign-pass').value;
-const nom = document.getElementById('sign-nom').value;
+  e.preventDefault();
+  const email = document.getElementById('sign-email').value;
+  const pass = document.getElementById('sign-pass').value;
+  const nom = document.getElementById('sign-nom').value;
 
-auth.createUserWithEmailAndPassword(email, pass)
-.then((userCredential) => {
-return userCredential.user.updateProfile({ displayName: nom });
-})
-.then(() => alert("Compte créé avec succès ! Bienvenue 🔥"))
-.catch((error) => alert("Erreur d'inscription : " + error.message));
+  auth.createUserWithEmailAndPassword(email, pass)
+    .then((userCredential) => {
+      return userCredential.user.updateProfile({ displayName: nom });
+    })
+    .then(() => alert("Compte créé avec succès ! Bienvenue sur Asseko Store 🔥"))
+    .catch((error) => alert("Erreur d'inscription : " + error.message));
 }
 
 function connexion(e) {
-e.preventDefault();
-const email = document.getElementById('login-email').value;
-const pass = document.getElementById('login-pass').value;
+  e.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-pass').value;
 
-auth.signInWithEmailAndPassword(email, pass)
-.then(() => alert("Connexion réussie !"))
-.catch((error) => alert("Erreur : " + error.message));
+  auth.signInWithEmailAndPassword(email, pass)
+    .then(() => alert("Connexion réussie !"))
+    .catch((error) => alert("Erreur : " + error.message));
 }
 
 function deconnexion() {
-auth.signOut().then(() => alert("Déconnecté !"));
+  auth.signOut().then(() => alert("Déconnecté !"));
 }
 
-// Suivi session
+// Suivi de session
 auth.onAuthStateChanged((user) => {
-const formLogin = document.getElementById('form-login');
-const formSignup = document.getElementById('form-signup');
-const userInfo = document.getElementById('user-info');
-const tabs = document.getElementById('auth-tabs');
+  const formLogin = document.getElementById('form-login');
+  const formSignup = document.getElementById('form-signup');
+  const userInfo = document.getElementById('user-info');
+  const tabs = document.getElementById('auth-tabs');
 
-if (user) {
-if(formLogin) formLogin.style.display = 'none';
-if(formSignup) formSignup.style.display = 'none';
-if(tabs) tabs.style.display = 'none';
-if(userInfo) userInfo.style.display = 'block';
-const userNameEl = document.getElementById('user-name');
-if(userNameEl) userNameEl.innerText = user.displayName || user.email;
-} else {
-if(tabs) tabs.style.display = 'flex';
-if(userInfo) userInfo.style.display = 'none';
-switchTab('login');
-}
+  if (user) {
+    formLogin.style.display = 'none';
+    formSignup.style.display = 'none';
+    tabs.style.display = 'none';
+    userInfo.style.display = 'block';
+    document.getElementById('user-name').innerText = user.displayName || user.email;
+  } else {
+    tabs.style.display = 'flex';
+    userInfo.style.display = 'none';
+    switchTab('login');
+  }
 });
 
 window.onload = () => {
-generer(listeJeux, 'catalogue');
-generer(listeAccessoires, 'catalogue-chaussures');
-maj();
+  generer(listeJeux, 'catalogue');
+  generer(listeAccessoires, 'catalogue-chaussures');
+  maj();
 };
 </script>
 </body>
 </html>
-
