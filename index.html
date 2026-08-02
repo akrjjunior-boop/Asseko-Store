@@ -170,7 +170,6 @@ font-weight: bold;
 .modal-title { color: var(--primary); margin-top: 0; font-size: 1.4rem; }
 .modal-details { font-size: 0.85rem; line-height: 1.5; color: #ddd; margin: 15px 0; }
 
-/* Styles spécifiques aux sélecteurs Chaussures */
 .modal-details select {
 width: 100%;
 padding: 10px;
@@ -183,7 +182,6 @@ font-size: 0.9rem;
 outline: none;
 }
 
-/* Bulles de Couleur */
 .color-options {
 display: flex;
 gap: 12px;
@@ -198,7 +196,6 @@ cursor: pointer;
 border: 2px solid transparent;
 transition: transform 0.2s, border-color 0.2s;
 box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-position: relative;
 }
 .color-bubble:hover { transform: scale(1.1); }
 .color-bubble.selected {
@@ -262,16 +259,38 @@ Asseko Store - Tous droits réservés
 </footer>
 
 <script>
+// TOUS LES JEUX PC SONT BIEN PRÉSENTS CI-DESSOUS (27 JEUX)
 const listeJeux = [
 {n: "WWE 2K25", p: 8000, img: "https://i.pinimg.com/1200x/c7/ac/6d/c7ac6d5ef0a6ec03e70bdcf4de6e66be.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "60 Go", yt: ""},
 {n: "GoW Ragnarok", p: 8000, img: "https://i.pinimg.com/736x/8f/cc/bc/8fccbc000427939ea63559a8f1b4cc03.jpg", req: "16 Go RAM, RTX 2060 min.", tail: "110 Go", yt: ""},
 {n: "CoD Black Ops 6", p: 7000, img: "https://i.pinimg.com/736x/4b/17/2a/4b172acbb1a31cf30cfd712e4bb94928.jpg", req: "12 Go RAM, GTX 1060", tail: "100 Go", yt: ""},
 {n: "God of War", p: 7000, img: "https://i.pinimg.com/1200x/a1/84/9b/a1849baa4d6ccda5098080ad5097e359.jpg", req: "8 Go RAM, GTX 960", tail: "70 Go", yt: ""},
 {n: "Cyberpunk 2077", p: 5500, img: "https://i.pinimg.com/1200x/76/a4/9a/76a49a5f00a20d5ea0df8dafbbb514bc.jpg", req: "12 Go RAM, GTX 1060", tail: "70 Go", yt: ""},
-{n: "GTA V", p: 4000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg", req: "8 Go RAM, GTX 660", tail: "90 Go", yt: ""}
+{n: "Naruto Shinobi Strike", p: 5500, img: "https://i.pinimg.com/736x/ad/05/b2/ad05b260717d91bc4892c5d89eca5c80.jpg", req: "6 Go RAM, GTX 660", tail: "40 Go", yt: ""},
+{n: "DBZ Sparking Zero", p: 5000, img: "https://i.pinimg.com/736x/e2/aa/6a/e2aa6ae9d6afe729a1d621000fb15405.jpg", req: "8 Go RAM, GTX 970", tail: "30 Go", yt: ""},
+{n: "DBZ Kakarot", p: 5000, img: "https://i.pinimg.com/736x/03/77/39/0377395b7989c414483e580896048cf1.jpg", req: "6 Go RAM, GTX 750 Ti", tail: "40 Go", yt: ""},
+{n: "Naruto Connections", p: 5000, img: "https://i.pinimg.com/1200x/b4/bf/d2/b4bfd24ee83c4df44bad28dc17631001.jpg", req: "8 Go RAM, GTX 960", tail: "30 Go", yt: ""},
+{n: "CoD MW3", p: 5000, img: "https://i.pinimg.com/736x/de/e7/a2/dee7a2209580884a5b63615206169c9b.jpg", req: "8 Go RAM, GTX 970", tail: "80 Go", yt: ""},
+{n: "NFS Heat Deluxe", p: 4500, img: "https://i.pinimg.com/736x/2e/c9/fa/2ec9fad416ac4fe639f50184aba77aee.jpg", req: "8 Go RAM, GTX 1060", tail: "50 Go", yt: ""},
+{n: "F1 2022", p: 4500, img: "https://i.pinimg.com/1200x/20/ad/a9/20ada9cd59ea21f2f8658df69ef9c218.jpg", req: "8 Go RAM, GTX 1050 Ti", tail: "80 Go", yt: ""},
+{n: "FIFA 22", p: 4000, img: "https://i.pinimg.com/736x/df/7a/71/df7a71474e3b8fb87ce816bb79b23476.jpg", req: "8 Go RAM, GTX 1050", tail: "50 Go", yt: ""},
+{n: "GTA V", p: 4000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg", req: "8 Go RAM, GTX 660", tail: "90 Go", yt: ""},
+{n: "Naruto Storm 4", p: 4000, img: "https://i.pinimg.com/1200x/68/a4/a5/68a4a556802033962ab4e8327b848561.jpg", req: "4 Go RAM, GTX 750", tail: "40 Go", yt: ""},
+{n: "Jump Force", p: 4000, img: "https://i.pinimg.com/736x/25/30/66/25306638ebe76311cfbf6bde6caae84f.jpg", req: "8 Go RAM, GTX 1060", tail: "20 Go", yt: ""},
+{n: "FIFA 21", p: 4500, img: "https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg", req: "8 Go RAM, GTX 660", tail: "50 Go", yt: ""},
+{n: "NBA 2K23", p: 4500, img: "https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg", req: "8 Go RAM, GTX 770", tail: "110 Go", yt: ""},
+{n: "Test Drive Unlimited 2", p: 3500, img: "https://i.pinimg.com/1200x/96/91/bf/9691bf3993f312e2ed4744c392061ca8.jpg", req: "2 Go RAM, GT 8800", tail: "15 Go", yt: ""},
+{n: "Naruto Storm Revolution", p: 3500, img: "https://i.pinimg.com/736x/c9/26/38/c926388ae9d01a6e3bc70d439a1eb0f6.jpg", req: "4 Go RAM", tail: "8 Go", yt: ""},
+{n: "FIFA 20", p: 3500, img: "https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg", req: "8 Go RAM", tail: "45 Go", yt: ""},
+{n: "Efootball 21", p: 4000, img: "https://i.pinimg.com/736x/01/39/9e/01399ef1fba685b0fee527e7478eb3d1.jpg", req: "8 Go RAM, GTX 670", tail: "40 Go", yt: ""},
+{n: "Assassin's Creed Revelations", p: 3000, img: "https://i.pinimg.com/736x/e0/80/7a/e0807a9df4e4d5a9542c3a133e6b5821.jpg", req: "2 Go RAM", tail: "12 Go", yt: ""},
+{n: "PES 2018", p: 3000, img: "https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg", req: "4 Go RAM", tail: "25 Go", yt: ""},
+{n: "Minecraft Story Mode", p: 2500, img: "https://i.pinimg.com/1200x/91/9e/6f/919e6f51cc7bd1fc0c8b1187057b22f5.jpg", req: "3 Go RAM", tail: "6 Go", yt: ""},
+{n: "FIFA 17", p: 2500, img: "https://i.pinimg.com/1200x/80/ed/ee/80edee894a2cd179caedb4134d1a427b.jpg", req: "8 Go RAM", tail: "35 Go", yt: ""},
+{n: "PES 17", p: 2500, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg", req: "1 Go RAM", tail: "12 Go", yt: ""}
 ];
 
-// Configuration Chaussures avec Bulles de Couleurs (code HEX/couleur) + Pointures
+// LISTE CHAUSSURES & ACCESSOIRES
 const listeAccessoires = [
 {
 n: "Nike Mercurial Vapor 16",
@@ -361,7 +380,6 @@ let contenu = `<ul><li><b>Prix :</b> ${produit.p.toLocaleString()} FCFA</li>`;
 if (estChaussure) {
 contenu += `<li><b>Stock restant :</b> ${produit.stock > 0 ? produit.stock + ' paire(s)' : '<span style="color:red">Rupture de stock</span>'}</li>`;
 
-// 1. Menu Déroulant pour les Pointures
 if (produit.pointures && produit.pointures.length > 0) {
 contenu += `<br><label><b>Choisir la pointure :</b></label>
 <select id="pointureSelect">
@@ -369,9 +387,8 @@ ${produit.pointures.map(pt => `<option value="${pt}">Pointure ${pt}</option>`).j
 </select>`;
 }
 
-// 2. Bulles de Couleur Cliquables
 if (produit.couleurs && produit.couleurs.length > 0) {
-couleurSelectionnee = produit.couleurs[0].nom; // Couleur par défaut (la 1ère)
+couleurSelectionnee = produit.couleurs[0].nom;
 contenu += `<br><label><b>Choisir la couleur : <span id="labelCouleur" style="color:var(--primary);">${couleurSelectionnee}</span></b></label>
 <div class="color-options">
 ${produit.couleurs.map((c, index) => `
@@ -415,7 +432,6 @@ window.location.href = url;
 document.getElementById('productModal').style.display = 'flex';
 }
 
-// Fonction pour gérer la sélection par bulle de couleur
 function choisirCouleur(nomCouleur, el) {
 couleurSelectionnee = nomCouleur;
 document.getElementById('labelCouleur').innerText = nomCouleur;
@@ -450,3 +466,4 @@ maj();
 </script>
 </body>
 </html>
+
