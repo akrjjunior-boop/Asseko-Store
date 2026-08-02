@@ -65,7 +65,7 @@ margin-bottom: 5px;
 color: #ccc;
 }
 
-input[type="text"], input[type="tel"] {
+input[type="text"], input[type="email"] {
 width: 100%;
 padding: 12px;
 border-radius: 8px;
@@ -78,14 +78,14 @@ outline: none;
 }
 input:focus { border-color: var(--primary); }
 
-.btn-whatsapp {
+.btn-paiement {
 width: 100%;
-background: #25d366;
+background: #27ae60;
 color: white;
 border: none;
 padding: 14px;
 border-radius: 8px;
-font-size: 1rem;
+font-size: 1.1rem;
 font-weight: bold;
 cursor: pointer;
 display: flex;
@@ -93,8 +93,9 @@ align-items: center;
 justify-content: center;
 gap: 10px;
 margin-top: 20px;
+transition: background 0.2s;
 }
-.btn-whatsapp:hover { background: #20ba5a; }
+.btn-paiement:hover { background: #219150; }
 
 .back-link {
 display: block;
@@ -110,25 +111,25 @@ font-size: 0.85rem;
 <body>
 
 <div class="container">
-<h2>Validation de Commande</h2>
+<h2>Validation de la Commande</h2>
 
 <div class="recap-box" id="recapitulatif">
 <!-- Rempli automatiquement via JS -->
 </div>
 
-<form id="formCommande" onsubmit="event.preventDefault(); envoyerWhatsApp();">
+<form id="formCommande" onsubmit="event.preventDefault(); envoyerConfirmationPaiement();">
 <div class="form-group">
 <label for="nom">Nom & Prénom *</label>
 <input type="text" id="nom" required placeholder="Ex: Jean Dupont">
 </div>
 
 <div class="form-group">
-<label for="telephone">Numéro Téléphone / WhatsApp *</label>
-<input type="tel" id="telephone" required placeholder="Ex: 074000000">
+<label for="email">Adresse Mail *</label>
+<input type="email" id="email" required placeholder="Ex: exemple@email.com">
 </div>
 
-<button type="submit" class="btn-whatsapp">
-📲 Valider et envoyer via WhatsApp
+<button type="submit" class="btn-paiement">
+✅ J'ai payé
 </button>
 </form>
 
@@ -136,17 +137,17 @@ font-size: 0.85rem;
 </div>
 
 <script>
-// 1. Récupération des données dans l'URL
+// 1. Récupération des données transmis dans l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const nomArticle = urlParams.get('jeu') || "Article";
 const prixArticle = urlParams.get('prix') || "0";
 const pointureArticle = urlParams.get('pointure');
 const couleurArticle = urlParams.get('couleur');
 
-// Numéro WhatsApp de réception
+// Ton numéro WhatsApp de réception (Format international sans le +)
 const numeroWhatsApp = "24100000000";
 
-// 2. Affichage du récapitulatif sur la page
+// 2. Affichage du récapitulatif du produit sur la page
 const recapBox = document.getElementById('recapitulatif');
 let htmlRecap = `
 <div class="recap-item"><span>Article :</span> <strong>${nomArticle}</strong></div>
@@ -163,18 +164,19 @@ htmlRecap += `<div class="recap-item"><span>Couleur :</span> <strong>${couleurAr
 
 recapBox.innerHTML = htmlRecap;
 
-// 3. Envoi du message formaté vers WhatsApp
-function envoyerWhatsApp() {
+// 3. Construction et envoi du message WhatsApp lors du clic sur "J'ai payé"
+function envoyerConfirmationPaiement() {
 const nomClient = document.getElementById('nom').value.trim();
-const telClient = document.getElementById('telephone').value.trim();
+const emailClient = document.getElementById('email').value.trim();
 
-if (!nomClient || !telClient) {
-alert("Veuillez remplir vos informations.");
+if (!nomClient || !emailClient) {
+alert("Veuillez renseigner votre nom et votre adresse mail.");
 return;
 }
 
 let message = `Bonjour Asseko Store ! 👋\n\n`;
-message += `Je souhaite valider ma commande :\n`;
+message += `J'ai effectué le paiement pour ma commande :\n\n`;
+message += `📦 *DÉTAILS DU PRODUIT*\n`;
 message += `• *Article :* ${nomArticle}\n`;
 message += `• *Prix :* ${parseInt(prixArticle).toLocaleString()} FCFA\n`;
 
@@ -185,10 +187,10 @@ if (couleurArticle) {
 message += `• *Couleur :* ${couleurArticle}\n`;
 }
 
-message += `\n*Informations Client :*\n`;
-message += `• *Nom :* ${nomClient}\n`;
-message += `• *Téléphone :* ${telClient}\n\n`;
-message += `Merci de me confirmer la disponibilité et les modalités de paiement !`;
+message += `\n👤 *INFORMATIONS DU CLIENT*\n`;
+message += `• *Nom complet :* ${nomClient}\n`;
+message += `• *Adresse Mail :* ${emailClient}\n\n`;
+message += `Merci de vérifier mon paiement et de valider l'envoi / la livraison !`;
 
 const urlFinal = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
 window.location.href = urlFinal;
@@ -196,3 +198,4 @@ window.location.href = urlFinal;
 </script>
 </body>
 </html>
+
