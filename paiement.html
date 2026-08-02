@@ -7,6 +7,7 @@
 <style>
 :root {
 --primary: #27ae60;
+--airtel-red: #e50914;
 --bg: #121212;
 --card: #1e1e1e;
 --text: #ffffff;
@@ -34,6 +35,46 @@ h2 {
 color: var(--primary);
 text-align: center;
 margin-top: 0;
+}
+
+/* Zone d'instructions Airtel Money */
+.payment-info-box {
+background: #181818;
+border: 2px solid var(--airtel-red);
+border-radius: 12px;
+padding: 15px;
+margin-bottom: 20px;
+text-align: center;
+}
+
+.payment-info-box h3 {
+color: var(--airtel-red);
+margin-top: 0;
+margin-bottom: 8px;
+font-size: 1.1rem;
+}
+
+.qr-code-img {
+width: 180px;
+height: 180px;
+object-fit: contain;
+margin: 10px auto;
+border: 4px solid white;
+border-radius: 8px;
+background: white;
+display: block;
+}
+
+.airtel-number {
+font-size: 1.1rem;
+font-weight: bold;
+color: #fff;
+background: rgba(229, 9, 20, 0.2);
+padding: 8px 12px;
+border-radius: 6px;
+display: inline-block;
+margin-top: 8px;
+border: 1px dashed var(--airtel-red);
 }
 
 .recap-box {
@@ -113,10 +154,28 @@ font-size: 0.85rem;
 <div class="container">
 <h2>Validation de la Commande</h2>
 
+<!-- Bloc Information Paiement Airtel Money -->
+<div class="payment-info-box">
+<h3>📲 Paiement par Airtel Money</h3>
+<p style="font-size:0.85rem; margin:0 0 10px 0; color:#ddd;">
+Scannez le QR Code ou effectuez le transfert Airtel Money vers le numéro ci-dessous :
+</p>
+
+<!-- QR Code configuré -->
+<img src="image.png" alt="QR Code Airtel Money Asseko Store" class="qr-code-img">
+
+<!-- Numéro Airtel Money configuré -->
+<div class="airtel-number">
+📞 Numéro Airtel Money : 077826458
+</div>
+</div>
+
+<!-- Récapitulatif de la commande -->
 <div class="recap-box" id="recapitulatif">
 <!-- Rempli automatiquement via JS -->
 </div>
 
+<!-- Formulaire Client -->
 <form id="formCommande" onsubmit="event.preventDefault(); envoyerConfirmationPaiement();">
 <div class="form-group">
 <label for="nom">Nom & Prénom *</label>
@@ -137,21 +196,21 @@ font-size: 0.85rem;
 </div>
 
 <script>
-// 1. Récupération des données transmis dans l'URL
+// 1. Récupération des données transmises depuis l'URL (index.html)
 const urlParams = new URLSearchParams(window.location.search);
 const nomArticle = urlParams.get('jeu') || "Article";
 const prixArticle = urlParams.get('prix') || "0";
 const pointureArticle = urlParams.get('pointure');
 const couleurArticle = urlParams.get('couleur');
 
-// Ton numéro WhatsApp de réception (Format international sans le +)
-const numeroWhatsApp = "24100000000";
+// Ton numéro WhatsApp de réception avec l'indicatif Gabon (241)
+const numeroWhatsApp = "24177826458";
 
-// 2. Affichage du récapitulatif du produit sur la page
+// 2. Affichage dynamique du récapitulatif
 const recapBox = document.getElementById('recapitulatif');
 let htmlRecap = `
 <div class="recap-item"><span>Article :</span> <strong>${nomArticle}</strong></div>
-<div class="recap-item"><span>Prix :</span> <strong style="color:var(--primary);">${parseInt(prixArticle).toLocaleString()} FCFA</strong></div>
+<div class="recap-item"><span>Montant à régler :</span> <strong style="color:var(--primary);">${parseInt(prixArticle).toLocaleString()} FCFA</strong></div>
 `;
 
 if (pointureArticle) {
@@ -164,18 +223,18 @@ htmlRecap += `<div class="recap-item"><span>Couleur :</span> <strong>${couleurAr
 
 recapBox.innerHTML = htmlRecap;
 
-// 3. Construction et envoi du message WhatsApp lors du clic sur "J'ai payé"
+// 3. Action au clic sur "J'ai payé" -> Redirection WhatsApp avec message pré-rempli
 function envoyerConfirmationPaiement() {
 const nomClient = document.getElementById('nom').value.trim();
 const emailClient = document.getElementById('email').value.trim();
 
 if (!nomClient || !emailClient) {
-alert("Veuillez renseigner votre nom et votre adresse mail.");
+alert("Veuillez remplir votre nom et votre adresse mail.");
 return;
 }
 
 let message = `Bonjour Asseko Store ! 👋\n\n`;
-message += `J'ai effectué le paiement pour ma commande :\n\n`;
+message += `J'ai effectué le paiement Airtel Money pour ma commande :\n\n`;
 message += `📦 *DÉTAILS DU PRODUIT*\n`;
 message += `• *Article :* ${nomArticle}\n`;
 message += `• *Prix :* ${parseInt(prixArticle).toLocaleString()} FCFA\n`;
@@ -190,7 +249,7 @@ message += `• *Couleur :* ${couleurArticle}\n`;
 message += `\n👤 *INFORMATIONS DU CLIENT*\n`;
 message += `• *Nom complet :* ${nomClient}\n`;
 message += `• *Adresse Mail :* ${emailClient}\n\n`;
-message += `Merci de vérifier mon paiement et de valider l'envoi / la livraison !`;
+message += `Merci de vérifier la réception du paiement Airtel Money et de me valider la commande !`;
 
 const urlFinal = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
 window.location.href = urlFinal;
