@@ -5,146 +5,164 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asseko Store - Finaliser la commande</title>
 <style>
-:root {
---primary: #27ae60;
---airtel-red: #e50914;
---bg: #121212;
---card: #1e1e1e;
---text: #ffffff;
+:root { 
+  --primary: #27ae60; 
+  --airtel-red: #e50914;
+  --mobicash-blue: #0056b3;
+  --bg: #121212; 
+  --card: #1e1e1e; 
+  --text: #ffffff;
 }
 
-body {
-background: var(--bg);
-color: var(--text);
-font-family: 'Segoe UI', Roboto, sans-serif;
-margin: 0;
-padding: 20px;
+body { 
+  background: var(--bg); 
+  color: var(--text); 
+  font-family: 'Segoe UI', Roboto, sans-serif; 
+  margin: 0; 
+  padding: 20px;
 }
 
 .container {
-max-width: 500px;
-margin: 20px auto;
-background: var(--card);
-padding: 25px;
-border-radius: 16px;
-border: 1px solid var(--primary);
-box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  max-width: 500px;
+  margin: 20px auto;
+  background: var(--card);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid var(--primary);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
 h2 {
-color: var(--primary);
-text-align: center;
-margin-top: 0;
+  color: var(--primary);
+  text-align: center;
+  margin-top: 0;
 }
 
-/* Zone d'instructions Airtel Money */
+/* Zone d'instructions de paiement */
 .payment-info-box {
-background: #181818;
-border: 2px solid var(--airtel-red);
-border-radius: 12px;
-padding: 15px;
-margin-bottom: 20px;
-text-align: center;
+  background: #181818;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.airtel-box {
+  border: 2px solid var(--airtel-red);
+}
+
+.mobicash-box {
+  border: 2px solid var(--mobicash-blue);
 }
 
 .payment-info-box h3 {
-color: var(--airtel-red);
-margin-top: 0;
-margin-bottom: 8px;
-font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
 }
 
+.airtel-box h3 { color: var(--airtel-red); }
+.mobicash-box h3 { color: #3b82f6; }
+
 .qr-code-img {
-width: 180px;
-height: 180px;
-object-fit: contain;
-margin: 10px auto;
-border: 4px solid white;
-border-radius: 8px;
-background: white;
-display: block;
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin: 10px auto;
+  border: 4px solid white;
+  border-radius: 8px;
+  background: white;
+  display: block;
+}
+
+.phone-number {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 8px;
 }
 
 .airtel-number {
-font-size: 1.1rem;
-font-weight: bold;
-color: #fff;
-background: rgba(229, 9, 20, 0.2);
-padding: 8px 12px;
-border-radius: 6px;
-display: inline-block;
-margin-top: 8px;
-border: 1px dashed var(--airtel-red);
+  background: rgba(229, 9, 20, 0.2);
+  border: 1px dashed var(--airtel-red);
+}
+
+.mobicash-number {
+  background: rgba(0, 86, 179, 0.2);
+  border: 1px dashed var(--mobicash-blue);
 }
 
 .recap-box {
-background: #181818;
-border: 1px solid #333;
-border-radius: 10px;
-padding: 15px;
-margin-bottom: 20px;
-font-size: 0.95rem;
-line-height: 1.6;
+  background: #181818;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .recap-item {
-display: flex;
-justify-content: space-between;
-border-bottom: 1px dashed #333;
-padding: 6px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #333;
+  padding: 6px 0;
 }
 .recap-item:last-child { border-bottom: none; }
 
 .form-group {
-margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 label {
-display: block;
-font-size: 0.85rem;
-margin-bottom: 5px;
-color: #ccc;
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  color: #ccc;
 }
 
 input[type="text"], input[type="email"] {
-width: 100%;
-padding: 12px;
-border-radius: 8px;
-border: 1px solid #333;
-background: #252525;
-color: white;
-font-size: 1rem;
-box-sizing: border-box;
-outline: none;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #252525;
+  color: white;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
 }
 input:focus { border-color: var(--primary); }
 
 .btn-paiement {
-width: 100%;
-background: #27ae60;
-color: white;
-border: none;
-padding: 14px;
-border-radius: 8px;
-font-size: 1.1rem;
-font-weight: bold;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 10px;
-margin-top: 20px;
-transition: background 0.2s;
+  width: 100%;
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  transition: background 0.2s;
 }
 .btn-paiement:hover { background: #219150; }
 
 .back-link {
-display: block;
-text-align: center;
-margin-top: 15px;
-color: #888;
-text-decoration: none;
-font-size: 0.85rem;
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #888;
+  text-decoration: none;
+  font-size: 0.85rem;
 }
 .back-link:hover { color: white; }
 </style>
@@ -152,47 +170,58 @@ font-size: 0.85rem;
 <body>
 
 <div class="container">
-<h2>Validation de la Commande</h2>
+  <h2>Validation de la Commande</h2>
 
-<!-- Bloc Information Paiement Airtel Money -->
-<div class="payment-info-box">
-<h3>📲 Paiement par Airtel Money</h3>
-<p style="font-size:0.85rem; margin:0 0 10px 0; color:#ddd;">
-Scannez le QR Code ou effectuez le transfert Airtel Money vers le numéro ci-dessous :
-</p>
+  <!-- Bloc Information Paiement Airtel Money -->
+  <div class="payment-info-box airtel-box">
+    <h3>📲 Paiement par Airtel Money</h3>
+    <p style="font-size:0.85rem; margin:0 0 10px 0; color:#ddd;">
+      Scannez le QR Code ou effectuez le transfert vers le numéro ci-dessous :
+    </p>
 
-<!-- QR Code configuré -->
-<img src="image.png" alt="QR Code Airtel Money Asseko Store" class="qr-code-img">
+    <img src="image.png" alt="QR Code Airtel Money Asseko Store" class="qr-code-img">
 
-<!-- Numéro Airtel Money configuré -->
-<div class="airtel-number">
-📞 Numéro Airtel Money : 077826458
-</div>
-</div>
+    <div class="phone-number airtel-number">
+      📞 Numéro : 077826458
+    </div>
+  </div>
 
-<!-- Récapitulatif de la commande -->
-<div class="recap-box" id="recapitulatif">
-<!-- Rempli automatiquement via JS -->
-</div>
+  <!-- Bloc Information Paiement Moov Money / MobiCash -->
+  <div class="payment-info-box mobicash-box">
+    <h3>🔵 Paiement par Moov Money (MobiCash)</h3>
+    <p style="font-size:0.85rem; margin:0 0 10px 0; color:#ddd;">
+      Effectuez votre transfert Moov Money vers le numéro ci-dessous :
+    </p>
 
-<!-- Formulaire Client -->
-<form id="formCommande" onsubmit="event.preventDefault(); envoyerConfirmationPaiement();">
-<div class="form-group">
-<label for="nom">Nom & Prénom *</label>
-<input type="text" id="nom" required placeholder="Ex: Jean Dupont">
-</div>
+    <!-- Remplace "060000000" par ton numéro Moov Money dès que ton compte sera prêt -->
+    <div class="phone-number mobicash-number">
+      📞 Numéro : 060000000 (À venir)
+    </div>
+  </div>
 
-<div class="form-group">
-<label for="email">Adresse Mail *</label>
-<input type="email" id="email" required placeholder="Ex: exemple@email.com">
-</div>
+  <!-- Récapitulatif de la commande -->
+  <div class="recap-box" id="recapitulatif">
+    <!-- Rempli automatiquement via JS -->
+  </div>
 
-<button type="submit" class="btn-paiement">
-✅ J'ai payé
-</button>
-</form>
+  <!-- Formulaire Client -->
+  <form id="formCommande" onsubmit="event.preventDefault(); envoyerConfirmationPaiement();">
+    <div class="form-group">
+      <label for="nom">Nom & Prénom *</label>
+      <input type="text" id="nom" required placeholder="Ex: Jean Dupont">
+    </div>
 
-<a href="index.html" class="back-link">← Retourner à la boutique</a>
+    <div class="form-group">
+      <label for="email">Adresse Mail *</label>
+      <input type="email" id="email" required placeholder="Ex: exemple@email.com">
+    </div>
+
+    <button type="submit" class="btn-paiement">
+      ✅ J'ai payé
+    </button>
+  </form>
+
+  <a href="index.html" class="back-link">← Retourner à la boutique</a>
 </div>
 
 <script>
@@ -203,58 +232,57 @@ const prixArticle = urlParams.get('prix') || "0";
 const pointureArticle = urlParams.get('pointure');
 const couleurArticle = urlParams.get('couleur');
 
-// Ton numéro WhatsApp de réception avec l'indicatif Gabon (241)
-const numeroWhatsApp = "24177826458";
+// Ton numéro WhatsApp de réception (+241 62 14 31 84)
+const numeroWhatsApp = "24162143184"; 
 
 // 2. Affichage dynamique du récapitulatif
 const recapBox = document.getElementById('recapitulatif');
 let htmlRecap = `
-<div class="recap-item"><span>Article :</span> <strong>${nomArticle}</strong></div>
-<div class="recap-item"><span>Montant à régler :</span> <strong style="color:var(--primary);">${parseInt(prixArticle).toLocaleString()} FCFA</strong></div>
+  <div class="recap-item"><span>Article :</span> <strong>${nomArticle}</strong></div>
+  <div class="recap-item"><span>Montant à régler :</span> <strong style="color:var(--primary);">${parseInt(prixArticle).toLocaleString()} FCFA</strong></div>
 `;
 
 if (pointureArticle) {
-htmlRecap += `<div class="recap-item"><span>Pointure :</span> <strong>${pointureArticle}</strong></div>`;
+  htmlRecap += `<div class="recap-item"><span>Pointure :</span> <strong>${pointureArticle}</strong></div>`;
 }
 
 if (couleurArticle) {
-htmlRecap += `<div class="recap-item"><span>Couleur :</span> <strong>${couleurArticle}</strong></div>`;
+  htmlRecap += `<div class="recap-item"><span>Couleur :</span> <strong>${couleurArticle}</strong></div>`;
 }
 
 recapBox.innerHTML = htmlRecap;
 
 // 3. Action au clic sur "J'ai payé" -> Redirection WhatsApp avec message pré-rempli
 function envoyerConfirmationPaiement() {
-const nomClient = document.getElementById('nom').value.trim();
-const emailClient = document.getElementById('email').value.trim();
+  const nomClient = document.getElementById('nom').value.trim();
+  const emailClient = document.getElementById('email').value.trim();
 
-if (!nomClient || !emailClient) {
-alert("Veuillez remplir votre nom et votre adresse mail.");
-return;
-}
+  if (!nomClient || !emailClient) {
+    alert("Veuillez remplir votre nom et votre adresse mail.");
+    return;
+  }
 
-let message = `Bonjour Asseko Store ! 👋\n\n`;
-message += `J'ai effectué le paiement Airtel Money pour ma commande :\n\n`;
-message += `📦 *DÉTAILS DU PRODUIT*\n`;
-message += `• *Article :* ${nomArticle}\n`;
-message += `• *Prix :* ${parseInt(prixArticle).toLocaleString()} FCFA\n`;
+  let message = `Bonjour Asseko Store ! 👋\n\n`;
+  message += `J'ai effectué le paiement pour ma commande :\n\n`;
+  message += `📦 *DÉTAILS DU PRODUIT*\n`;
+  message += `• *Article :* ${nomArticle}\n`;
+  message += `• *Prix :* ${parseInt(prixArticle).toLocaleString()} FCFA\n`;
 
-if (pointureArticle) {
-message += `• *Pointure :* ${pointureArticle}\n`;
-}
-if (couleurArticle) {
-message += `• *Couleur :* ${couleurArticle}\n`;
-}
+  if (pointureArticle) {
+    message += `• *Pointure :* ${pointureArticle}\n`;
+  }
+  if (couleurArticle) {
+    message += `• *Couleur :* ${couleurArticle}\n`;
+  }
 
-message += `\n👤 *INFORMATIONS DU CLIENT*\n`;
-message += `• *Nom complet :* ${nomClient}\n`;
-message += `• *Adresse Mail :* ${emailClient}\n\n`;
-message += `Merci de vérifier la réception du paiement Airtel Money et de me valider la commande !`;
+  message += `\n👤 *INFORMATIONS DU CLIENT*\n`;
+  message += `• *Nom complet :* ${nomClient}\n`;
+  message += `• *Adresse Mail :* ${emailClient}\n\n`;
+  message += `Merci de vérifier la réception du paiement et de me valider la commande !`;
 
-const urlFinal = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
-window.location.href = urlFinal;
+  const urlFinal = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
+  window.location.href = urlFinal;
 }
 </script>
 </body>
 </html>
-
