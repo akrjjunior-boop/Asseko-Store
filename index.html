@@ -209,7 +209,7 @@ footer { margin-top: 50px; padding: 30px; border-top: 1px solid #222; color: #66
 </head>
 <body>
 
-<div class="top-bar">🔥 OFFRE SPÉCIALE : Livraison ultra-rapide par WhatsApp après validation !</div>
+<div class="top-bar">🛒 OFFRE SPÉCIALE : Livraison ultra-rapide par WhatsApp après validation !</div>
 
 <header>
 <img src="logo2.png" class="logo-style" alt="Logo">
@@ -218,7 +218,7 @@ footer { margin-top: 50px; padding: 30px; border-top: 1px solid #222; color: #66
 
 <div class="features-bar">
 <div class="feature-item">⚡ <span>Livraison rapide</span></div>
-<div class="feature-item">📱 <span>Airtel & Moov Money</span></div>
+<div class="feature-item">💳 <span>Airtel & Moov Money</span></div>
 <div class="feature-item">🎮 <span>Jeux PC & Accessoires</span></div>
 </div>
 
@@ -234,7 +234,7 @@ footer { margin-top: 50px; padding: 30px; border-top: 1px solid #222; color: #66
 </div>
 </div>
 
-<h2 class="section-title">Catalogue Jeux PC</h2>
+<h2 class="section-title">Catalogue Jeux PC & Modding</h2>
 <div class="grid-jeux" id="catalogue"></div>
 
 <h2 class="section-title">Chaussures & Accessoires</h2>
@@ -260,6 +260,7 @@ Asseko Store - Tous droits réservés
 
 <script>
 const listeJeux = [
+// --- JEUX TRÈS POPULAIRES / HAUTE PERF ---
 {n: "WWE 2K25", p: 8000, img: "https://i.pinimg.com/1200x/c7/ac/6d/c7ac6d5ef0a6ec03e70bdcf4de6e66be.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "60 Go"},
 {n: "GoW Ragnarok", p: 8000, img: "https://i.pinimg.com/736x/8f/cc/bc/8fccbc000427939ea63559a8f1b4cc03.jpg", req: "16 Go RAM, RTX 2060 min.", tail: "110 Go"},
 {n: "CoD Black Ops 6", p: 7000, img: "https://i.pinimg.com/736x/4b/17/2a/4b172acbb1a31cf30cfd712e4bb94928.jpg", req: "12 Go RAM, GTX 1060", tail: "100 Go"},
@@ -270,23 +271,35 @@ const listeJeux = [
 {n: "DBZ Kakarot", p: 5000, img: "https://i.pinimg.com/736x/03/77/39/0377395b7989c414483e580896048cf1.jpg", req: "6 Go RAM, GTX 750 Ti", tail: "40 Go"},
 {n: "Naruto Connections", p: 5000, img: "https://i.pinimg.com/1200x/b4/bf/d2/b4bfd24ee83c4df44bad28dc17631001.jpg", req: "8 Go RAM, GTX 960", tail: "30 Go"},
 {n: "CoD MW3", p: 5000, img: "https://i.pinimg.com/736x/de/e7/a2/dee7a2209580884a5b63615206169c9b.jpg", req: "8 Go RAM, GTX 970", tail: "80 Go"},
+
+// --- FOOTBALL & SPORT ---
+{n: "FIFA 22", p: 4000, img: "https://i.pinimg.com/736x/df/7a/71/df7a71474e3b8fb87ce816bb79b23476.jpg", req: "8 Go RAM, GTX 1050", tail: "50 Go"},
+{n: "FIFA 21", p: 4500, img: "https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg", req: "8 Go RAM, GTX 660", tail: "50 Go"},
+{n: "FIFA 20", p: 3500, img: "https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg", req: "8 Go RAM", tail: "45 Go"},
+{n: "FIFA 17", p: 2500, img: "https://i.pinimg.com/1200x/80/ed/ee/80edee894a2cd179caedb4134d1a427b.jpg", req: "8 Go RAM", tail: "35 Go"},
+{n: "Efootball 21", p: 4000, img: "https://i.pinimg.com/736x/01/39/9e/01399ef1fba685b0fee527e7478eb3d1.jpg", req: "8 Go RAM, GTX 670", tail: "40 Go"},
+{n: "PES 2018 Low PC", p: 3000, img: "https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg", req: "4 Go RAM, Intel HD Graphics", tail: "25 Go"},
+{n: "PES 2017 + Patch 2026", p: 3000, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg", req: "2 Go RAM, PC Bur.", tail: "15 Go"},
+{n: "PES 2013 + Patch", p: 2000, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg", req: "1 Go RAM, PC Bureautique", tail: "8 Go"},
+{n: "NBA 2K23", p: 4500, img: "https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg", req: "8 Go RAM, GTX 770", tail: "110 Go"},
+
+// --- ACTION, RACING & MODDING ---
+{n: "GTA V", p: 4000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg", req: "8 Go RAM, GTX 660", tail: "90 Go"},
+{n: "GTA San Andreas + Mods", p: 2500, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg", req: "2 Go RAM", tail: "5 Go"},
+{n: "Blood Strike PC Config", p: 2000, img: "https://i.pinimg.com/736x/4b/17/2a/4b172acbb1a31cf30cfd712e4bb94928.jpg", req: "4 Go RAM, Intel HD", tail: "10 Go"},
 {n: "NFS Heat Deluxe", p: 4500, img: "https://i.pinimg.com/736x/2e/c9/fa/2ec9fad416ac4fe639f50184aba77aee.jpg", req: "8 Go RAM, GTX 1060", tail: "50 Go"},
 {n: "F1 2022", p: 4500, img: "https://i.pinimg.com/1200x/20/ad/a9/20ada9cd59ea21f2f8658df69ef9c218.jpg", req: "8 Go RAM, GTX 1050 Ti", tail: "80 Go"},
-{n: "FIFA 22", p: 4000, img: "https://i.pinimg.com/736x/df/7a/71/df7a71474e3b8fb87ce816bb79b23476.jpg", req: "8 Go RAM, GTX 1050", tail: "50 Go"},
-{n: "GTA V", p: 4000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg", req: "8 Go RAM, GTX 660", tail: "90 Go"},
-{n: "Naruto Storm 4", p: 4000, img: "https://i.pinimg.com/1200x/68/a4/a5/68a4a556802033962ab4e8327b848561.jpg", req: "4 Go RAM, GTX 750", tail: "40 Go"},
-{n: "Jump Force", p: 4000, img: "https://i.pinimg.com/736x/25/30/66/25306638ebe76311cfbf6bde6caae84f.jpg", req: "8 Go RAM, GTX 1060", tail: "20 Go"},
-{n: "FIFA 21", p: 4500, img: "https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg", req: "8 Go RAM, GTX 660", tail: "50 Go"},
-{n: "NBA 2K23", p: 4500, img: "https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg", req: "8 Go RAM, GTX 770", tail: "110 Go"},
 {n: "Test Drive Unlimited 2", p: 3500, img: "https://i.pinimg.com/1200x/96/91/bf/9691bf3993f312e2ed4744c392061ca8.jpg", req: "2 Go RAM, GT 8800", tail: "15 Go"},
+{n: "Naruto Storm 4", p: 4000, img: "https://i.pinimg.com/1200x/68/a4/a5/68a4a556802033962ab4e8327b848561.jpg", req: "4 Go RAM, GTX 750", tail: "40 Go"},
 {n: "Naruto Storm Revolution", p: 3500, img: "https://i.pinimg.com/736x/c9/26/38/c926388ae9d01a6e3bc70d439a1eb0f6.jpg", req: "4 Go RAM", tail: "8 Go"},
-{n: "FIFA 20", p: 3500, img: "https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg", req: "8 Go RAM", tail: "45 Go"},
-{n: "Efootball 21", p: 4000, img: "https://i.pinimg.com/736x/01/39/9e/01399ef1fba685b0fee527e7478eb3d1.jpg", req: "8 Go RAM, GTX 670", tail: "40 Go"},
+{n: "Jump Force", p: 4000, img: "https://i.pinimg.com/736x/25/30/66/25306638ebe76311cfbf6bde6caae84f.jpg", req: "8 Go RAM, GTX 1060", tail: "20 Go"},
 {n: "Assassin's Creed Revelations", p: 3000, img: "https://i.pinimg.com/736x/e0/80/7a/e0807a9df4e4d5a9542c3a133e6b5821.jpg", req: "2 Go RAM", tail: "12 Go"},
-{n: "PES 2018", p: 3000, img: "https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg", req: "4 Go RAM", tail: "25 Go"},
 {n: "Minecraft Story Mode", p: 2500, img: "https://i.pinimg.com/1200x/91/9e/6f/919e6f51cc7bd1fc0c8b1187057b22f5.jpg", req: "3 Go RAM", tail: "6 Go"},
-{n: "FIFA 17", p: 2500, img: "https://i.pinimg.com/1200x/80/ed/ee/80edee894a2cd179caedb4134d1a427b.jpg", req: "8 Go RAM", tail: "35 Go"},
-{n: "PES 17", p: 2500, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg", req: "1 Go RAM", tail: "12 Go"}
+
+// --- EMULATION & HARDWARE MODS ---
+{n: "FMCB + OPL PS2 (Carte)", p: 5000, img: "https://i.pinimg.com/1200x/91/9e/6f/919e6f51cc7bd1fc0c8b1187057b22f5.jpg", req: "Compatible toute PS2", tail: "N/A"},
+{n: "Pack Emulateur PPSSPP", p: 2500, img: "https://i.pinimg.com/1200x/91/9e/6f/919e6f51cc7bd1fc0c8b1187057b22f5.jpg", req: "PC / Android", tail: "Variable"},
+{n: "Pack Emulateur PCSX2 PS2", p: 3000, img: "https://i.pinimg.com/1200x/91/9e/6f/919e6f51cc7bd1fc0c8b1187057b22f5.jpg", req: "4 Go RAM, i3 min.", tail: "Variable"}
 ];
 
 const listeAccessoires = [
@@ -295,15 +308,27 @@ n: "Nike Mercurial Vapor 16",
 p: 20000,
 img: "https://i.pinimg.com/1200x/d6/bd/63/d6bd637c9795be8d2b0ad64fa1784295.jpg",
 stock: 5,
-pointures: [40, 41, 42, 43, 44, 45],
+pointures: [39, 40, 41, 42, 43, 44, 45],
 couleurs: [
 {nom: "Noir", code: "#000000"},
 {nom: "Rose", code: "#e91e63"},
-{nom: "Blanc", code: "#ffffff"}
+{nom: "Blanc", code: "#ffffff"},
+{nom: "Vert Flash", code: "#2ecc71"}
 ]
 },
 {
-n: "Jordan 3 black",
+n: "Nike Mercurial Superfly",
+p: 25000,
+img: "https://i.pinimg.com/1200x/d6/bd/63/d6bd637c9795be8d2b0ad64fa1784295.jpg",
+stock: 4,
+pointures: [40, 41, 42, 43, 44],
+couleurs: [
+{nom: "Orange", code: "#f97316"},
+{nom: "Noir", code: "#000000"}
+]
+},
+{
+n: "Jordan 3 Black",
 p: 15000,
 img: "https://i.pinimg.com/736x/ed/36/75/ed36753fa4238548f79fcf8e13ebfc65.jpg",
 stock: 3,
@@ -311,6 +336,17 @@ pointures: [39, 40, 41, 42, 43],
 couleurs: [
 {nom: "Noir / Gris", code: "#222222"},
 {nom: "Rouge", code: "#d32f2f"}
+]
+},
+{
+n: "Maillot Japon Concept 2026",
+p: 12000,
+img: "https://i.pinimg.com/736x/ed/36/75/ed36753fa4238548f79fcf8e13ebfc65.jpg",
+stock: 6,
+pointures: ["S", "M", "L", "XL"],
+couleurs: [
+{nom: "Bleu Roi", code: "#2563eb"},
+{nom: "Noir", code: "#000000"}
 ]
 }
 ];
@@ -320,24 +356,29 @@ let couleurSelectionnee = "";
 
 function generer(liste, id, estChaussure = false) {
 const container = document.getElementById(id);
+if (!container) return;
+
 container.innerHTML = liste.map(j => {
 const enStock = !estChaussure || (j.stock > 0);
 const badgeStock = estChaussure ?
 `<div class="stock-badge ${enStock ? '' : 'out'}">${enStock ? 'Stock: ' + j.stock : 'Épuisé'}</div>` : '';
 
+// Échappement sécurisé des apostrophes pour les événements inline JS
+const nomSecurise = j.n.replace(/'/g, "\\'");
+
 return `
 <div class="jeu-card" data-nom="${j.n.toLowerCase()}" data-prix="${j.p}">
 ${badgeStock}
-<img src="${j.img}" alt="${j.n}" onclick="ouvrirModal('${j.n}', ${estChaussure})">
+<img src="${j.img}" alt="${j.n}" onclick="ouvrirModal('${nomSecurise}', ${estChaussure})">
 <div class="info">
-<div class="jeu-nom" onclick="ouvrirModal('${j.n}', ${estChaussure})">${j.n}</div>
+<div class="jeu-nom" onclick="ouvrirModal('${nomSecurise}', ${estChaussure})">${j.n}</div>
 <div class="prix">${j.p.toLocaleString()} F</div>
 <div class="btn-group">
 ${enStock ?
-`<button onclick="ouvrirModal('${j.n}', ${estChaussure})" class="btn-buy">Acheter</button>` :
+`<button onclick="ouvrirModal('${nomSecurise}', ${estChaussure})" class="btn-buy">Acheter</button>` :
 `<button class="btn-buy disabled">Épuisé</button>`
 }
-<button onclick="add('${j.n}', ${j.p})" class="btn-cart" ${!enStock ? 'disabled style="opacity:0.5"' : ''}>🛒</button>
+<button onclick="add('${nomSecurise}', ${j.p})" class="btn-cart" ${!enStock ? 'disabled style="opacity:0.5"' : ''}>🛒</button>
 </div>
 </div>
 </div>
@@ -376,12 +417,12 @@ document.getElementById('modalImg').src = produit.img;
 let contenu = `<ul><li><b>Prix :</b> ${produit.p.toLocaleString()} FCFA</li>`;
 
 if (estChaussure) {
-contenu += `<li><b>Stock restant :</b> ${produit.stock > 0 ? produit.stock + ' paire(s)' : '<span style="color:red">Rupture de stock</span>'}</li>`;
+contenu += `<li><b>Stock restant :</b> ${produit.stock > 0 ? produit.stock + ' unité(s)' : '<span style="color:red">Rupture de stock</span>'}</li>`;
 
 if (produit.pointures && produit.pointures.length > 0) {
-contenu += `<br><label><b>Choisir la pointure :</b></label>
+contenu += `<br><label><b>Choisir la pointure / taille :</b></label>
 <select id="pointureSelect">
-${produit.pointures.map(pt => `<option value="${pt}">Pointure ${pt}</option>`).join('')}
+${produit.pointures.map(pt => `<option value="${pt}">${pt}</option>`).join('')}
 </select>`;
 }
 
@@ -393,21 +434,22 @@ ${produit.couleurs.map((c, index) => `
 <div class="color-bubble ${index === 0 ? 'selected' : ''}"
 style="background-color: ${c.code};"
 title="${c.nom}"
-onclick="choisirCouleur('${c.nom}', this)">
+onclick="choisirCouleur('${c.nom.replace(/'/g, "\\'")}', this)">
 </div>
 `).join('')}
 </div>`;
 }
 
 } else {
-contenu += `<li><b>Config :</b> ${produit.req || 'N/A'}</li>
-<li><b>Taille :</b> ${produit.tail || 'N/A'}</li>`;
+contenu += `<li><b>Config minimale :</b> ${produit.req || 'N/A'}</li>
+<li><b>Taille de téléchargement :</b> ${produit.tail || 'N/A'}</li>`;
 }
 
 contenu += `</ul>`;
 document.getElementById('modalDetails').innerHTML = contenu;
 
 const buyBtn = document.getElementById('modalBuyBtn');
+const nomSecurise = produit.n.replace(/'/g, "\\'");
 if (estChaussure && produit.stock <= 0) {
 buyBtn.classList.add('disabled');
 buyBtn.innerText = "Produit épuisé";
@@ -415,7 +457,7 @@ buyBtn.onclick = null;
 } else {
 buyBtn.classList.remove('disabled');
 buyBtn.innerText = "Acheter maintenant";
-buyBtn.onclick = () => acheterDirect(produit.n, produit.p, estChaussure);
+buyBtn.onclick = () => acheterDirect(nomSecurise, produit.p, estChaussure);
 }
 
 document.getElementById('productModal').style.display = 'flex';
@@ -469,4 +511,3 @@ maj();
 </script>
 </body>
 </html>
-
