@@ -3,482 +3,415 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asseko Store - Jeux PC & Accessoires</title>
+<title>Asseko Store - Jeux & Articles</title>
 <style>
 :root {
---primary: #27ae60;
---primary-hover: #219150;
---bg: #121212;
---card: #1e1e1e;
---text: #ffffff;
+  --primary: #27ae60;
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #ffffff;
 }
 
 body {
-background: var(--bg);
-color: var(--text);
-font-family: 'Segoe UI', Roboto, sans-serif;
-margin: 0;
-padding-bottom: 60px;
-}
-
-.top-bar {
-background: var(--primary);
-color: white;
-text-align: center;
-padding: 8px 10px;
-font-size: 0.85rem;
-font-weight: bold;
-letter-spacing: 0.5px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 15px;
 }
 
 header {
-padding: 30px 20px 20px;
-background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
-border-bottom: 2px solid var(--primary);
-text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
 }
 
-.logo-style {
-width: 90px;
-height: 90px;
-border-radius: 50%;
-border: 3px solid var(--primary);
-object-fit: cover;
-box-shadow: 0 0 15px rgba(39, 174, 96, 0.3);
-margin-bottom: 10px;
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--primary);
 }
 
-h1 { margin: 5px 0; font-size: 1.8rem; letter-spacing: 1px; }
-
-.features-bar {
-display: flex;
-justify-content: center;
-gap: 15px;
-flex-wrap: wrap;
-padding: 15px 10px;
-background: #181818;
-border-bottom: 1px solid #2a2a2a;
-font-size: 0.8rem;
-}
-.feature-item { display: flex; align-items: center; gap: 6px; color: #ccc; }
-
-.cart-status {
-position: fixed;
-bottom: 20px;
-right: 20px;
-background: #f39c12;
-padding: 12px 20px;
-border-radius: 50px;
-font-weight: bold;
-text-decoration: none;
-color: white;
-z-index: 999;
-box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-border: 2px solid white;
-display: flex;
-align-items: center;
-gap: 8px;
+.cart-icon {
+  position: relative;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: white;
 }
 
-.whatsapp-btn {
-position: fixed;
-bottom: 20px;
-left: 20px;
-background: #25d366;
-color: white;
-width: 50px;
-height: 50px;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.5rem;
-text-decoration: none;
-z-index: 999;
-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
-.controls-container {
-max-width: 1000px;
-margin: 25px auto 10px;
-padding: 0 15px;
-display: flex;
-flex-direction: column;
-gap: 12px;
-}
-.search-input {
-width: 100%;
-padding: 12px 18px;
-border-radius: 25px;
-border: 1px solid #333;
-background: #1e1e1e;
-color: white;
-font-size: 0.95rem;
-box-sizing: border-box;
-outline: none;
-}
-.search-input:focus { border-color: var(--primary); }
-
-.filter-tags { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.filter-btn {
-background: #222;
-border: 1px solid #333;
-color: #ccc;
-padding: 6px 14px;
-border-radius: 15px;
-cursor: pointer;
-font-size: 0.8rem;
-}
-.filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
-
-.section-title { text-align: center; margin: 30px 0 15px; color: var(--primary); text-transform: uppercase; font-size: 1.3rem; }
-
-.grid-jeux { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; max-width: 1200px; margin: auto; }
-@media (min-width: 768px) { .grid-jeux { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; } }
-
-.jeu-card { background: var(--card); border-radius: 16px; overflow: hidden; border: 1px solid #2a2a2a; transition: 0.2s; display: flex; flex-direction: column; position: relative; }
-.jeu-card:hover { transform: translateY(-3px); border-color: #444; }
-.jeu-card img { width: 100%; height: 160px; object-fit: cover; cursor: pointer; }
-
-.stock-badge {
-position: absolute;
-top: 10px;
-right: 10px;
-background: rgba(0,0,0,0.75);
-color: #27ae60;
-padding: 4px 8px;
-border-radius: 8px;
-font-size: 0.7rem;
-font-weight: bold;
-}
-.stock-badge.out { color: #e74c3c; }
-
-.info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.jeu-nom { font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #eee; min-height: 34px; cursor: pointer; }
-.prix { color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 10px; }
-
-.btn-group { display: flex; gap: 6px; }
-.btn-buy { background: var(--primary); color: white; text-decoration: none; padding: 8px; border-radius: 8px; flex: 3; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; text-align: center; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.btn-buy.disabled { background: #555; cursor: not-allowed; pointer-events: none; }
-.btn-cart { background: #333; color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 0.9rem; }
-.btn-cart:hover { background: #444; }
-
-/* Modale */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; }
-.modal-content { background: var(--card); border-radius: 16px; max-width: 500px; width: 100%; padding: 20px; border: 1px solid var(--primary); position: relative; max-height: 90vh; overflow-y: auto; }
-.close-modal { position: absolute; top: 12px; right: 15px; font-size: 1.5rem; color: #888; cursor: pointer; }
-.modal-title { color: var(--primary); margin-top: 0; font-size: 1.4rem; }
-.modal-details { font-size: 0.85rem; line-height: 1.5; color: #ddd; margin: 15px 0; }
-
-.modal-details select {
-width: 100%;
-padding: 10px;
-border-radius: 8px;
-background: #222;
-color: white;
-border: 1px solid #444;
-margin-top: 5px;
-font-size: 0.9rem;
-outline: none;
+.categories {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 5px;
 }
 
-.color-options {
-display: flex;
-gap: 12px;
-margin-top: 8px;
-flex-wrap: wrap;
-}
-.color-bubble {
-width: 32px;
-height: 32px;
-border-radius: 50%;
-cursor: pointer;
-border: 2px solid transparent;
-transition: transform 0.2s, border-color 0.2s;
-box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-}
-.color-bubble:hover { transform: scale(1.1); }
-.color-bubble.selected {
-border-color: var(--primary);
-transform: scale(1.15);
-box-shadow: 0 0 10px var(--primary);
+.cat-btn {
+  background: #252525;
+  color: #ccc;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
-footer { margin-top: 50px; padding: 30px; border-top: 1px solid #222; color: #666; font-size: 0.85rem; text-align: center; }
+.cat-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  margin: 0 0 5px 0;
+}
+
+.card-price {
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.btn-buy {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Modal pour le choix de la taille / couleur */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 350px;
+  width: 100%;
+  border: 1px solid var(--primary);
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+
+.option-group {
+  margin-bottom: 15px;
+}
+
+.option-title {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.options-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.opt-btn {
+  background: #252525;
+  border: 1px solid #444;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.opt-btn.selected {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
+.color-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.color-btn.selected {
+  border-color: #fff;
+  transform: scale(1.1);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  background: #444;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  flex: 1;
+  font-weight: bold;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
 
-<div class="top-bar">🔥 OFFRE SPÉCIALE : Livraison ultra-rapide par WhatsApp après validation !</div>
-
 <header>
-<img src="logo2.png" class="logo-style" alt="Logo">
-<h1>ASSEKO<span style="color: var(--primary);">STORE</span></h1>
+  <h1>Asseko Store</h1>
+  <a href="panier.html" class="cart-icon">
+    🛒 <span class="cart-badge" id="cartBadge">0</span>
+  </a>
 </header>
 
-<div class="features-bar">
-<div class="feature-item">⚡ <span>Livraison rapide</span></div>
-<div class="feature-item">📱 <span>Airtel & Moov Money</span></div>
-<div class="feature-item">🎮 <span>Jeux PC & Accessoires</span></div>
+<div class="categories">
+  <button class="cat-btn active" onclick="filtrerCat('tous', this)">Tous</button>
+  <button class="cat-btn" onclick="filtrerCat('jeux', this)">🎮 Jeux PC</button>
+  <button class="cat-btn" onclick="filtrerCat('chaussures', this)">👟 Chaussures</button>
 </div>
 
-<a href="panier.html" class="cart-status" id="cart-counter">🛒 <span>(0)</span></a>
-<a href="https://wa.me/24100000000" class="whatsapp-btn" target="_blank" title="Besoin d'aide ?">💬</a>
+<div class="grid" id="produitsGrid"></div>
 
-<div class="controls-container">
-<input type="text" id="searchBar" class="search-input" placeholder="🔍 Rechercher un jeu ou une chaussure..." onkeyup="filtrerCatalogue()">
-<div class="filter-tags">
-<button class="filter-btn active" onclick="filtrerPrix('all', this)">Tous les prix</button>
-<button class="filter-btn" onclick="filtrerPrix(4000, this)">Moins de 4 000 F</button>
-<button class="filter-btn" onclick="filtrerPrix(6000, this)">Moins de 6 000 F</button>
-</div>
-</div>
+<!-- Modal de Sélection d'Options -->
+<div class="modal-overlay" id="modalOptions">
+  <div class="modal-content">
+    <h3 class="modal-title" id="modalNomProduit">Nom du produit</h3>
+    
+    <div class="option-group" id="groupPointures" style="display:none;">
+      <div class="option-title">Choisir une pointure :</div>
+      <div class="options-list" id="listePointures"></div>
+    </div>
 
-<h2 class="section-title">Catalogue Jeux PC</h2>
-<div class="grid-jeux" id="catalogue"></div>
+    <div class="option-group" id="groupCouleurs" style="display:none;">
+      <div class="option-title">Choisir une couleur :</div>
+      <div class="options-list" id="listeCouleurs"></div>
+    </div>
 
-<h2 class="section-title">Chaussures & Accessoires</h2>
-<div class="grid-jeux" id="catalogue-chaussures"></div>
-
-<!-- Pop-up Fiche Produit -->
-<div class="modal" id="productModal">
-<div class="modal-content">
-<span class="close-modal" onclick="fermerModal()">&times;</span>
-<h3 class="modal-title" id="modalNom">Nom du produit</h3>
-<img id="modalImg" src="" style="width:100%; height:200px; object-fit:cover; border-radius:10px; margin-bottom:10px;">
-<div class="modal-details" id="modalDetails"></div>
-<div style="display:flex; gap:10px;">
-<button id="modalBuyBtn" class="btn-buy" style="padding: 12px; width:100%;">Acheter maintenant</button>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="fermerModal()">Annuler</button>
+      <button class="btn-primary" onclick="validerAchatModal()">Valider & Payez</button>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-
-<footer>
-<img src="logo2.png" class="logo-style" alt="Logo Footer"><br><br>
-Asseko Store - Tous droits réservés
-</footer>
 
 <script>
-const listeJeux = [
-{n: "WWE 2K25", p: 8000, img: "https://i.pinimg.com/1200x/c7/ac/6d/c7ac6d5ef0a6ec03e70bdcf4de6e66be.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "60 Go"},
-{n: "GoW Ragnarok", p: 8000, img: "https://i.pinimg.com/736x/8f/cc/bc/8fccbc000427939ea63559a8f1b4cc03.jpg", req: "16 Go RAM, RTX 2060 min.", tail: "110 Go"},
-{n: "CoD Black Ops 6", p: 7000, img: "https://i.pinimg.com/736x/4b/17/2a/4b172acbb1a31cf30cfd712e4bb94928.jpg", req: "12 Go RAM, GTX 1060", tail: "100 Go"},
-{n: "God of War", p: 7000, img: "https://i.pinimg.com/1200x/a1/84/9b/a1849baa4d6ccda5098080ad5097e359.jpg", req: "8 Go RAM, GTX 960", tail: "70 Go"},
-{n: "Cyberpunk 2077", p: 5500, img: "https://i.pinimg.com/1200x/76/a4/9a/76a49a5f00a20d5ea0df8dafbbb514bc.jpg", req: "12 Go RAM, GTX 1060", tail: "70 Go"},
-{n: "Naruto Shinobi Strike", p: 5500, img: "https://i.pinimg.com/736x/ad/05/b2/ad05b260717d91bc4892c5d89eca5c80.jpg", req: "6 Go RAM, GTX 660", tail: "40 Go"},
-{n: "DBZ Sparking Zero", p: 5000, img: "https://i.pinimg.com/736x/e2/aa/6a/e2aa6ae9d6afe729a1d621000fb15405.jpg", req: "8 Go RAM, GTX 970", tail: "30 Go"},
-{n: "DBZ Kakarot", p: 5000, img: "https://i.pinimg.com/736x/03/77/39/0377395b7989c414483e580896048cf1.jpg", req: "6 Go RAM, GTX 750 Ti", tail: "40 Go"},
-{n: "Naruto Connections", p: 5000, img: "https://i.pinimg.com/1200x/b4/bf/d2/b4bfd24ee83c4df44bad28dc17631001.jpg", req: "8 Go RAM, GTX 960", tail: "30 Go"},
-{n: "CoD MW3", p: 5000, img: "https://i.pinimg.com/736x/de/e7/a2/dee7a2209580884a5b63615206169c9b.jpg", req: "8 Go RAM, GTX 970", tail: "80 Go"},
-{n: "NFS Heat Deluxe", p: 4500, img: "https://i.pinimg.com/736x/2e/c9/fa/2ec9fad416ac4fe639f50184aba77aee.jpg", req: "8 Go RAM, GTX 1060", tail: "50 Go"},
-{n: "F1 2022", p: 4500, img: "https://i.pinimg.com/1200x/20/ad/a9/20ada9cd59ea21f2f8658df69ef9c218.jpg", req: "8 Go RAM, GTX 1050 Ti", tail: "80 Go"},
-{n: "FIFA 22", p: 4000, img: "https://i.pinimg.com/736x/df/7a/71/df7a71474e3b8fb87ce816bb79b23476.jpg", req: "8 Go RAM, GTX 1050", tail: "50 Go"},
-{n: "GTA V", p: 4000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg", req: "8 Go RAM, GTX 660", tail: "90 Go"},
-{n: "Naruto Storm 4", p: 4000, img: "https://i.pinimg.com/1200x/68/a4/a5/68a4a556802033962ab4e8327b848561.jpg", req: "4 Go RAM, GTX 750", tail: "40 Go"},
-{n: "Jump Force", p: 4000, img: "https://i.pinimg.com/736x/25/30/66/25306638ebe76311cfbf6bde6caae84f.jpg", req: "8 Go RAM, GTX 1060", tail: "20 Go"},
-{n: "FIFA 21", p: 4500, img: "https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg", req: "8 Go RAM, GTX 660", tail: "50 Go"},
-{n: "NBA 2K23", p: 4500, img: "https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg", req: "8 Go RAM, GTX 770", tail: "110 Go"},
-{n: "Test Drive Unlimited 2", p: 3500, img: "https://i.pinimg.com/1200x/96/91/bf/9691bf3993f312e2ed4744c392061ca8.jpg", req: "2 Go RAM, GT 8800", tail: "15 Go"},
-{n: "Naruto Storm Revolution", p: 3500, img: "https://i.pinimg.com/736x/c9/26/38/c926388ae9d01a6e3bc70d439a1eb0f6.jpg", req: "4 Go RAM", tail: "8 Go"},
-{n: "FIFA 20", p: 3500, img: "https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg", req: "8 Go RAM", tail: "45 Go"},
-{n: "Efootball 21", p: 4000, img: "https://i.pinimg.com/736x/01/39/9e/01399ef1fba685b0fee527e7478eb3d1.jpg", req: "8 Go RAM, GTX 670", tail: "40 Go"},
-{n: "Assassin's Creed Revelations", p: 3000, img: "https://i.pinimg.com/736x/e0/80/7a/e0807a9df4e4d5a9542c3a133e6b5821.jpg", req: "2 Go RAM", tail: "12 Go"},
-{n: "PES 2018", p: 3000, img: "https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg", req: "4 Go RAM", tail: "25 Go"},
-{n: "Minecraft Story Mode", p: 2500, img: "https://i.pinimg.com/1200x/91/9e/6f/919e6f51cc7bd1fc0c8b1187057b22f5.jpg", req: "3 Go RAM", tail: "6 Go"},
-{n: "FIFA 17", p: 2500, img: "https://i.pinimg.com/1200x/80/ed/ee/80edee894a2cd179caedb4134d1a427b.jpg", req: "8 Go RAM", tail: "35 Go"},
-{n: "Forza Horizon 5", p: 6000, img: "https://i.pinimg.com/1200x/cb/6f/e3/cb6fe35de2c4cdbf039ed2cb56ca58ad.jpg", req: "8 Go RAM", tail: "172 Go"}
+// Base de données des articles
+const produits = [
+  {
+    id: 1,
+    nom: "PES 2017 Configuré PC",
+    prix: 3000,
+    cat: "jeux",
+    img: "https://via.placeholder.com/150/121212/FFFFFF?text=PES+2017"
+  },
+  {
+    id: 2,
+    nom: "GTA San Andreas PC",
+    prix: 2000,
+    cat: "jeux",
+    img: "https://via.placeholder.com/150/121212/FFFFFF?text=GTA+SA"
+  },
+  {
+    id: 3,
+    nom: "Nike Mercurial Vapor",
+    prix: 35000,
+    cat: "chaussures",
+    img: "https://via.placeholder.com/150/121212/FFFFFF?text=Mercurial",
+    pointures: ["39", "40", "41", "42", "43"],
+    couleurs: [
+      {nom: "Noir", code: "#000000"},
+      {nom: "Rose", code: "#ec4899"},
+      {nom: "Vert", code: "#2ecc71"}
+    ]
+  }
 ];
 
-const listeAccessoires = [
-{
-n: "Nike Mercurial Vapor 16",
-p: 20000,
-img: "https://i.pinimg.com/1200x/d6/bd/63/d6bd637c9795be8d2b0ad64fa1784295.jpg",
-stock: 5,
-pointures: [40, 41, 42, 43, 44, 45],
-couleurs: [
-{nom: "Noir", code: "#000000"},
-{nom: "Rose", code: "#e91e63"},
-{nom: "Blanc", code: "#ffffff"}
-]
-},
-{
-n: "Nike Sandale OG",
-p: 4000,
-img: "https://i.pinimg.com/736x/2e/e4/07/2ee407c955d81d1e2f922716466713ce.jpg",
-stock: 5,
-pointures: [40, 41, 42, 43, 44, 45],
-couleurs: [
-{nom: "Noir", code: "#000000"},
-{nom: "Rose", code: "#e91e63"},
-{nom: "Blanc", code: "#ffffff"}
-]
-},
-{
-n: "Jordan 3 black",
-p: 15000,
-img: "https://i.pinimg.com/736x/ed/36/75/ed36753fa4238548f79fcf8e13ebfc65.jpg",
-stock: 3,
-pointures: [39, 40, 41, 42, 43],
-couleurs: [
-{nom: "Noir / Gris", code: "#222222"},
-{nom: "Rouge", code: "#d32f2f"}
-]
-}
-];
+let produitSelectionne = null;
+let pointureChoisie = null;
+let couleurChoisie = null;
 
-let prixMaxFiltre = 'all';
-let couleurSelectionnee = "";
-
-function generer(liste, id, estChaussure = false) {
-const container = document.getElementById(id);
-container.innerHTML = liste.map(j => {
-const enStock = !estChaussure || (j.stock > 0);
-const badgeStock = estChaussure ?
-`<div class="stock-badge ${enStock ? '' : 'out'}">${enStock ? 'Stock: ' + j.stock : 'Épuisé'}</div>` : '';
-
-return `
-<div class="jeu-card" data-nom="${j.n.toLowerCase()}" data-prix="${j.p}">
-${badgeStock}
-<img src="${j.img}" alt="${j.n}" onclick="ouvrirModal('${j.n}', ${estChaussure})">
-<div class="info">
-<div class="jeu-nom" onclick="ouvrirModal('${j.n}', ${estChaussure})">${j.n}</div>
-<div class="prix">${j.p.toLocaleString()} F</div>
-<div class="btn-group">
-${enStock ?
-`<button onclick="ouvrirModal('${j.n}', ${estChaussure})" class="btn-buy">Acheter</button>` :
-`<button class="btn-buy disabled">Épuisé</button>`
-}
-<button onclick="add('${j.n}', ${j.p})" class="btn-cart" ${!enStock ? 'disabled style="opacity:0.5"' : ''}>🛒</button>
-</div>
-</div>
-</div>
-`}).join('');
+function afficherProduits(liste) {
+  const container = document.getElementById('produitsGrid');
+  container.innerHTML = liste.map(p => `
+    <div class="card">
+      <img src="${p.img}" alt="${p.nom}">
+      <div class="card-content">
+        <h4 class="card-title">${p.nom}</h4>
+        <div class="card-price">${p.prix.toLocaleString()} FCFA</div>
+        <button class="btn-buy" onclick="clicAcheter(${p.id})">Acheter</button>
+      </div>
+    </div>
+  `).join('');
 }
 
-function filtrerCatalogue() {
-const recherche = document.getElementById('searchBar').value.toLowerCase();
-const cards = document.querySelectorAll('.jeu-card');
+function filtrerCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 
-cards.forEach(card => {
-const nom = card.getAttribute('data-nom');
-const prix = parseInt(card.getAttribute('data-prix'));
-
-const correspondanceNom = nom.includes(recherche);
-const correspondancePrix = (prixMaxFiltre === 'all') || (prix <= prixMaxFiltre);
-
-card.style.display = (correspondanceNom && correspondancePrix) ? 'flex' : 'none';
-});
+  if (cat === 'tous') {
+    afficherProduits(produits);
+  } else {
+    afficherProduits(produits.filter(p => p.cat === cat));
+  }
 }
 
-function filtrerPrix(max, element) {
-prixMaxFiltre = max;
-document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-element.classList.add('active');
-filtrerCatalogue();
+function clicAcheter(id) {
+  produitSelectionne = produits.find(p => p.id === id);
+  if (!produitSelectionne) return;
+
+  // Si l'article a des options (Pointures / Couleurs)
+  if (produitSelectionne.pointures || produitSelectionne.couleurs) {
+    ouvrirmodal(produitSelectionne);
+  } else {
+    // Redirection directe vers paiement pour un article simple
+    redirigerVersPaiement(produitSelectionne.nom, produitSelectionne.prix);
+  }
 }
 
-function ouvrirModal(nom, estChaussure) {
-const produit = [...listeJeux, ...listeAccessoires].find(item => item.n === nom);
-if (!produit) return;
+function ouvrirmodal(p) {
+  document.getElementById('modalNomProduit').innerText = p.nom;
+  
+  const grpP = document.getElementById('groupPointures');
+  const lstP = document.getElementById('listePointures');
+  const grpC = document.getElementById('groupCouleurs');
+  const lstC = document.getElementById('listeCouleurs');
 
-document.getElementById('modalNom').innerText = produit.n;
-document.getElementById('modalImg').src = produit.img;
+  pointureChoisie = null;
+  couleurChoisie = null;
 
-let contenu = `<ul><li><b>Prix :</b> ${produit.p.toLocaleString()} FCFA</li>`;
+  if (p.pointures && p.pointures.length > 0) {
+    grpP.style.display = 'block';
+    pointureChoisie = p.pointures[0]; // Choix par défaut
+    lstP.innerHTML = p.pointures.map((pt, idx) => `
+      <button class="opt-btn ${idx === 0 ? 'selected' : ''}" onclick="selectPointure('${pt}', this)">${pt}</button>
+    `).join('');
+  } else {
+    grpP.style.display = 'none';
+  }
 
-if (estChaussure) {
-contenu += `<li><b>Stock restant :</b> ${produit.stock > 0 ? produit.stock + ' paire(s)' : '<span style="color:red">Rupture de stock</span>'}</li>`;
+  if (p.couleurs && p.couleurs.length > 0) {
+    grpC.style.display = 'block';
+    couleurChoisie = p.couleurs[0].nom; // Choix par défaut
+    lstC.innerHTML = p.couleurs.map((c, idx) => `
+      <button class="color-btn ${idx === 0 ? 'selected' : ''}" style="background-color: ${c.code}" title="${c.nom}" onclick="selectCouleur('${c.nom}', this)"></button>
+    `).join('');
+  } else {
+    grpC.style.display = 'none';
+  }
 
-if (produit.pointures && produit.pointures.length > 0) {
-contenu += `<br><label><b>Choisir la pointure :</b></label>
-<select id="pointureSelect">
-${produit.pointures.map(pt => `<option value="${pt}">Pointure ${pt}</option>`).join('')}
-</select>`;
+  document.getElementById('modalOptions').style.display = 'flex';
 }
 
-if (produit.couleurs && produit.couleurs.length > 0) {
-couleurSelectionnee = produit.couleurs[0].nom;
-contenu += `<br><label><b>Choisir la couleur : <span id="labelCouleur" style="color:var(--primary);">${couleurSelectionnee}</span></b></label>
-<div class="color-options">
-${produit.couleurs.map((c, index) => `
-<div class="color-bubble ${index === 0 ? 'selected' : ''}"
-style="background-color: ${c.code};"
-title="${c.nom}"
-onclick="choisirCouleur('${c.nom}', this)">
-</div>
-`).join('')}
-</div>`;
+function selectPointure(pt, btn) {
+  document.querySelectorAll('#listePointures .opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  pointureChoisie = pt;
 }
 
-} else {
-contenu += `<li><b>Config :</b> ${produit.req || 'N/A'}</li>
-<li><b>Taille :</b> ${produit.tail || 'N/A'}</li>`;
-}
-
-contenu += `</ul>`;
-document.getElementById('modalDetails').innerHTML = contenu;
-
-const buyBtn = document.getElementById('modalBuyBtn');
-if (estChaussure && produit.stock <= 0) {
-buyBtn.classList.add('disabled');
-buyBtn.innerText = "Produit épuisé";
-buyBtn.onclick = null;
-} else {
-buyBtn.classList.remove('disabled');
-buyBtn.innerText = "Acheter maintenant";
-buyBtn.onclick = () => acheterDirect(produit.n, produit.p, estChaussure);
-}
-
-document.getElementById('productModal').style.display = 'flex';
-}
-
-function choisirCouleur(nomCouleur, el) {
-couleurSelectionnee = nomCouleur;
-document.getElementById('labelCouleur').innerText = nomCouleur;
-
-document.querySelectorAll('.color-bubble').forEach(b => b.classList.remove('selected'));
-el.classList.add('selected');
-}
-
-function acheterDirect(nomProduit, prixProduit, estChaussure) {
-let url = `paiement.html?jeu=${encodeURIComponent(nomProduit)}&prix=${prixProduit}`;
-
-if (estChaussure) {
-const selectPointure = document.getElementById('pointureSelect');
-const pointure = selectPointure ? selectPointure.value : "";
-
-if (pointure) url += `&pointure=${encodeURIComponent(pointure)}`;
-if (couleurSelectionnee) url += `&couleur=${encodeURIComponent(couleurSelectionnee)}`;
-}
-
-window.location.href = url;
+function selectCouleur(cNom, btn) {
+  document.querySelectorAll('#listeCouleurs .color-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  couleurChoisie = cNom;
 }
 
 function fermerModal() {
-document.getElementById('productModal').style.display = 'none';
+  document.getElementById('modalOptions').style.display = 'none';
 }
 
-function add(n, p) {
-let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-panier.push({nom: n, prix: p});
-localStorage.setItem('asseko_panier', JSON.stringify(panier));
-maj();
-alert("Ajouté au panier !");
+function validerAchatModal() {
+  fermerModal();
+  redirigerVersPaiement(produitSelectionne.nom, produitSelectionne.prix, pointureChoisie, couleurChoisie);
 }
 
-function maj() {
-let p = JSON.parse(localStorage.getItem('asseko_panier')) || [];
-let el = document.querySelector('#cart-counter span');
-if (el) el.innerText = "(" + p.length + ")";
+function redirigerVersPaiement(nom, prix, pointure = null, couleur = null) {
+  let url = `paiement.html?jeu=${encodeURIComponent(nom)}&prix=${prix}`;
+  if (pointure) url += `&pointure=${encodeURIComponent(pointure)}`;
+  if (couleur) url += `&couleur=${encodeURIComponent(couleur)}`;
+  window.location.href = url;
 }
 
-window.onload = () => {
-generer(listeJeux, 'catalogue', false);
-generer(listeAccessoires, 'catalogue-chaussures', true);
-maj();
+function majBadgePanier() {
+  let panier = JSON.parse(localStorage.getItem('asseko_panier')) || [];
+  document.getElementById('cartBadge').innerText = panier.length;
+}
+
+// Initialisation
+window.onload = function() {
+  afficherProduits(produits);
+  majBadgePanier();
 };
 </script>
 </body>
 </html>
-
