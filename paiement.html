@@ -92,12 +92,14 @@ h2 {
   height: 170px;
   object-fit: contain;
   margin: 12px auto;
-  border: 3px solid var(--accent-cyan);
   border-radius: 12px;
   background: white;
   display: block;
   box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
 }
+
+.airtel-qr { border: 3px solid var(--airtel-red); }
+.mobicash-qr { border: 3px solid var(--mobicash-blue); }
 
 .phone-number {
   font-size: 1.05rem;
@@ -216,7 +218,8 @@ input:focus {
       Scannez le QR Code ou effectuez le transfert vers le numéro ci-dessous :
     </p>
 
-    <img src="image.png" alt="QR Code Airtel Money Asseko Store" class="qr-code-img">
+    <!-- Remplace "image-airtel.png" par le nom de ton image QR Airtel -->
+    <img src="image-airtel.png" alt="QR Code Airtel Money Asseko Store" class="qr-code-img airtel-qr">
 
     <div class="phone-number airtel-number">
       📞 Numéro : 077804274
@@ -227,10 +230,13 @@ input:focus {
   <div class="payment-info-box mobicash-box">
     <h3>🔵 Paiement par Moov Money (MobiCash)</h3>
     <p style="font-size:0.85rem; margin:0 0 10px 0; color:var(--text-muted);">
-      Effectuez votre transfert Moov Money vers le numéro ci-dessous :
+      Scannez le QR Code ou effectuez le transfert vers le numéro ci-dessous :
     </p>
     
- <div class="phone-number mobicash-number">
+    <!-- Remplace "image-mobicash.png" par le nom de ton image QR MobiCash -->
+    <img src="image-mobicash.png" alt="QR Code MobiCash Asseko Store" class="qr-code-img mobicash-qr">
+
+    <div class="phone-number mobicash-number">
       📞 Numéro : 062143184
     </div>
   </div>
