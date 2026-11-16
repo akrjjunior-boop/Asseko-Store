@@ -1,2 +1,2 @@
 # Asseko-Store
-Site de vente de jeux vidéo PC
+Site de vente de jeux vidéo PC et accessoires gaming 
