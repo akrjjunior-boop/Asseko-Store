@@ -20,7 +20,7 @@
   --green-whatsapp: #25d366;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background: var(--bg-dark);
@@ -130,7 +130,6 @@ h1 {
   background: var(--card-bg);
   color: white;
   font-size: 0.95rem;
-  box-sizing: border-box;
   outline: none;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
 }
@@ -242,7 +241,7 @@ h1 {
 .btn-cart:hover { background: rgba(255, 255, 255, 0.2); }
 
 /* Modale */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 2000; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 2000; align-items: center; justify-content: center; padding: 15px; }
 .modal-content { background: #161b22; border-radius: 20px; max-width: 500px; width: 100%; padding: 25px; border: 1px solid var(--accent-cyan); position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 30px rgba(0, 242, 254, 0.2); }
 .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); cursor: pointer; }
 .modal-title { font-family: 'Rajdhani', sans-serif; color: var(--accent-cyan); margin-top: 0; font-size: 1.6rem; text-transform: uppercase; }
@@ -360,11 +359,11 @@ const listeJeux = [
 {n: "FIFA 23 ULTIMATE EDITION", p: 6000, img: "https://i.pinimg.com/736x/4b/b5/8d/4bb58d6e6cd6f66e037924483d815bd1.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "100 Go"},  
 {n: "Carte PSN 10 €", p: 8000, img: "https://i.pinimg.com/1200x/ac/20/cc/ac20cc35fef9f39dcf5d6a195add5f3e.jpg",  req: "Playstation 4 et Playstation 5"},
 {n: "Carte PSN 20 €", p: 15500, img: "https://i.pinimg.com/736x/eb/11/8c/eb118cee2e9bf799520008ed11d6dbd3.jpg",  req: "Playstation 4 et Playstation 5"}, 
-{n: "FC 24 ", p: 10000, img: "https://i.pinimg.com/736x/64/02/71/640271a720839b2b097ae9a809b793d1.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", taille: "100 Go"},
-{n: "FC 26 ", p: 15000, img: "https://i.pinimg.com/1200x/32/06/dd/3206dd46cb3cb8b2b8377119d199ed08.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", taille: "120 Go"},
-{n: "FC 27 ", p: 20000, img: "https://i.pinimg.com/736x/49/63/89/4963894e96e3b6d2fadfef9bec281060.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", taille: "125 Go"},
-{n: "UNCHARTED: Legacy of Thieves Collection", p: 7000, img: "https://i.pinimg.com/1200x/e6/26/06/e626068f415a52c7d8ab8fcaa32e5d80.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", taille: "126 Go"},
-{n: "TEKKEN 7", p: 7000, img: "https://i.pinimg.com/736x/ae/9b/3a/ae9b3ad20fc06f1dfd447e658102a71d.jpg", req: "8 Go RAM, icore5 8th min.", taille: "110 Go"}
+{n: "FC 24", p: 10000, img: "https://i.pinimg.com/736x/64/02/71/640271a720839b2b097ae9a809b793d1.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", tail: "100 Go"},
+{n: "FC 26", p: 15000, img: "https://i.pinimg.com/1200x/32/06/dd/3206dd46cb3cb8b2b8377119d199ed08.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", tail: "120 Go"},
+{n: "FC 27", p: 20000, img: "https://i.pinimg.com/736x/49/63/89/4963894e96e3b6d2fadfef9bec281060.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", tail: "125 Go"},
+{n: "UNCHARTED: Legacy of Thieves Collection", p: 7000, img: "https://i.pinimg.com/1200x/e6/26/06/e626068f415a52c7d8ab8fcaa32e5d80.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", tail: "126 Go"},
+{n: "TEKKEN 7", p: 7000, img: "https://i.pinimg.com/736x/ae/9b/3a/ae9b3ad20fc06f1dfd447e658102a71d.jpg", req: "8 Go RAM, icore5 8th min.", tail: "110 Go"}
 ];
 
 const listeAccessoires = [
@@ -419,11 +418,12 @@ couleurs: [
 ]
 },
 {
-n: "Disque Dur gaming 256 go ",
+n: "Disque Dur gaming 256 go",
 p: 37000,
 img: "https://i.pinimg.com/736x/2c/ec/da/2cecda618732ee10f59bbf8a04cf52bd.jpg",
 stock: 3,
-
+couleurs: [
+{nom: "Noir", code: "#000000"}
 ]
 }
 ];
