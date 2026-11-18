@@ -331,35 +331,33 @@ Asseko Store - Tous droits réservés
 
 <script>
 const listeJeux = [
-{n: "WWE 2K26", p: 8000, img: "https://i.pinimg.com/1200x/c7/ac/6d/c7ac6d5ef0a6ec03e70bdcf4de6e66be.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "60 Go"},
-{n: "GoW Ragnarok", p: 8000, img: "https://i.pinimg.com/736x/8f/cc/bc/8fccbc000427939ea63559a8f1b4cc03.jpg", req: "16 Go RAM, RTX 2060 min.", tail: "110 Go"},
+{n: "WWE 2K26", p: 10000, img: "https://i.pinimg.com/736x/13/65/70/1365700b51d7b557ac980fd8f103350e.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "150 Go"},
+{n: "God of war ", p: 10000, img: "https://i.pinimg.com/1200x/a1/84/9b/a1849baa4d6ccda5098080ad5097e359.jpg", req: "8 Go RAM, RTX 2060 min.", tail: "85 Go"},
 {n: "CoD Black Ops 6", p: 7000, img: "https://i.pinimg.com/736x/4b/17/2a/4b172acbb1a31cf30cfd712e4bb94928.jpg", req: "12 Go RAM, GTX 1060", tail: "100 Go"},
-{n: "God of War", p: 7000, img: "https://i.pinimg.com/1200x/a1/84/9b/a1849baa4d6ccda5098080ad5097e359.jpg", req: "8 Go RAM, GTX 960", tail: "70 Go"},
-{n: "Cyberpunk 2077", p: 5500, img: "https://i.pinimg.com/1200x/76/a4/9a/76a49a5f00a20d5ea0df8dafbbb514bc.jpg", req: "12 Go RAM, GTX 1060", tail: "70 Go"},
+{n: "Need for Speed: Hot Pursuit - Remastered", p: 7000, img: "https://i.pinimg.com/1200x/fa/e5/00/fae50019b8c0e10c6899c37e8049a353.jpg", req: "8 Go RAM, GTX 960", tail: "85 Go"},
+{n: "Cyberpunk 2077", p: 7000, img: "https://i.pinimg.com/1200x/76/a4/9a/76a49a5f00a20d5ea0df8dafbbb514bc.jpg", req: "12 Go RAM, GTX 1060", tail: "70 Go"},
 {n: "Naruto Shinobi Strike", p: 5500, img: "https://i.pinimg.com/736x/ad/05/b2/ad05b260717d91bc4892c5d89eca5c80.jpg", req: "6 Go RAM, GTX 660", tail: "40 Go"},
-{n: "DBZ Sparking Zero", p: 5000, img: "https://i.pinimg.com/736x/e2/aa/6a/e2aa6ae9d6afe729a1d621000fb15405.jpg", req: "8 Go RAM, GTX 970", tail: "30 Go"},
-{n: "FIFA 21", p: 4500, img: "https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg", req: "8 Go RAM, GTX 660", tail: "50 Go"},
-{n: "FIFA 20", p: 4000, img: "https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg", req: "8 Go RAM", tail: "45 Go"},
+{n: "DBZ Sparking Zero", p: 6000, img: "https://i.pinimg.com/736x/e2/aa/6a/e2aa6ae9d6afe729a1d621000fb15405.jpg", req: "8 Go RAM, GTX 970", tail: "30 Go"},
+{n: "FIFA 21", p: 5500, img: "https://i.pinimg.com/736x/24/73/05/247305ab8d34bc58cece9964c5d48b42.jpg", req: "8 Go RAM, GTX 660", tail: "50 Go"},
+{n: "FIFA 20", p: 5000, img: "https://i.pinimg.com/736x/cc/d4/3c/ccd43c3af807fd2650e6782764f13e78.jpg", req: "8 Go RAM", tail: "45 Go"},
 {n: "Efootball 21", p: 4000, img: "https://i.pinimg.com/736x/01/39/9e/01399ef1fba685b0fee527e7478eb3d1.jpg", req: "8 Go RAM, GTX 670", tail: "40 Go"},
 {n: "PES 2018 Low PC", p: 3000, img: "https://i.pinimg.com/736x/86/f9/f5/86f9f5b37e94acfd341eab4ae9f507ab.jpg", req: "4 Go RAM, Intel HD Graphics", tail: "25 Go"},
-{n: "NBA 2K23", p: 4500, img: "https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg", req: "8 Go RAM, GTX 770", tail: "110 Go"},
-{n: "GTA V", p: 4000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg", req: "8 Go RAM, GTX 660", tail: "90 Go"},
+{n: "NBA 2K23", p: 15000, img: "https://i.pinimg.com/736x/20/e7/20/20e7206b03a82fcb026375627008d4bb.jpg", req: "8 Go RAM, GTX 770", tail: "110 Go"},
+{n: "GTA V", p: 5000, img: "https://i.pinimg.com/736x/fe/30/39/fe3039c9dde62dfd179915be1ea5905d.jpg", req: "8 Go RAM, GTX 660", tail: "90 Go"},
 {n: "Assetto Corsa", p: 6000, img: "https://i.pinimg.com/736x/c0/fa/52/c0fa52a3f90b6433827c0ca334241c77.jpg", req: "2 Go RAM, GTX 1060", tail: "40 Go"},
 {n: "F1 2022", p: 4500, img: "https://i.pinimg.com/1200x/20/ad/a9/20ada9cd59ea21f2f8658df69ef9c218.jpg", req: "8 Go RAM, GTX 1050 Ti", tail: "80 Go"},
-{n: "Naruto Storm 4", p: 4000, img: "https://i.pinimg.com/1200x/68/a4/a5/68a4a556802033962ab4e8327b848561.jpg", req: "4 Go RAM, GTX 750", tail: "40 Go"},
+{n: "Naruto Storm 4", p: 5000, img: "https://i.pinimg.com/1200x/68/a4/a5/68a4a556802033962ab4e8327b848561.jpg", req: "4 Go RAM, GTX 750", tail: "40 Go"},
 {n: "Jump Force", p: 4000, img: "https://i.pinimg.com/736x/25/30/66/25306638ebe76311cfbf6bde6caae84f.jpg", req: "8 Go RAM, GTX 1060", tail: "20 Go"},
 {n: "Far Cry 3 ", p: 5000, img: "https://i.pinimg.com/736x/3e/b6/a4/3eb6a4f5b93754b38ce3c2869778e78e.jpg", req: "4 Go RAM", tail: "25 Go"},
-{n: "Red Dead Redemption", p: 4000, img: "https://i.pinimg.com/1200x/7f/6d/48/7f6d48a99cc9352ec7f41f0a970777ee.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "22 Go"},
-{n: "FIFA 23 ULTIMATE EDITION", p: 6000, img: "https://i.pinimg.com/736x/4b/b5/8d/4bb58d6e6cd6f66e037924483d815bd1.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "100 Go"},  
+{n: "ONE PIECE World Seeker", p: 5000, img: "https://i.pinimg.com/1200x/4c/78/04/4c7804370e008e83b3cd222fdad89902.jpg", req: "8 Go RAM, GTX 1060 min.", tail: "50 Go"},
 {n: "Carte PSN 10 €", p: 8000, img: "https://i.pinimg.com/1200x/ac/20/cc/ac20cc35fef9f39dcf5d6a195add5f3e.jpg",  req: "Playstation 4 et Playstation 5"},
 {n: "Carte PSN 20 €", p: 15500, img: "https://i.pinimg.com/736x/eb/11/8c/eb118cee2e9bf799520008ed11d6dbd3.jpg",  req: "Playstation 4 et Playstation 5"}, 
 {n: "FC 24", p: 10000, img: "https://i.pinimg.com/736x/64/02/71/640271a720839b2b097ae9a809b793d1.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", tail: "100 Go"},
 {n: "FC 26", p: 15000, img: "https://i.pinimg.com/1200x/32/06/dd/3206dd46cb3cb8b2b8377119d199ed08.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", tail: "120 Go"},
 {n: "Pes 2017", p: 3500, img: "https://i.pinimg.com/736x/c5/7f/5f/c57f5f0515e4850f1d55ce257268bfec.jpg",  req: "Intel Core i5- GHz(RAM) : 2 Go", tail: "50 Go"},
 {n: "FC 27", p: 20000, img: "https://i.pinimg.com/736x/49/63/89/4963894e96e3b6d2fadfef9bec281060.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", tail: "125 Go"},
-{n: "Call of duty Black ops 2", p: 4000, img: "https://i.pinimg.com/736x/5d/be/53/5dbe53b1765bd78cc44f0d6e0fd29241.jpg", req: "8 Go RAM, GTX 1060", tail: "40 Go"},
-{n: "UNCHARTED: Legacy of Thieves Collection", p: 7000, img: "https://i.pinimg.com/1200x/e6/26/06/e626068f415a52c7d8ab8fcaa32e5d80.jpg",  req: "Intel Core i5-6600K @ 3,50 GHz(RAM) : 8 Go", tail: "126 Go"},
-{n: "TEKKEN 7", p: 7000, img: "https://i.pinimg.com/736x/ae/9b/3a/ae9b3ad20fc06f1dfd447e658102a71d.jpg", req: "8 Go RAM, icore5 8th min.", tail: "110 Go"}
+{n: "Call of Duty: Ghosts", p: 7000, img: "https://i.pinimg.com/1200x/95/5c/14/955c143e0fd663af1c59f17a2c643967.jpg", req: "6 Go RAM, GTX 1060", tail: "70 Go"},
+{n: "UHUNTER×HUNTER NEN×IMPACT", p: 3000, img: "https://i.pinimg.com/1200x/d4/f0/1b/d4f01be158eb69460177ac77c18ed32b.jpg",  req: "Intel Core i3-6600K(RAM) : 8 Go", tail: "10 Go"}
 ];
 
 const listeAccessoires = [
